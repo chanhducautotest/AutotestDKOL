@@ -1,0 +1,9 @@
+.idea/
+target/
+src/test/resources/
+.iml/
+.gradle/
+logs/
+Desktop.iml
+Desktop.ipr
+Desktop.iws

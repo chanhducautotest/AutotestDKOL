@@ -1,0 +1,14 @@
+{
+  "URL_TEST_HOME": "https://shop-stag.fpt.vn",
+  "URL_TEST_INTERNET": "https://shop-stag.fpt.vn/internet",
+  "URL_TEST_SERVICE": "https://shop-stag.fpt.vn/internet/service",
+  "URL_TEST_PAYMENT": "https://shop-stag.fpt.vn/internet/payment",
+  "URL_INTERNET_REGISTER": "https://shop-stag.fpt.vn/internet/register",
+  "URL_INTERNET_SERVICE": "https://shop-stag.fpt.vn/internet/service",
+  "REGULAR_EXPRESSION_FORM_PRICE": "\\d+.\\d+đ",
+  "URL_FPT_ABOUT_ROLE": "https://shop-stag.fpt.vn/homepage/warranty?servicecode=internet",
+
+  "INPUT_PROVINCE": "Hà Nội",
+  "INPUT_DISTRICT": "Q.Hoàn Kiếm",
+  "INPUT_WARD": "Phường Cửa Đông"
+}
