@@ -260,7 +260,6 @@ public class ActionLandingPage extends ElementsLadingPage {
         WebDriverWait wait = new WebDriverWait(driver,60);
         wait.until(ExpectedConditions.visibilityOfElementLocated(nameVerifyMessage.by()));
         String nameVerifyMessageText = nameVerifyMessage.findWebElement().getText();
-        System.out.println(nameVerifyMessageText);
         return nameVerifyMessageText.equals(expectedMessage);
     }
     public void clickBtnContinue(){

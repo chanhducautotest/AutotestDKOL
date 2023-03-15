@@ -112,16 +112,13 @@ public class ToDoStepDefinition extends RunCucumberByCompositionTest {
     public void chooseContinue() {
         landingPage = new ActionLandingPage();
         landingPage.clickBtnContinue();
-        sleepTo(3000);
     }
 
     @Then("Hiện thông báo {string}")
     public void showNotification(String expectedMsg) {
-        sleepTo(3000);
         landingPage = new ActionLandingPage();
-//        System.out.println(">>>>>>>>>"+expectedMsg);
-        Assert.assertTrue(landingPage.verifyMessageDisplayed("Vui lòng nhập họ và tên."), "Thông báo khi chưa nhập họ và tên chưa hợp lệ");
-        sleepTo(3000);
+        expectedMsg = "Vui lòng nhập họ và tên.";
+        Assert.assertTrue(landingPage.verifyMessageDisplayed(expectedMsg), "Thông báo khi chưa nhập họ và tên chưa hợp lệ");
     }
 
 }
