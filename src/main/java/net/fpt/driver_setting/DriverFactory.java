@@ -9,6 +9,7 @@ import java.net.MalformedURLException;
 import java.util.Set;
 
 import static net.fpt.driver_setting.DriverType.FIREFOX;
+import static net.fpt.driver_setting.DriverType.CHROME;
 
 public class DriverFactory {
     private RemoteWebDriver webDriver;
@@ -21,13 +22,13 @@ public class DriverFactory {
     static final Logger logger = LoggerFactory.getLogger(DriverFactory.class);
 
     public DriverFactory(){
-        DriverType driverType= FIREFOX;
+        DriverType driverType= CHROME;
         String browser;
         try {
             browser = System.getenv("Browser").toUpperCase();
         }catch( Exception e ){
             logger.warn("Unknown driver type auto set to FIREFOX");
-            browser = "FIREFOX";
+            browser = "CHROME";
         }
         logger.debug("Set browser "+ browser);
         try {
