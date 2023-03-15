@@ -7,13 +7,15 @@ import page_objects.PageBase;
 
 public class ElementsLadingPage extends PageBase {
         WebDriverWait wait = new WebDriverWait(driver, 30, 1000);
-
         public Query topServices = new Query().defaultLocator(By.xpath("//div[@class='owl-stage']/div/div/span[1]")).usingDriver(driver);
-
         public Query super100 = new Query().defaultLocator(By.xpath("/html[1]/body[1]/div[1]/div[2]/main[1]/div[1]/div[1]/section[3]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/p[1]")).usingDriver(driver);
-
+        public Query modalLocation = new Query().defaultLocator(By.xpath("//*[@id='mdLocation-manual___BV_modal_content_']")).usingDriver(driver);
+        public Query internetFieldHeader = new Query().defaultLocator(By.xpath("//h2[normalize-space()='Internet Only']")).usingDriver(driver);
+        public Query btnContinue = new Query().defaultLocator(By.xpath("//button[contains(text(),'Tiếp tục')]")).usingDriver(driver);
+        public Query nameVerifyMessage = new Query().defaultLocator(By.xpath("//small[contains(text(),'Vui lòng nhập họ và tên.')]")).usingDriver(driver);
         public Query btnX = new Query().defaultLocator(By.xpath("//div[@id='mdLocation-manual___BV_modal_content_']//button[@aria-label='Close']")).usingDriver(driver);
-
+        //Các elements phần Header
+        public Query linkFPTInternetHeader = new Query().defaultLocator(By.xpath("//h2[@class='h2-header'][normalize-space()='Internet']")).usingDriver(driver);
         //Các elements phần Footer
         public Query txtVeFPTTelecom = new Query().defaultLocator(By.xpath("//span[text()='Về FPT Telecom']")).usingDriver(driver);
         public Query txtKhachHangFPTTelecom = new Query().defaultLocator(By.xpath("//span[text()='Khách hàng FPT Telecom']")).usingDriver(driver);
