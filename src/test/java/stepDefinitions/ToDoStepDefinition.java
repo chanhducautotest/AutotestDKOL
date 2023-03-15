@@ -82,7 +82,7 @@ public class ToDoStepDefinition extends RunCucumberByCompositionTest {
     }
 
     @Given("Truy cập hệ thống DKOL")
-    public void truyCậpHệThốngDKOL() {
+    public void accessDKOLSystem() {
         landingPage = new ActionLandingPage();
         landingPage.goHere();
         sleepTo(3000);
@@ -92,12 +92,12 @@ public class ToDoStepDefinition extends RunCucumberByCompositionTest {
     }
 
     @When("Vào mục internet")
-    public void vàoMụcInternet() throws InterruptedException {
+    public void goToInternetSection() throws InterruptedException {
         landingPage.clickLinkFPTInternetHeader();
     }
 
     @Then("Chọn gói cước: <ten_goi_cuoc>")
-    public void chọnGóiCướcTen_goi_cuoc() throws ParameterException, InterruptedException {
+    public void chooseInternetPackage() throws ParameterException, InterruptedException {
         landingPage = new ActionLandingPage();
         String param =  ParameterService.INSTANCE.getTestString("NetOnly_Sky","Sky");
         if(param == null){
@@ -105,20 +105,23 @@ public class ToDoStepDefinition extends RunCucumberByCompositionTest {
         }else{
             landingPage.clickChooseInternet(param);
         }
-        System.out.println(param);
         sleepTo(3000);
     }
 
     @And("Nhấn Tiếp Tục")
-    public void nhấnTiếpTục() {
+    public void chooseContinue() {
         landingPage = new ActionLandingPage();
         landingPage.clickBtnContinue();
+        sleepTo(3000);
     }
 
     @Then("Hiện thông báo {string}")
-    public void hiệnThôngBáo(String expectedMessage) {
+    public void showNotification(String expectedMsg) {
+        sleepTo(3000);
         landingPage = new ActionLandingPage();
-        System.out.println(">>>>>>>>>>>>"+ expectedMessage);
-        landingPage.verifyMessageDisplayed(expectedMessage);
+//        System.out.println(">>>>>>>>>"+expectedMsg);
+        Assert.assertTrue(landingPage.verifyMessageDisplayed("Vui lòng nhập họ và tên."), "Thông báo khi chưa nhập họ và tên chưa hợp lệ");
+        sleepTo(3000);
     }
+
 }

@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.Assert;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -255,12 +256,12 @@ public class ActionLandingPage extends ElementsLadingPage {
             return true;
         }else  return false;
     }
-    public Boolean verifyMessageDisplayed(String expectedMessage) {
+    public boolean verifyMessageDisplayed(String expectedMessage) {
         WebDriverWait wait = new WebDriverWait(driver,60);
         wait.until(ExpectedConditions.visibilityOfElementLocated(nameVerifyMessage.by()));
-        if(getTextElement(nameVerifyMessage).equals(expectedMessage)){
-            return true;
-        }else  return false;
+        String nameVerifyMessageText = nameVerifyMessage.findWebElement().getText();
+        System.out.println(nameVerifyMessageText);
+        return nameVerifyMessageText.equals(expectedMessage);
     }
     public void clickBtnContinue(){
         logger.info("clickBtnContinue");
