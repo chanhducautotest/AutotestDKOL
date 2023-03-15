@@ -3,6 +3,7 @@ package stepDefinitions;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -20,7 +21,7 @@ import static net.fpt.driver_setting.DriverBase.closeDriverObjects;
 import static net.fpt.driver_setting.DriverBase.instantiateDriverObject;
 
 public class ToDoStepDefinition extends RunCucumberByCompositionTest {
-    public ActionLandingPage langdingPage;
+    public ActionLandingPage landingPage;
     public ActionsMenu menuPage;
 
     public static void sleepTo(int milliseconds) {
@@ -33,24 +34,24 @@ public class ToDoStepDefinition extends RunCucumberByCompositionTest {
 
     @Given("Open browser and connect website")
     public void openBrowserAndConnectWebsite() {
-        langdingPage = new ActionLandingPage();
-        langdingPage.goHere();
+        landingPage = new ActionLandingPage();
+        landingPage.goHere();
     }
 
     @Then("Verify website correct")
     public void verifyWebsiteCorrect() {
-        Assert.assertEquals(langdingPage.getTitle(),"Đăng ký Online dịch vụ internet, truyền hình, camera - FPT Telecom");
+        Assert.assertEquals(landingPage.getTitle(),"Đăng ký Online dịch vụ internet, truyền hình, camera - FPT Telecom");
     }
 
     @Given("Mở và kết nối với website")
     public void openAndConnectWebsite() {
-        langdingPage = new ActionLandingPage();
-        langdingPage.goHere();
+        landingPage = new ActionLandingPage();
+        landingPage.goHere();
     }
 
     @Then("Xác minh đã truy cập website thành công")
     public void verifyAccessWebsiteCompleted() {
-        Assert.assertEquals(langdingPage.getTitle(),"Đăng ký Online dịch vụ internet, truyền hình, camera - FPT Telecom");
+        Assert.assertEquals(landingPage.getTitle(),"Đăng ký Online dịch vụ internet, truyền hình, camera - FPT Telecom");
     }
 
     @Then("Fill {string} to search box")
@@ -76,6 +77,46 @@ public class ToDoStepDefinition extends RunCucumberByCompositionTest {
     @Given("Fail verify website correct")
     public void failVerifyWebsiteCorrect() {
         sleepTo(5000);
-        Assert.assertEquals(langdingPage.getTitle(),"FPT Telecom");
+        Assert.assertEquals(landingPage.getTitle(),"FPT Telecom");
+    }
+    @Given("Truy cập hệ thống DKOL")
+    public void truyCậpHệThốngDKOL() {
+        landingPage = new ActionLandingPage();
+        landingPage.goHere();
+        sleepTo(3000);
+        landingPage.maximizeWindow();
+        sleepTo(3000);
+        landingPage.checkClickBtnX();
+    }
+
+    @When("Vào mục internet")
+    public void vàoMụcInternet() throws InterruptedException {
+        landingPage.clickLinkFPTInternetHeader();
+    }
+
+    @Then("Chọn gói cước: <ten_goi_cuoc>")
+    public void chọnGóiCướcTen_goi_cuoc() throws ParameterException, InterruptedException {
+        landingPage = new ActionLandingPage();
+        String param =  ParameterService.INSTANCE.getTestString("NetOnly_Sky","Sky");
+        if(param == null){
+            landingPage.clickChooseInternet("Sky");
+        }else{
+            landingPage.clickChooseInternet(param);
+        }
+        System.out.println(param);
+        sleepTo(3000);
+    }
+
+    @And("Nhấn Tiếp Tục")
+    public void nhấnTiếpTục() {
+        landingPage = new ActionLandingPage();
+        landingPage.clickBtnContinue();
+    }
+
+    @Then("Hiện thông báo {string}")
+    public void hiệnThôngBáo(String expectedMessage) {
+        landingPage = new ActionLandingPage();
+        System.out.println(">>>>>>>>>>>>"+ expectedMessage);
+        landingPage.verifyMessageDisplayed(expectedMessage);
     }
 }

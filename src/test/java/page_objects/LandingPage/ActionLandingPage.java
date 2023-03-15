@@ -3,10 +3,7 @@ package page_objects.LandingPage;
 
 import com.lazerycode.selenium.util.Query;
 import org.assertj.core.api.AssertionsForClassTypes;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
@@ -22,6 +19,10 @@ import static constants.Common.*;
 
 public class ActionLandingPage extends ElementsLadingPage {
     static final Logger logger = LoggerFactory.getLogger(ActionLandingPage.class);
+    //Maximize window
+    public void maximizeWindow(){
+        driver.manage().window().maximize();
+    }
 
     /* Check list text chưa là khách hàng của net.fpt */
     public String getTitle() {
@@ -126,6 +127,22 @@ public class ActionLandingPage extends ElementsLadingPage {
         WebElement myElement =  wait.until(ExpectedConditions.elementToBeClickable(linkZLEl.by()));
         String getHyperLink =  myElement.getAttribute("href");
         return getHyperLink;
+    }
+    /* Check link FPT Internet phần Header */
+    public ActionLandingPage clickLinkFPTInternetHeader() throws InterruptedException {
+        logger.info("clickLinkFPTInternetHeader");
+        clickElement(linkFPTInternetHeader);
+        Thread.sleep(2000);
+        return this;
+    }
+    /* Check chọn gói Net */
+    public String clickChooseInternet(String param) throws InterruptedException {
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript("arguments[0].scrollIntoView(true);", internetFieldHeader.findWebElement());
+        WebElement internet = driver.findElement(By.xpath("//h3[@class='name text-16 text-bold clo-black23 mb-1'][normalize-space()='"+param+"']"));
+        Thread.sleep(2000);
+        internet.click();
+        return internet.getText();
     }
     /* Check link FPT Internet*/
     public String clickLinkFPTInternet() throws InterruptedException {
@@ -237,6 +254,28 @@ public class ActionLandingPage extends ElementsLadingPage {
         if(getTextElement(txtTrangChu).equals("Trang chủ")){
             return true;
         }else  return false;
+    }
+    public Boolean verifyMessageDisplayed(String expectedMessage) {
+        WebDriverWait wait = new WebDriverWait(driver,60);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(nameVerifyMessage.by()));
+        if(getTextElement(nameVerifyMessage).equals(expectedMessage)){
+            return true;
+        }else  return false;
+    }
+    public void clickBtnContinue(){
+        logger.info("clickBtnContinue");
+        WebDriverWait wait = new WebDriverWait(driver,60);
+        WebElement scrollToContinueBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(btnContinue.by()));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", scrollToContinueBtn);
+        clickElement(btnContinue);
+    }
+    /* Check click button x trong modal Chọn địa chỉ lắp đặt */
+    public void checkClickBtnX()  {
+        logger.info("checkClickBtnX");
+        WebDriverWait wait = new WebDriverWait(driver,60);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(btnX.by()));
+        clickElement(btnX);
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(btnX.by()));
     }
     /* Check hiển thị danh sách Ưu đãi mới nhất*/
     public Boolean checkDisplayUuDaiMoiNhat()  {
