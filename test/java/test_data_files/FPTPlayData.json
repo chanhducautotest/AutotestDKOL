@@ -1,7 +1,0 @@
-{
-  "REGULAR_EXPRESSION_FORM_PRICE": "\\d+.\\d+đ",
-  "URL_FPT_PLAY": "https://shop-stag.fpt.vn/fpt-play",
-
-  "PAYMENT_METHOD": "Ví điện tử Foxpay",
-  "ATM_PAYMENT_METHOD": "Thẻ ATM"
-}
