@@ -4,7 +4,7 @@
     <listeners>
         <listener class-name="net.fpt.listeners.ScreenShotListener" />
         <listener class-name="net.fpt.listeners.ExtentTestNGIReporter" />
-        <!--        <listener class-name="net.fpt.listeners.LogTestNGListener" />-->
+        <listener class-name="net.fpt.listeners.LogTestNGListener" />
         <!--        <listener class-name="net.fpt.listeners.CustomizedEmailableIReport" />-->
     </listeners>
     <test name="Vegetable garden" preserve-order="false">
