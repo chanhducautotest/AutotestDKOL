@@ -41,7 +41,7 @@
         <proxyPort>80</proxyPort>
 
         <!-- Configurable Test Case -->
-        <suiteXmlFile>testNG.xml</suiteXmlFile>
+        <suiteXmlFile>testng.xml</suiteXmlFile>
 
         <!-- Configurable Email -->
         <enableEmailReport>false</enableEmailReport>
