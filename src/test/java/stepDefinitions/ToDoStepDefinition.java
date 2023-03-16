@@ -96,10 +96,10 @@ public class ToDoStepDefinition extends RunCucumberByCompositionTest {
         landingPage.clickLinkFPTInternetHeader();
     }
 
-    @Then("Chọn gói cước: <ten_goi_cuoc>")
-    public void chooseInternetPackage() throws ParameterException, InterruptedException {
+    @Then("Chọn gói cước: {string}")
+    public void chooseInternetPackage() throws  InterruptedException {
         landingPage = new ActionLandingPage();
-        String param =  ParameterService.INSTANCE.getTestString("NetOnly_Sky","Sky");
+        String param =  ParameterService.INSTANCE.getTestString("DS_ten_goi_cuoc","Sky");
         if(param == null){
             landingPage.clickChooseInternet("Sky");
         }else{
