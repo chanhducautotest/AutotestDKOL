@@ -75,6 +75,7 @@ public class ActionFPTPlayPage extends ElementsFPTPlayPage {
         return isElementVisible(wait,button_maxPackage);
     }
 
+
     /** Hàm mua gói và kiểm tra webpage chuyển qua trang thanh toán
      * author: HungNDT2
      * */
@@ -157,15 +158,46 @@ public class ActionFPTPlayPage extends ElementsFPTPlayPage {
     }
 
     /**
-     * Hàm click vòa góc trên màn hinh bỏ qua pop-up quản cáo
+     * Hàm click vòa góc trên màn hinh bỏ qua pop-up quảng cáo
      * author: minhlh5
      * */
     public ActionFPTPlayPage skipPopUpAd() throws InterruptedException, MalformedURLException {
         Thread.sleep(6000);
         Actions actionProvider = new Actions(driver);
-        // Thực hiện hành động click chuột phải lên butto
+        // Thực hiện hành động click chuột phải lên button
         actionProvider.click().build().perform();
         return this;
     }
+
+
+    /** Chọn Gói VIP
+     * author: kietht5
+     * */
+    public void clickbtnPackageVIP() {
+        clickEl(wait,button_PackageVIP);
+    }
+    /** Chọn Gói MAX
+     * author: kietht5
+     * */
+    public void clickbtnPackageMAX() {
+        clickEl(wait,button_PackageMAX);
+    }
+    public void clickbtnPackageIZI() {
+        clickEl(wait,button_PackageIZI);
+    }
+
+    /** Chọn nút mua ngay
+     * author: kietht5
+     * */
+    public void clickbtnBuyNow() {
+        clickEl(wait,button_BuyNow);
+    }
+    /** Hàm get URLFPTPlay
+     * author: kietht5
+     * */
+    public void getURLFPTPlay(String URL) {
+         driver.getCurrentUrl();
+    }
+
 
 }

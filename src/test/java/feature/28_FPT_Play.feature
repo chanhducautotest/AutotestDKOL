@@ -4,7 +4,7 @@
 Feature: FPT Play
 
 	Scenario Outline: FPT Play
-		Given Truy cập hệ thống DKOL
+		Given Truy cập hệ thống Websit DKOL
 		When Chọn mục FPT Play
 		And Chọn <ten_goi>
 		And Chọn nút mua ngay
