@@ -60,4 +60,9 @@ public final class CommonFPTPlay {
     public static String getGoodsCode =
             jsonUtil.getStringUTF8(DATA_TEST_FILE_PATH_COMMON_REGISTER_DATA,"REGEX_GOODS_CODE");
 
+
+    public static List LIST_PACKAGE =
+            jsonUtil.docFileJSON(DATA_TEST_FILE_PATH_COMMON_REGISTER_DATA,"LIST_PACKAGE");
+    public static String URL_FPT_PLAY_REGISTER_GOIVIP =
+            jsonUtil.getStringUTF8(DATA_TEST_FILE_PATH_COMMON_REGISTER_DATA,"URL_FPT_PLAY_REGISTER_GOIVIP");
 }

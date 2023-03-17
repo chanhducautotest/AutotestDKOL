@@ -7,10 +7,15 @@ import page_objects.PageBase;
 
 public class ElementsFPTPlayPage extends PageBase {
 
-    public Query headermenu_FPTPlay = new Query().defaultLocator(By.xpath("//header/nav[1]/div[1]/div[1]/ul[1]/li[3]/a[1]")).usingDriver(driver);
+    public Query headermenu_FPTPlay = new Query().defaultLocator(By.xpath("//header/nav[1]/div[1]/div[1]/ul[1]/li[3]/a[1]/h2[1]")).usingDriver(driver);
     public Query button_buyPackage = new Query().defaultLocator(By.xpath("/html[1]/body[1]/div[1]/div[2]/main[1]/div[2]/div[1]/section[2]/div[2]/div[2]/div[1]/div[1]/div[2]/a[1]")).usingDriver(driver);
     public Query button_vipPackage = new Query().defaultLocator(By.xpath("/html[1]/body[1]/div[1]/div[2]/main[1]/div[2]/div[1]/section[2]/div[1]/div[1]/div[1]/div[1]/ul[1]/li[1]/h2[1]")).usingDriver(driver);
     public Query button_maxPackage = new Query().defaultLocator(By.xpath("/html[1]/body[1]/div[1]/div[2]/main[1]/div[2]/div[1]/section[2]/div[1]/div[1]/div[1]/div[1]/ul[1]/li[2]/h2[1]")).usingDriver(driver);
+    public Query button_BuyNow = new Query().defaultLocator(By.xpath("//body/div[1]/div[2]/main[1]/div[2]/div[1]/div[1]/section[1]/div[2]/div[2]/div[1]/div[1]/div[2]/a[1]")).usingDriver(driver);
+    public Query button_PackageVIP = new Query().defaultLocator(By.xpath("//h2[@id='202']")).usingDriver(driver);
+    public Query button_PackageMAX = new Query().defaultLocator(By.xpath("//h2[@id='201']")).usingDriver(driver);
+    public Query button_PackageIZI = new Query().defaultLocator(By.xpath("//h2[@id='2004']")).usingDriver(driver);
+
 
     public Query label_priceSaleOffPackage = new Query().defaultLocator(By.xpath("/html[1]/body[1]/div[1]/div[2]/main[1]/div[2]/div[1]/section[2]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/span[1]/span[1]")).usingDriver(driver);
     public Query label_priceOriginalPackage = new Query().defaultLocator(By.xpath("/html/body/div/div[2]/main/div[2]/div[1]/section[2]/div[2]/div[2]/div/div/div[1]/div/div/span[1]/span")).usingDriver(driver);
