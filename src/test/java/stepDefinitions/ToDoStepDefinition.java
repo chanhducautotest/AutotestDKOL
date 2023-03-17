@@ -12,6 +12,7 @@ import org.opentestfactory.exception.ParameterException;
 import org.opentestfactory.exception.ParameterNotFoundException;
 import org.opentestfactory.util.ParameterService;
 import org.testng.Assert;
+import page_objects.FPTPlayPage.ActionFPTPlayPage;
 import page_objects.LandingPage.ActionLandingPage;
 import page_objects.Menu.ActionsMenu;
 import runners.RunCucumberByCompositionTest;
@@ -24,6 +25,7 @@ import static net.fpt.driver_setting.DriverBase.instantiateDriverObject;
 public class ToDoStepDefinition extends RunCucumberByCompositionTest {
     public ActionLandingPage landingPage;
     public ActionsMenu menuPage;
+    public ActionFPTPlayPage fptPlayPage;
 
     public static void sleepTo(int milliseconds) {
         try {
@@ -121,4 +123,47 @@ public class ToDoStepDefinition extends RunCucumberByCompositionTest {
         Assert.assertTrue(landingPage.verifyMessageDisplayed(expectedMsg), "Thông báo khi chưa nhập họ và tên chưa hợp lệ");
     }
 
+    @Given("Truy cập hệ thống Websit DKOL")
+    public void accessWebsiteDKOL() {
+        landingPage = new ActionLandingPage();
+        landingPage.goHere();
+        sleepTo(3000);
+        landingPage.maximizeWindow();
+        sleepTo(3000);
+        landingPage.checkClickBtnX();
+    }
+
+    @When("Chọn mục FPT Play")
+    public void selectFPTPlay() {
+        fptPlayPage = new ActionFPTPlayPage();
+        fptPlayPage.accessFPTPlayPage();
+        sleepTo(3000);
+    }
+
+
+    @And("Chọn {string}")
+    public void selectnamePackage(String param) {
+        fptPlayPage = new ActionFPTPlayPage();
+        param =  ParameterService.INSTANCE.getTestString("DS_ten_goi","Gói VIP");
+        if(param == "Gói VIP"){
+            fptPlayPage.clickbtnPackageVIP();
+        }else
+        {
+            fptPlayPage.clickbtnPackageMAX();
+        }
+        sleepTo(3000);
+    }
+
+    @And("Chọn nút mua ngay")
+    public void selectbtnBuyNow() {
+        fptPlayPage = new ActionFPTPlayPage();
+        fptPlayPage.clickbtnBuyNow();
+        sleepTo(3000);
+    }
+
+    @Then("Chọn btn Tiếp tục")
+    public void selectbtnNext() {
+        landingPage = new ActionLandingPage();
+        landingPage.clickBtnContinue();
+    }
 }

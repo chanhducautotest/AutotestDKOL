@@ -1,7 +1,12 @@
 {
   "REGULAR_EXPRESSION_FORM_PRICE": "\\d+.\\d+đ",
   "URL_FPT_PLAY": "https://shop-stag.fpt.vn/fpt-play",
-
+  "LIST_PACKAGE": [
+    "VIP",
+    "MAX",
+    "IZI"
+  ],
   "PAYMENT_METHOD": "Ví điện tử Foxpay",
-  "ATM_PAYMENT_METHOD": "Thẻ ATM"
+  "ATM_PAYMENT_METHOD": "Thẻ ATM",
+  "URL_FPT_PLAY_REGISTER_GOIVIP": "https://shop-stag.fpt.vn/fpt-play/register/goi-vip"
 }
