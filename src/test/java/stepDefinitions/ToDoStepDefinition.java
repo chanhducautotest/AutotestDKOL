@@ -99,13 +99,13 @@ public class ToDoStepDefinition extends RunCucumberByCompositionTest {
     }
 
     @Then("Chọn gói cước: {string}")
-    public void chooseInternetPackage(String param) throws  InterruptedException {
+    public void chooseInternetPackage(String parameter) throws  InterruptedException {
         landingPage = new ActionLandingPage();
-        param =  ParameterService.INSTANCE.getTestString("DS_ten_goi_cuoc","Sky");
-        if(param == null){
+        parameter =  ParameterService.INSTANCE.getTestString("DS_ten_goi_cuoc","Sky");
+        if(parameter == null){
             landingPage.clickChooseInternet("Sky");
         }else{
-            landingPage.clickChooseInternet(param);
+            landingPage.clickChooseInternet(parameter);
         }
         sleepTo(3000);
     }
