@@ -31,12 +31,12 @@
         <maxRetryCount>1</maxRetryCount>
 
         <!-- Configurable Grid -->
-        <gridEnabled>false</gridEnabled>
+        <gridEnabled>true</gridEnabled>
         <gridURL>http://seleniumhub.fpt.net/wd/hub</gridURL>
 <!--        <gridURL>http://localhost:4444/wd/hub</gridURL>-->
 
         <!-- Configurable Proxy -->
-        <proxyEnabled>True</proxyEnabled>
+        <proxyEnabled>true</proxyEnabled>
         <proxyHost>proxy.hcm.fpt.vn</proxyHost>
         <proxyPort>80</proxyPort>
 
