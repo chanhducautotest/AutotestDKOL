@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import static net.fpt.utils.WebElementActionUtil.getListElementHasLinkInList;
+import static net.fpt.utils.WebElementActionUtil.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static constants.Common.*;
 
@@ -144,13 +144,12 @@ public class ActionLandingPage extends ElementsLadingPage {
         return this;
     }
     /* Check chọn gói Net */
-    public String clickChooseInternet(String param) throws InterruptedException {
+    public void clickChooseInternetSky() {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         jsExecutor.executeScript("arguments[0].scrollIntoView(true);", internetFieldHeader.findWebElement());
-        WebElement internet = driver.findElement(By.xpath("//h3[@class='name text-16 text-bold clo-black23 mb-1'][normalize-space()='"+param+"']"));
-        Thread.sleep(2000);
-        internet.click();
-        return internet.getText();
+        sleepTo(2000);
+        clickEl(wait,internetSkyHeader);
+        sleepTo(2000);
     }
     /* Check link FPT Play*/
     public String clickLinkFPTPlay() throws InterruptedException {

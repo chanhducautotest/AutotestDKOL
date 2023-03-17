@@ -13,6 +13,7 @@ public class ElementsLadingPage extends PageBase {
         public Query super100 = new Query().defaultLocator(By.xpath("/html[1]/body[1]/div[1]/div[2]/main[1]/div[1]/div[1]/section[3]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/p[1]")).usingDriver(driver);
         public Query modalLocation = new Query().defaultLocator(By.xpath("//*[@id='mdLocation-manual___BV_modal_content_']")).usingDriver(driver);
         public Query internetFieldHeader = new Query().defaultLocator(By.xpath("//h2[normalize-space()='Internet Only']")).usingDriver(driver);
+        public Query internetSkyHeader = new Query().defaultLocator(By.xpath("//h3[@class='name text-16 text-bold clo-black23 mb-1'][normalize-space()='Sky']")).usingDriver(driver);
         public Query btnX = new Query().defaultLocator(By.xpath("//div[@id='mdLocation-manual___BV_modal_content_']//button[@aria-label='Close']")).usingDriver(driver);
         public Query btnContinue = new Query().defaultLocator(By.xpath("//button[contains(text(),'Tiếp tục')]")).usingDriver(driver);
         public Query nameVerifyMessage = new Query().defaultLocator(By.xpath("//small[contains(text(),'Vui lòng nhập họ và tên.')]")).usingDriver(driver);

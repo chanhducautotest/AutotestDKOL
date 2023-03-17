@@ -102,10 +102,10 @@ public class ToDoStepDefinition extends RunCucumberByCompositionTest {
     public void chooseInternetPackage(String parameter) throws  InterruptedException {
         landingPage = new ActionLandingPage();
         parameter =  ParameterService.INSTANCE.getTestString("DS_ten_goi_cuoc","Sky");
-        if(parameter == null){
-            landingPage.clickChooseInternet("Sky");
+        if(parameter == "Sky"){
+            landingPage.clickChooseInternetSky();
         }else{
-            landingPage.clickChooseInternet(parameter);
+            landingPage.clickChooseInternetSky();
         }
         sleepTo(3000);
     }
