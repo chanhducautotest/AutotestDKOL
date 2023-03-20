@@ -151,6 +151,29 @@ public class ActionLandingPage extends ElementsLadingPage {
         clickEl(wait,internetSkyHeader);
         sleepTo(2000);
     }
+    public WebElement getElementByInput(List<WebElement> elements, String input) {
+        for (WebElement element : elements) {
+            if (element.getText().equals(input)) {
+                return element;
+            }
+        }
+        return null;
+    }
+    public void clickChooseInternet(String parameter){
+        logger.info("clickChooseInternet");
+        List<WebElement> elementInternetList = driver.findElements(listElementsH3.by());
+        WebElement matchingElement = getElementByInput(elementInternetList,parameter);
+        try {
+            matchingElement.click();
+        }catch (NullPointerException e ) {
+            e.printStackTrace();
+        }
+//        if(matchingElement != null){
+//            matchingElement.click();
+//        }else {
+//            logger.error("Không tìm thấy elements intenet header nào");
+//        }
+    }
     /* Check link FPT Play*/
     public String clickLinkFPTPlay() throws InterruptedException {
         logger.info("clickLinkFPTPlay");
