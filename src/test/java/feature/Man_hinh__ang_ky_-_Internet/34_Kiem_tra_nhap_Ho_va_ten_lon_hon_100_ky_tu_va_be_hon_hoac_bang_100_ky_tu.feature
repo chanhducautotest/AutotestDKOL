@@ -1,9 +1,9 @@
 # Automation priority: 1
 # Test case importance: Low
 # language: en
-Feature: Kiểm tra nhập Họ và tên >100 ký tự và <= 100 ký tự
+Feature: Kiểm tra nhập Họ và tên lớn hơn 100 ký tự và bé hơn hoặc bằng 100 ký tự
 
-	Scenario Outline: Kiểm tra nhập Họ và tên >100 ký tự và <= 100 ký tự
+	Scenario Outline: Kiểm tra nhập Họ và tên lớn hơn 100 ký tự và bé hơn hoặc bằng 100 ký tự
 		Given Truy cập hệ thống DKOL
 		When Vào mục internet
 		And Chọn gói cước: <ten_goi_cuoc>
