@@ -15,5 +15,5 @@ Feature: Kiểm tra nhập Họ và tên >100 ký tự và <= 100 ký tự
 
 		@1
 		Examples:
-		| ho_ten | ho_ten_be_hon_bang_100 | ho_ten_lon_hon_100 | ten_goi_cuoc |
-		| "Tạ Minh Chánh Đức" | "sgExZXfHwkzFOlGyJuFDBwyUyvAFYpdleoIFRuFgUrXZigJAAwihFksXEvTxwkovvcqXdSFUPqAVwnWiWcDNNHWDkDLGVTRSrhNV" | "sgExZXfHwkzFOlGyJuFDBwyUyvAFYpdleoIFRuFgUrXZigJAAwihFksXEvTxwkovvcqXdSFUPqAVwnWiWcDNNHWDkDLGVTRSrhNV99" | "Sky" |
+		| ho_ten_be_hon_bang_100 | ho_ten_lon_hon_100 | ten_goi_cuoc |
+		| "sgExZXfHwkzFOlGyJuFDBwyUyvAFYpdleoIFRuFgUrXZigJAAwihFksXEvTxwkovvcqXdSFUPqAVwnWiWcDNNHWDkDLGVTRSrhNV" | "sgExZXfHwkzFOlGyJuFDBwyUyvAFYpdleoIFRuFgUrXZigJAAwihFksXEvTxwkovvcqXdSFUPqAVwnWiWcDNNHWDkDLGVTRSrhNV99" | "Sky" |
