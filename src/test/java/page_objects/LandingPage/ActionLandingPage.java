@@ -151,6 +151,23 @@ public class ActionLandingPage extends ElementsLadingPage {
         clickEl(wait,internetSkyHeader);
         sleepTo(2000);
     }
+    public WebElement getElementByInput(List<WebElement> elements, String input) {
+        for (WebElement element : elements) {
+            if (element.getText().equals(input)) {
+                return element;
+            }
+        }
+        return null;
+    }
+    public void clickChooseInternet(String parameter){
+        List<WebElement> elementInternetList = driver.findElements(listElementsH3.by());
+        WebElement matchingElement = getElementByInput(elementInternetList,parameter);
+        if(matchingElement != null){
+            matchingElement.click();
+        }else {
+            System.out.println("Không tìm thấy Elements Internet");
+        }
+    }
     /* Check link FPT Play*/
     public String clickLinkFPTPlay() throws InterruptedException {
         logger.info("clickLinkFPTPlay");

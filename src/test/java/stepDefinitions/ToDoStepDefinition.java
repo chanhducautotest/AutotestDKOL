@@ -103,9 +103,11 @@ public class ToDoStepDefinition extends RunCucumberByCompositionTest {
         landingPage = new ActionLandingPage();
         parameter =  ParameterService.INSTANCE.getTestString("DS_ten_goi_cuoc","Sky");
         if(parameter == "Sky"){
-            landingPage.clickChooseInternetSky();
+//            landingPage.clickChooseInternetSky();
+            landingPage.clickChooseInternet(parameter);
         }else{
-            landingPage.clickChooseInternetSky();
+//            landingPage.clickChooseInternetSky();
+            landingPage.clickChooseInternet(parameter);
         }
         sleepTo(3000);
     }
