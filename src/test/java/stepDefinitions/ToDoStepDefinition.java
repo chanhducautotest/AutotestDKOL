@@ -168,4 +168,10 @@ public class ToDoStepDefinition extends RunCucumberByCompositionTest {
         landingPage = new ActionLandingPage();
         landingPage.clickBtnContinue();
     }
+
+    @When("Vào mục Internet")
+    public void goToInternetsSection() throws InterruptedException {
+        landingPage.clickLinkFPTInternetHeader();
+    }
+
 }

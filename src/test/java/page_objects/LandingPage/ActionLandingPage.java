@@ -160,13 +160,19 @@ public class ActionLandingPage extends ElementsLadingPage {
         return null;
     }
     public void clickChooseInternet(String parameter){
+        logger.info("clickChooseInternet");
         List<WebElement> elementInternetList = driver.findElements(listElementsH3.by());
         WebElement matchingElement = getElementByInput(elementInternetList,parameter);
-        if(matchingElement != null){
+        try {
             matchingElement.click();
-        }else {
-            System.out.println("Không tìm thấy Elements Internet");
+        }catch (NullPointerException e ) {
+            e.printStackTrace();
         }
+//        if(matchingElement != null){
+//            matchingElement.click();
+//        }else {
+//            logger.error("Không tìm thấy elements intenet header nào");
+//        }
     }
     /* Check link FPT Play*/
     public String clickLinkFPTPlay() throws InterruptedException {
