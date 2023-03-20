@@ -6,7 +6,7 @@ Feature: Kiểm tra nhập Họ và tên >100 ký tự và <= 100 ký tự
 	Scenario Outline: Kiểm tra nhập Họ và tên >100 ký tự và <= 100 ký tự
 		Given Truy cập hệ thống DKOL
 		When Vào mục internet
-		And Chọn gói cước:<ten_goi_cuoc>
+		And Chọn gói cước: <ten_goi_cuoc>
 		Then Nhập Họ và tên <ho_ten_lon_hon_100>
 		Then Kiểm tra chỉ cho phép lấy tối đa 100 ký tự
 		Then Nhập họ và tên bé hơn hoặc bằng 100 ký tự <ho_ten_be_hon_bang_100> và các thông tin còn lại
