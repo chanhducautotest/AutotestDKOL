@@ -8,7 +8,14 @@
   "REGULAR_EXPRESSION_FORM_PRICE": "\\d+.\\d+đ",
   "URL_FPT_ABOUT_ROLE": "https://shop-stag.fpt.vn/homepage/warranty?servicecode=internet",
 
-  "INPUT_PROVINCE": "Hà Nội",
-  "INPUT_DISTRICT": "Q.Hoàn Kiếm",
-  "INPUT_WARD": "Phường Cửa Đông"
+  "INPUT_PROVINCE": "HỒ CHÍ MINH",
+  "INPUT_DISTRICT": "Q3",
+  "INPUT_WARD": "Phường 10",
+  "INPUT_STREET": "Lý Chính Thắng",
+  "INPUT_HOUSE_NUMBER": "12" ,
+
+  "INPUT_PHONE": "0907323446",
+  "INPUT_BIRTHDAY": "04/04/1999",
+  "INPUT_CMND": "0285574432",
+  "INPUT_EMAIL": "ins.zeus.pro@gmail.com"
 }

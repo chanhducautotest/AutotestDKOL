@@ -80,7 +80,4 @@ public final class Common {
     public static String getTEXTCOPY = jsonUtil.getStringUTF8(DATA_TEST_FILE_PATH_HOME,"TEXT_COPY");
 
     public static String urlHome = jsonUtil.findValueJsonObjectByKeyPathJsonString(DATA_TEST_FILE_PATH_COMMON,"/URL_TEST");
-
-
-
 }

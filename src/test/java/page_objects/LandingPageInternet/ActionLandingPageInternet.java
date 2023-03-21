@@ -1,10 +1,12 @@
 package page_objects.LandingPageInternet;
 
 import com.lazerycode.selenium.util.Query;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+import constants.CommonInternet;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Keyboard;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
@@ -209,5 +211,73 @@ public class ActionLandingPageInternet extends ElementsLadingPageInternet {
         }
         return imageLoaded1;
     }
-
+    public void sendTextToInputNameTxt(String param){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(inputNameTxt.by()));
+        inputNameTxt.findWebElement().sendKeys(param);
+        inputNameTxt.findWebElement().sendKeys(Keys.ENTER);
+    }
+    public boolean verify100TextToInputNameTxt(String param) {
+        inputNameTxt.findWebElement().sendKeys(Keys.ENTER);
+        String name100charactersVerifyText = inputNameTxt.findWebElement().getAttribute("value");
+        return name100charactersVerifyText.equalsIgnoreCase(param);
+    }
+    public void sendTextToInputCitySearchBox(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(inputSearchBox.by()));
+        inputSearchBox.findWebElement().sendKeys(inputProvinceMenu);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(firstResultSearchBox.by())).click();
+    }
+    public void sendTextToInputDistrictSearchBox(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(inputSearchBox.by()));
+        inputSearchBox.findWebElement().sendKeys(inputDistrictMenu);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(firstResultSearchBox.by())).click();
+    }
+    public void sendTextToInputWardSearchBox(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(inputSearchBox.by()));
+        inputSearchBox.findWebElement().sendKeys(inputWardMenu);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(firstResultSearchBox.by())).click();
+    }
+    public void sendTextToInputStreetSearchBox(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(inputSearchBox.by()));
+        inputSearchBox.findWebElement().sendKeys(inputStreetMenu);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(firstResultSearchBox.by())).click();
+    }
+    public void sendTextToOthersFieldsExceptNameField(){
+        inputPhoneTxt.findWebElement().sendKeys(CommonInternet.inputPhoneTxt);
+        inputBirthdayTxt.findWebElement().sendKeys(CommonInternet.inputBirthdayTxt);
+        inputCMNDTxt.findWebElement().sendKeys(CommonInternet.inputCMNDTxt);
+        inputEmailTxt.findWebElement().sendKeys(CommonInternet.inputEmailTxt);
+        sleepTo(2000);
+        JavascriptExecutor jsExecutor = driver;
+        jsExecutor.executeScript("arguments[0].scrollIntoView(true);", addressField.findWebElement());
+        sleepTo(1000);
+        clickEl(wait,dropdownCityArrow);
+        sendTextToInputCitySearchBox();
+        sleepTo(1000);
+        clickEl(wait,dropdownDistrictArrow);
+        sendTextToInputDistrictSearchBox();
+        sleepTo(1000);
+        clickEl(wait,dropdownWardArrow);
+        sendTextToInputWardSearchBox();
+        sleepTo(1000);
+        clickEl(wait,dropdownStreetArrow);
+        sendTextToInputStreetSearchBox();
+        houseNumberInputTxt.findWebElement().sendKeys(inputHouseNumberMenu);
+    }
+    public void chooseContinueBtn(){
+        JavascriptExecutor jsExecutor = driver;
+        jsExecutor.executeScript("arguments[0].scrollIntoView(true);", continueBtn.findWebElement());
+        wait.until(ExpectedConditions.visibilityOfElementLocated(continueBtn.by())).click();
+    }
+    public void waitForPageLoaded(){
+        ExpectedCondition<Boolean> pageLoadCondition = driver -> ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete");
+        WebDriverWait wait = new WebDriverWait(driver, 20);
+        wait.until(pageLoadCondition);
+    }
+    public boolean verifyGoToServicePage(){
+        waitForPageLoaded();
+        sleepTo(6000);
+        String expectedUrl= "https://shop-stag.fpt.vn/internet/service";
+        String currentURL = driver.getCurrentUrl();
+        return currentURL.matches(expectedUrl);
+    }
 }

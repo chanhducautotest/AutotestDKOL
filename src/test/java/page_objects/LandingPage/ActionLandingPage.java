@@ -162,8 +162,8 @@ public class ActionLandingPage extends ElementsLadingPage {
     public void clickChooseInternet(String parameter){
         logger.info("clickChooseInternet");
         List<WebElement> elementInternetList = driver.findElements(listElementsH3.by());
-        WebElement matchingElement = getElementByInput(elementInternetList,parameter);
         try {
+            WebElement matchingElement = getElementByInput(elementInternetList,parameter);
             matchingElement.click();
         }catch (NullPointerException e ) {
             e.printStackTrace();

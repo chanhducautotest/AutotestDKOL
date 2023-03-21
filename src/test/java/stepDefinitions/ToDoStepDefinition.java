@@ -14,6 +14,7 @@ import org.opentestfactory.util.ParameterService;
 import org.testng.Assert;
 import page_objects.FPTPlayPage.ActionFPTPlayPage;
 import page_objects.LandingPage.ActionLandingPage;
+import page_objects.LandingPageInternet.ActionLandingPageInternet;
 import page_objects.Menu.ActionsMenu;
 import runners.RunCucumberByCompositionTest;
 
@@ -26,6 +27,7 @@ public class ToDoStepDefinition extends RunCucumberByCompositionTest {
     public ActionLandingPage landingPage;
     public ActionsMenu menuPage;
     public ActionFPTPlayPage fptPlayPage;
+    public ActionLandingPageInternet landingPageInternet;
 
     public static void sleepTo(int milliseconds) {
         try {
@@ -99,16 +101,25 @@ public class ToDoStepDefinition extends RunCucumberByCompositionTest {
     }
 
     @Then("Chọn gói cước: {string}")
-    public void chooseInternetPackage(String parameter) throws  InterruptedException {
+    public void chooseInternetPackage(String parameter){
         landingPage = new ActionLandingPage();
-        parameter =  ParameterService.INSTANCE.getTestString("DS_ten_goi_cuoc","Sky");
-        if(parameter == "Sky"){
-//            landingPage.clickChooseInternetSky();
+//        try {
+            parameter =  ParameterService.INSTANCE.getString("DS_ten_goi_cuoc",parameter);
+////            parameter = "Sky";
+//        }catch (ParameterException e) {
+//            throw new RuntimeException(e);
+//        }
+//        if (parameter == null) {
+//            System.out.println("null parameter");
+//            landingPage.clickChooseInternet("Sky");
+//        }else {
             landingPage.clickChooseInternet(parameter);
-        }else{
-//            landingPage.clickChooseInternetSky();
-            landingPage.clickChooseInternet(parameter);
-        }
+//        }
+
+//        if(parameter == null){
+//          landingPage.clickChooseInternetSky();
+//            landingPage.clickChooseInternet("Sky");
+//        }
         sleepTo(3000);
     }
 
@@ -174,4 +185,42 @@ public class ToDoStepDefinition extends RunCucumberByCompositionTest {
         landingPage.clickLinkFPTInternetHeader();
     }
 
+    @Then("Nhập Họ và tên {string}")
+    public void inputNameGreaterThan100(String param) {
+        landingPageInternet = new ActionLandingPageInternet();
+            param = ParameterService.INSTANCE.getString("DS_ho_ten_lon_hon_100",param);
+//            param = "sgExZXfHwkzFOlGyJuFDBwyUyvAFYpdleoIFRuFgUrXZigJAAwihFksXEvTxwkovvcqXdSFUPqAVwnWiWcDNNHWDkDLGVTRSrhNV99";
+        landingPageInternet.sendTextToInputNameTxt(param);
+    }
+
+    @Then("Kiểm tra chỉ cho phép lấy tối đa {} ký tự")
+    public void verifyAcceptHundredCharacters(String param) {
+        landingPageInternet = new ActionLandingPageInternet();
+            param = ParameterService.INSTANCE.getString("DS_ho_ten_be_hon_bang_100",param);
+//            param = "sgExZXfHwkzFOlGyJuFDBwyUyvAFYpdleoIFRuFgUrXZigJAAwihFksXEvTxwkovvcqXdSFUPqAVwnWiWcDNNHWDkDLGVTRSrhNV";
+
+        Assert.assertTrue(landingPageInternet.verify100TextToInputNameTxt(param), "Họ và tên cho phép nhập nhiều hơn 100 ký tự");
+    }
+
+    @Then("Nhập họ và tên bé hơn hoặc bằng {int} ký tự {string} và các thông tin còn lại")
+    public void inputNameIsLessThanOrEqualTo100Characters(int arg0, String param) {
+        landingPageInternet = new ActionLandingPageInternet();
+            param = ParameterService.INSTANCE.getString("DS_ho_ten_be_hon_bang_100",param);
+//            param = "sgExZXfHwkzFOlGyJuFDBwyUyvAFYpdleoIFRuFgUrXZigJAAwihFksXEvTxwkovvcqXdSFUPqAVwnWiWcDNNHWDkDLGVTRSrhNV";
+        landingPageInternet.sendTextToInputNameTxt(param);
+        landingPageInternet.sendTextToOthersFieldsExceptNameField();
+        sleepTo(3000);
+    }
+
+    @And("Nhấn tiếp tục")
+    public void clickContinueBtn() {
+        landingPageInternet = new ActionLandingPageInternet();
+        landingPageInternet.chooseContinueBtn();
+    }
+
+    @Then("Kiểm tra chuyển sang màn hình Chọn dịch vụ thành công")
+    public void verifyRedirectToChooseServiceScreen() {
+        landingPageInternet = new ActionLandingPageInternet();
+        Assert.assertTrue(landingPageInternet.verifyGoToServicePage(),"chuyển sang màn hình chọn dịch vụ không thành công");
+    }
 }

@@ -46,7 +46,14 @@ public final class CommonInternet {
             jsonUtil.getStringUTF8(DATA_TEST_FILE_PATH_INTERNET,"INPUT_DISTRICT");
     public static String inputWardMenu =
             jsonUtil.getStringUTF8(DATA_TEST_FILE_PATH_INTERNET,"INPUT_WARD");
+    public static String inputStreetMenu =
+            jsonUtil.getStringUTF8(DATA_TEST_FILE_PATH_INTERNET,"INPUT_STREET");
+    public static String inputHouseNumberMenu =
+            jsonUtil.getStringUTF8(DATA_TEST_FILE_PATH_INTERNET,"INPUT_HOUSE_NUMBER");
 
-
+    public static String inputPhoneTxt = jsonUtil.getStringUTF8(DATA_TEST_FILE_PATH_INTERNET,"INPUT_PHONE");
+    public static String inputBirthdayTxt = jsonUtil.getStringUTF8(DATA_TEST_FILE_PATH_INTERNET,"INPUT_BIRTHDAY");
+    public static String inputCMNDTxt = jsonUtil.getStringUTF8(DATA_TEST_FILE_PATH_INTERNET,"INPUT_CMND");
+    public static String inputEmailTxt = jsonUtil.getStringUTF8(DATA_TEST_FILE_PATH_INTERNET,"INPUT_EMAIL");
 
 }

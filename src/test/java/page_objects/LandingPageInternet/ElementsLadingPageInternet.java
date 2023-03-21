@@ -43,4 +43,19 @@ public class ElementsLadingPageInternet extends PageBase {
 
     public Query label_rules02 = new Query().defaultLocator(By.xpath("(//p[@class='text-12 mb-0']//span)[2]")).usingDriver(driver);
 
+    public Query inputNameTxt = new Query().defaultLocator(By.xpath("//input[@id='name']")).usingDriver(driver);
+    public Query inputPhoneTxt = new Query().defaultLocator(By.xpath("//input[@id='phone']")).usingDriver(driver);
+    public Query inputBirthdayTxt = new Query().defaultLocator(By.xpath("//input[@id='birthday']")).usingDriver(driver);
+    public Query inputCMNDTxt = new Query().defaultLocator(By.xpath("//input[@id='cmnd']")).usingDriver(driver);
+    public Query inputEmailTxt = new Query().defaultLocator(By.xpath("//input[@id='email']")).usingDriver(driver);
+    public Query addressField = new Query().defaultLocator(By.xpath("//div[@class='container w-736 sec-plb-inside rd-t mt-4 rd-b box-sdow']//div[@class='col-12']")).usingDriver(driver);
+    public Query dropdownCityArrow = new Query().defaultLocator(By.xpath("(//b[@role='presentation'])[2]")).usingDriver(driver);
+    public Query dropdownDistrictArrow = new Query().defaultLocator(By.xpath("(//b[@role='presentation'])[3]")).usingDriver(driver);
+    public Query dropdownWardArrow = new Query().defaultLocator(By.xpath("(//b[@role='presentation'])[4]")).usingDriver(driver);
+    public Query dropdownStreetArrow = new Query().defaultLocator(By.xpath("(//b[@role='presentation'])[5]")).usingDriver(driver);
+    public Query houseNumberInputTxt = new Query().defaultLocator(By.xpath("//input[@id='address']")).usingDriver(driver);
+    public Query inputSearchBox = new Query().defaultLocator(By.xpath("//input[@role='searchbox']")).usingDriver(driver);
+    public Query firstResultSearchBox = new Query().defaultLocator(By.xpath("(//ul[@id='select2--results'])[1]")).usingDriver(driver);
+    public Query continueBtn = new Query().defaultLocator(By.xpath("//button[contains(text(),'Tiếp tục')]")).usingDriver(driver);
+
 }
