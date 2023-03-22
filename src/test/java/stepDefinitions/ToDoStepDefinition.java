@@ -105,7 +105,7 @@ public class ToDoStepDefinition extends RunCucumberByCompositionTest {
         landingPage = new ActionLandingPage();
 //        try {
             parameter =  ParameterService.INSTANCE.getString("DS_ten_goi_cuoc",parameter);
-////            parameter = "Sky";
+//            parameter = "Sky";
 //        }catch (ParameterException e) {
 //            throw new RuntimeException(e);
 //        }
@@ -133,7 +133,7 @@ public class ToDoStepDefinition extends RunCucumberByCompositionTest {
     public void showNotification(String expectedMsg) {
         landingPage = new ActionLandingPage();
         expectedMsg = "Vui lòng nhập họ và tên.";
-        Assert.assertTrue(landingPage.verifyMessageDisplayed(expectedMsg), "Thông báo khi chưa nhập họ và tên chưa hợp lệ");
+        Assert.assertTrue(landingPage.verifyNameMessageDisplayed(expectedMsg), "Thông báo khi chưa nhập họ và tên chưa hợp lệ");
     }
 
     @Given("Truy cập hệ thống Websit DKOL")
@@ -185,28 +185,24 @@ public class ToDoStepDefinition extends RunCucumberByCompositionTest {
         landingPage.clickLinkFPTInternetHeader();
     }
 
-    @Then("Nhập Họ và tên {string}")
+    @Then("Nhập Họ và tên lớn hơn {} ký tự {string}")
     public void inputNameGreaterThan100(String param) {
         landingPageInternet = new ActionLandingPageInternet();
-            param = ParameterService.INSTANCE.getString("DS_ho_ten_lon_hon_100",param);
-//            param = "sgExZXfHwkzFOlGyJuFDBwyUyvAFYpdleoIFRuFgUrXZigJAAwihFksXEvTxwkovvcqXdSFUPqAVwnWiWcDNNHWDkDLGVTRSrhNV99";
+        param = ParameterService.INSTANCE.getString("DS_ho_ten_lon_hon_100",param);
         landingPageInternet.sendTextToInputNameTxt(param);
     }
 
     @Then("Kiểm tra chỉ cho phép lấy tối đa {} ký tự")
     public void verifyAcceptHundredCharacters(String param) {
         landingPageInternet = new ActionLandingPageInternet();
-            param = ParameterService.INSTANCE.getString("DS_ho_ten_be_hon_bang_100",param);
-//            param = "sgExZXfHwkzFOlGyJuFDBwyUyvAFYpdleoIFRuFgUrXZigJAAwihFksXEvTxwkovvcqXdSFUPqAVwnWiWcDNNHWDkDLGVTRSrhNV";
-
-        Assert.assertTrue(landingPageInternet.verify100TextToInputNameTxt(param), "Họ và tên cho phép nhập nhiều hơn 100 ký tự");
+        param = ParameterService.INSTANCE.getString("DS_ho_ten_be_hon_bang_100",param);
+        Assert.assertTrue(landingPageInternet.verify100TextToInputNameTxt(param), "Full name allows to enter more than 100 characters");
     }
 
-    @Then("Nhập họ và tên bé hơn hoặc bằng {int} ký tự {string} và các thông tin còn lại")
-    public void inputNameIsLessThanOrEqualTo100Characters(int arg0, String param) {
+    @Then("Nhập họ và tên bé hơn hoặc bằng {} ký tự {string} và các thông tin còn lại")
+    public void inputNameIsLessThanOrEqualTo100Characters(String param) {
         landingPageInternet = new ActionLandingPageInternet();
-            param = ParameterService.INSTANCE.getString("DS_ho_ten_be_hon_bang_100",param);
-//            param = "sgExZXfHwkzFOlGyJuFDBwyUyvAFYpdleoIFRuFgUrXZigJAAwihFksXEvTxwkovvcqXdSFUPqAVwnWiWcDNNHWDkDLGVTRSrhNV";
+        param = ParameterService.INSTANCE.getString("DS_ho_ten_be_hon_bang_100",param);
         landingPageInternet.sendTextToInputNameTxt(param);
         landingPageInternet.sendTextToOthersFieldsExceptNameField();
         sleepTo(3000);
@@ -221,6 +217,75 @@ public class ToDoStepDefinition extends RunCucumberByCompositionTest {
     @Then("Kiểm tra chuyển sang màn hình Chọn dịch vụ thành công")
     public void verifyRedirectToChooseServiceScreen() {
         landingPageInternet = new ActionLandingPageInternet();
-        Assert.assertTrue(landingPageInternet.verifyGoToServicePage(),"chuyển sang màn hình chọn dịch vụ không thành công");
+        Assert.assertTrue(landingPageInternet.verifyGoToServicePage(),"Switch to service selection screen fail!");
+    }
+
+    @Then("Kiểm tra click vào logo FPT Telecom và trở về trang chủ DKOL")
+    public void verifyClickLogoAndBackToHomePage() {
+        landingPageInternet = new ActionLandingPageInternet();
+        Assert.assertTrue(landingPageInternet.chooseLogoFPTAndCheckGoToHomePage(), "Failed to switch to Home screen!");
+    }
+
+    @Then("Kiểm tra giá trị default của trường giới tính {string}")
+    public void verifyDefaultValueOfGenderField(String param) {
+        landingPageInternet = new ActionLandingPageInternet();
+        param = ParameterService.INSTANCE.getString("DS_default_gioi_tinh",param);
+        Assert.assertTrue(landingPageInternet.verifyDefaultGender(param),"Default value of gender field is incorrect!");
+    }
+
+    @And("Chọn giới tính: {string}")
+    public void chooseGender(String param) {
+        landingPageInternet = new ActionLandingPageInternet();
+        param = ParameterService.INSTANCE.getString("DS_gioi_tinh",param);
+        landingPageInternet.sendTextToInputSearchGender(param);
+    }
+
+    @Then("Kiểm tra hiển thị đúng giá trị giới tính {string} vừa chọn")
+    public void verifySelectedGenderValue(String param) {
+        landingPageInternet = new ActionLandingPageInternet();
+        param = ParameterService.INSTANCE.getString("DS_gioi_tinh",param);
+        Assert.assertTrue(landingPageInternet.verifySelectedGender(param),"The value you just selected in the gender field is incorrect!");
+    }
+
+    @Then("Nhập Họ và tên {string}")
+    public void inputFullName(String param) {
+        landingPageInternet = new ActionLandingPageInternet();
+        param = ParameterService.INSTANCE.getString("DS_ho_ten",param);
+        landingPageInternet.sendTextToInputNameTxt(param);
+    }
+
+    @And("Nhấn chọn icon X")
+    public void chooseIconX() {
+        landingPageInternet = new ActionLandingPageInternet();
+        landingPageInternet.chooseClearBtn();
+    }
+
+    @And("Kiểm tra nội dung vừa nhập ở textbox Họ và tên đã được xóa")
+    public void verifyInputtedName() {
+        landingPageInternet = new ActionLandingPageInternet();
+        Assert.assertTrue(landingPageInternet.verifyInputtedNameValue(), "The name you just filled in has not been deleted!");
+    }
+
+    @Then("Kiểm tra default email {string}")
+    public void verifyDefaultEmail(String param) {
+        landingPageInternet = new ActionLandingPageInternet();
+        param = ParameterService.INSTANCE.getString("DS_default_email",param);
+        Assert.assertTrue(landingPageInternet.verifyDefaultEmailPlaceHolder(param),"Default email placeholder value is not match!");
+    }
+
+    @And("Nhập email sai format {string} và nhập tất cả thông tin còn lại")
+    public void inputWrongEmailFormatAndOthers(String param) {
+        landingPageInternet = new ActionLandingPageInternet();
+        param = ParameterService.INSTANCE.getString("DS_error_format_email",param);
+        landingPageInternet.sendTextToInputEmailTxt(param);
+        landingPageInternet.sendTextToOthersFieldsExceptEmailField();
+    }
+
+    @Then("Hiện thông báo sai format email {string}")
+    public void hiệnThôngBáoSaiFormatEmail(String expectedMsg) {
+        landingPageInternet = new ActionLandingPageInternet();
+        expectedMsg = "Email không đúng định dạng.";
+        Assert.assertTrue(landingPage.verifyEmailMessageDisplayed(expectedMsg), "Thông báo khi chưa nhập họ và tên chưa hợp lệ");
+
     }
 }

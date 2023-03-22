@@ -51,9 +51,12 @@ public final class CommonInternet {
     public static String inputHouseNumberMenu =
             jsonUtil.getStringUTF8(DATA_TEST_FILE_PATH_INTERNET,"INPUT_HOUSE_NUMBER");
 
+    public static String inputFullNameTxt = jsonUtil.getStringUTF8(DATA_TEST_FILE_PATH_INTERNET,"INPUT_FULL_NAME");
     public static String inputPhoneTxt = jsonUtil.getStringUTF8(DATA_TEST_FILE_PATH_INTERNET,"INPUT_PHONE");
     public static String inputBirthdayTxt = jsonUtil.getStringUTF8(DATA_TEST_FILE_PATH_INTERNET,"INPUT_BIRTHDAY");
     public static String inputCMNDTxt = jsonUtil.getStringUTF8(DATA_TEST_FILE_PATH_INTERNET,"INPUT_CMND");
     public static String inputEmailTxt = jsonUtil.getStringUTF8(DATA_TEST_FILE_PATH_INTERNET,"INPUT_EMAIL");
+    public static String inputGenderFemale = jsonUtil.getStringUTF8(DATA_TEST_FILE_PATH_INTERNET,"INPUT_GENDER_FEMALE");
+    public static String inputGenderMale = jsonUtil.getStringUTF8(DATA_TEST_FILE_PATH_INTERNET,"INPUT_GENDER_MALE");
 
 }

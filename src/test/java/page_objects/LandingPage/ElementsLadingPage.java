@@ -18,6 +18,7 @@ public class ElementsLadingPage extends PageBase {
         public Query btnX = new Query().defaultLocator(By.xpath("//div[@id='mdLocation-manual___BV_modal_content_']//button[@aria-label='Close']")).usingDriver(driver);
         public Query btnContinue = new Query().defaultLocator(By.xpath("//button[contains(text(),'Tiếp tục')]")).usingDriver(driver);
         public Query nameVerifyMessage = new Query().defaultLocator(By.xpath("//small[contains(text(),'Vui lòng nhập họ và tên.')]")).usingDriver(driver);
+        public Query emailVerifyMessage = new Query().defaultLocator(By.xpath("//small[contains(text(),'Email không đúng định dạng.')]")).usingDriver(driver);
 
 
     //Các elements phần Header

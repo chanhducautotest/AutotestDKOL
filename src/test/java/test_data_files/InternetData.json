@@ -14,8 +14,11 @@
   "INPUT_STREET": "Lý Chính Thắng",
   "INPUT_HOUSE_NUMBER": "12" ,
 
+  "INPUT_FULL_NAME": "Tạ Minh Chánh Đức",
   "INPUT_PHONE": "0907323446",
   "INPUT_BIRTHDAY": "04/04/1999",
   "INPUT_CMND": "0285574432",
-  "INPUT_EMAIL": "ins.zeus.pro@gmail.com"
+  "INPUT_EMAIL": "ins.zeus.pro@gmail.com",
+  "INPUT_GENDER_FEMALE": "Nữ",
+  "INPUT_GENDER_MALE": "Nam"
 }

@@ -278,10 +278,16 @@ public class ActionLandingPage extends ElementsLadingPage {
             return true;
         }else  return false;
     }
-    public boolean verifyMessageDisplayed(String expectedMessage) {
+    public boolean verifyNameMessageDisplayed(String expectedMessage) {
         WebDriverWait wait = new WebDriverWait(driver,60);
         wait.until(ExpectedConditions.visibilityOfElementLocated(nameVerifyMessage.by()));
         String nameVerifyMessageText = nameVerifyMessage.findWebElement().getText();
+        return nameVerifyMessageText.equals(expectedMessage);
+    }
+    public boolean verifyEmailMessageDisplayed(String expectedMessage) {
+        WebDriverWait wait = new WebDriverWait(driver,60);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(emailVerifyMessage.by()));
+        String nameVerifyMessageText = emailVerifyMessage.findWebElement().getText();
         return nameVerifyMessageText.equals(expectedMessage);
     }
     public void clickBtnContinue(){

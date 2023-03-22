@@ -48,7 +48,9 @@ public class ElementsLadingPageInternet extends PageBase {
     public Query inputBirthdayTxt = new Query().defaultLocator(By.xpath("//input[@id='birthday']")).usingDriver(driver);
     public Query inputCMNDTxt = new Query().defaultLocator(By.xpath("//input[@id='cmnd']")).usingDriver(driver);
     public Query inputEmailTxt = new Query().defaultLocator(By.xpath("//input[@id='email']")).usingDriver(driver);
+    public Query genderField = new Query().defaultLocator(By.xpath("(//span[@id='select2--container'])[1]")).usingDriver(driver);
     public Query addressField = new Query().defaultLocator(By.xpath("//div[@class='container w-736 sec-plb-inside rd-t mt-4 rd-b box-sdow']//div[@class='col-12']")).usingDriver(driver);
+    public Query dropdownGenderArrow = new Query().defaultLocator(By.xpath("(//b[@role='presentation'])[1]")).usingDriver(driver);
     public Query dropdownCityArrow = new Query().defaultLocator(By.xpath("(//b[@role='presentation'])[2]")).usingDriver(driver);
     public Query dropdownDistrictArrow = new Query().defaultLocator(By.xpath("(//b[@role='presentation'])[3]")).usingDriver(driver);
     public Query dropdownWardArrow = new Query().defaultLocator(By.xpath("(//b[@role='presentation'])[4]")).usingDriver(driver);
@@ -57,5 +59,7 @@ public class ElementsLadingPageInternet extends PageBase {
     public Query inputSearchBox = new Query().defaultLocator(By.xpath("//input[@role='searchbox']")).usingDriver(driver);
     public Query firstResultSearchBox = new Query().defaultLocator(By.xpath("(//ul[@id='select2--results'])[1]")).usingDriver(driver);
     public Query continueBtn = new Query().defaultLocator(By.xpath("//button[contains(text(),'Tiếp tục')]")).usingDriver(driver);
+    public Query fptLogo = new Query().defaultLocator(By.xpath("//img[@class='kd-fptplay-img']")).usingDriver(driver);
+    public Query btnClear = new Query().defaultLocator(By.xpath("//i[@class='btn-clear']")).usingDriver(driver);
 
 }

@@ -216,6 +216,11 @@ public class ActionLandingPageInternet extends ElementsLadingPageInternet {
         inputNameTxt.findWebElement().sendKeys(param);
         inputNameTxt.findWebElement().sendKeys(Keys.ENTER);
     }
+    public void sendTextToInputEmailTxt(String param){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(inputEmailTxt.by()));
+        inputEmailTxt.findWebElement().sendKeys(param);
+        inputEmailTxt.findWebElement().sendKeys(Keys.ENTER);
+    }
     public boolean verify100TextToInputNameTxt(String param) {
         inputNameTxt.findWebElement().sendKeys(Keys.ENTER);
         String name100charactersVerifyText = inputNameTxt.findWebElement().getAttribute("value");
@@ -263,6 +268,25 @@ public class ActionLandingPageInternet extends ElementsLadingPageInternet {
         sendTextToInputStreetSearchBox();
         houseNumberInputTxt.findWebElement().sendKeys(inputHouseNumberMenu);
     }
+    public void sendTextToOthersFieldsExceptEmailField(){
+        inputNameTxt.findWebElement().sendKeys(inputFullNameTxt);
+        inputPhoneTxt.findWebElement().sendKeys(CommonInternet.inputPhoneTxt);
+        inputBirthdayTxt.findWebElement().sendKeys(CommonInternet.inputBirthdayTxt);
+        inputCMNDTxt.findWebElement().sendKeys(CommonInternet.inputCMNDTxt);
+        sleepTo(2000);
+        JavascriptExecutor jsExecutor = driver;
+        jsExecutor.executeScript("arguments[0].scrollIntoView(true);", addressField.findWebElement());
+        sleepTo(1000);
+        clickEl(wait,dropdownCityArrow);
+        sendTextToInputCitySearchBox();
+        clickEl(wait,dropdownDistrictArrow);
+        sendTextToInputDistrictSearchBox();
+        clickEl(wait,dropdownWardArrow);
+        sendTextToInputWardSearchBox();
+        clickEl(wait,dropdownStreetArrow);
+        sendTextToInputStreetSearchBox();
+        houseNumberInputTxt.findWebElement().sendKeys(inputHouseNumberMenu);
+    }
     public void chooseContinueBtn(){
         JavascriptExecutor jsExecutor = driver;
         jsExecutor.executeScript("arguments[0].scrollIntoView(true);", continueBtn.findWebElement());
@@ -279,5 +303,39 @@ public class ActionLandingPageInternet extends ElementsLadingPageInternet {
         String expectedUrl= "https://shop-stag.fpt.vn/internet/service";
         String currentURL = driver.getCurrentUrl();
         return currentURL.matches(expectedUrl);
+    }
+    public boolean chooseLogoFPTAndCheckGoToHomePage(){
+        String expectedUrl="https://shop-stag.fpt.vn/";
+        clickEl(wait,fptLogo);
+        waitForPageLoaded();
+        String currentUrl = driver.getCurrentUrl();
+        return currentUrl.matches(expectedUrl);
+    }
+    public boolean verifyDefaultGender(String param) {
+        waitForPageLoaded();
+        String genderValueDefault = genderField.findWebElement().getText();
+        return genderValueDefault.equalsIgnoreCase(param);
+    }
+    public void sendTextToInputSearchGender(String param){
+        clickEl(wait,dropdownGenderArrow);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(inputSearchBox.by()));
+        inputSearchBox.findWebElement().sendKeys(param);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(firstResultSearchBox.by())).click();
+    }
+    public boolean verifySelectedGender(String param) {
+        String genderValueDefault = genderField.findWebElement().getText();
+        return genderValueDefault.equalsIgnoreCase(param);
+    }
+    public void chooseClearBtn(){
+        clickEl(wait,btnClear);
+    }
+    public boolean verifyInputtedNameValue() {
+        String genderValueDefault = inputNameTxt.findWebElement().getAttribute("value");
+        return genderValueDefault.equalsIgnoreCase("");
+    }
+    public boolean verifyDefaultEmailPlaceHolder(String param){
+        String expectedValue = inputEmailTxt.findWebElement().getAttribute("placeholder");
+        System.out.println(expectedValue);
+        return expectedValue.equalsIgnoreCase(param);
     }
 }
