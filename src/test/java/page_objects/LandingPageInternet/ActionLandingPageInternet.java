@@ -257,13 +257,10 @@ public class ActionLandingPageInternet extends ElementsLadingPageInternet {
         sleepTo(1000);
         clickEl(wait,dropdownCityArrow);
         sendTextToInputCitySearchBox();
-        sleepTo(1000);
         clickEl(wait,dropdownDistrictArrow);
         sendTextToInputDistrictSearchBox();
-        sleepTo(1000);
         clickEl(wait,dropdownWardArrow);
         sendTextToInputWardSearchBox();
-        sleepTo(1000);
         clickEl(wait,dropdownStreetArrow);
         sendTextToInputStreetSearchBox();
         houseNumberInputTxt.findWebElement().sendKeys(inputHouseNumberMenu);

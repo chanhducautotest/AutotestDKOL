@@ -103,23 +103,8 @@ public class ToDoStepDefinition extends RunCucumberByCompositionTest {
     @Then("Chọn gói cước: {string}")
     public void chooseInternetPackage(String parameter){
         landingPage = new ActionLandingPage();
-//        try {
-            parameter =  ParameterService.INSTANCE.getString("DS_ten_goi_cuoc",parameter);
-//            parameter = "Sky";
-//        }catch (ParameterException e) {
-//            throw new RuntimeException(e);
-//        }
-//        if (parameter == null) {
-//            System.out.println("null parameter");
-//            landingPage.clickChooseInternet("Sky");
-//        }else {
-            landingPage.clickChooseInternet(parameter);
-//        }
-
-//        if(parameter == null){
-//          landingPage.clickChooseInternetSky();
-//            landingPage.clickChooseInternet("Sky");
-//        }
+        parameter =  ParameterService.INSTANCE.getString("DS_ten_goi_cuoc",parameter);
+        landingPage.clickChooseInternet(parameter);
         sleepTo(3000);
     }
 
