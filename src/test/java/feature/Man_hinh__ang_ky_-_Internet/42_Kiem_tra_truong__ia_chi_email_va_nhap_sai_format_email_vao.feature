@@ -10,7 +10,7 @@ Feature: Kiểm tra trường Địa chỉ email và nhập sai format email và
 		Then Kiểm tra default email <default_email>
 		And Nhập email sai format <error_format_email> và nhập tất cả thông tin còn lại
 		And Nhấn tiếp tục
-		Then Hiện thông báo "Email không đúng định dạng."
+		Then Hiện thông báo sai format email "Email không đúng định dạng."
 
 		@1
 		Examples:
