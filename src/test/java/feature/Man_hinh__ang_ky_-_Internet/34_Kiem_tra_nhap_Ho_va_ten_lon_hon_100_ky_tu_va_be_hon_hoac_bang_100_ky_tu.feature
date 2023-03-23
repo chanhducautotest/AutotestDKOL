@@ -7,9 +7,9 @@ Feature: Kiểm tra nhập Họ và tên lớn hơn 100 ký tự và bé hơn ho
 		Given Truy cập hệ thống DKOL
 		When Vào mục internet
 		And Chọn gói cước: <ten_goi_cuoc>
-		Then Nhập Họ và tên lớn hơn 100 ký tự <ho_ten_lon_hon_100>
-		Then Kiểm tra chỉ cho phép lấy tối đa 100 ký tự
-		Then Nhập họ và tên bé hơn hoặc bằng 100 ký tự <ho_ten_be_hon_bang_100> và các thông tin còn lại
+		Then Nhập Họ và tên lớn hơn một trăm ký tự <ho_ten_lon_hon_100>
+		Then Kiểm tra chỉ cho phép lấy tối đa một trăm ký tự <ho_ten_be_hon_bang_100>
+		Then Nhập họ và tên bé hơn hoặc bằng một trăm ký tự <ho_ten_be_hon_bang_100> và các thông tin còn lại
 		And Nhấn tiếp tục
 		Then Kiểm tra chuyển sang màn hình Chọn dịch vụ thành công
 
