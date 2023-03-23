@@ -17,6 +17,7 @@ Feature: Kiểm tra khi để trống, nhập vào CMND/CCCD bé hơn 9 số, l�
 		And Nhập Số CMND/CCCD lớn hơn mười hai số <cmnd_lon_hon_12>
 		Then Kiểm tra hệ thống chỉ cho phép nhập vào CMND/CCCD mười hai số <cmnd_12_so>
 		And Nhập Số CMND/CCCD hợp lệ <cmnd_hop_le> và các thông tin còn lại
+		And Nhấn tiếp tục
 		Then Kiểm tra chuyển sang màn hình Chọn dịch vụ thành công
 
 		@1
