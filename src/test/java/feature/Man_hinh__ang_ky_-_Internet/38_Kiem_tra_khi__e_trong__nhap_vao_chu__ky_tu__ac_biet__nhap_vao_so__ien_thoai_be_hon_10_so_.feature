@@ -17,7 +17,7 @@ Feature: Kiểm tra khi để trống, nhập vào chữ, ký tự đặc biệt
 		And Nhập số điện thoại có số đầu khác không <sdt_khac_0>
 		And Nhấn tiếp tục
 		Then Hiện thông báo khi nhập vào số điện thoại có đầu số khác không "Số điện thoại của bạn không đúng định dạng!"
-		And Nhập số điện thoại hợp lệ <sdt_hop_le>
+		And Nhập số điện thoại hợp lệ <sdt_hop_le> và các thông tin còn lại
 		And Nhấn tiếp tục
 		Then Kiểm tra chuyển sang màn hình Chọn dịch vụ thành công
 
