@@ -13,7 +13,7 @@ Feature: Kiểm tra khi để trống, nhập vào CMND/CCCD bé hơn 9 số, l�
 		And Nhấn tiếp tục
 		Then Hiện thông báo nhập sai format CMND, CCCD "CMND/CCCD phải từ 9 đến 12 chữ số."
 		And Nhập Số CMND, CCCD có chứa chữ, ký tự đặc biệt <cmnd_ky_tu_dac_biet>
-		Then Kiểm tra hệ thống không cho phép nhập chữ và ký tự đặc biệt vào trường CMND/CCCD
+		Then Kiểm tra hệ thống không cho phép nhập chữ và ký tự đặc biệt vào trường CMND, CCCD
 		And Nhập Số CMND, CCCD lớn hơn mười hai số <cmnd_lon_hon_12>
 		Then Kiểm tra hệ thống chỉ cho phép nhập vào CMND, CCCD mười hai số <cmnd_12_so>
 		And Nhập Số CMND, CCCD hợp lệ <cmnd_hop_le> và các thông tin còn lại
