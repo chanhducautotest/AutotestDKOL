@@ -284,12 +284,7 @@ public class ActionLandingPage extends ElementsLadingPage {
         String nameVerifyMessageText = nameVerifyMessage.findWebElement().getText();
         return nameVerifyMessageText.equals(expectedMessage);
     }
-    public boolean verifyEmailMessageDisplayed(String expectedMessage) {
-        WebDriverWait wait = new WebDriverWait(driver,60);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(emailVerifyMessage.by()));
-        String nameVerifyMessageText = emailVerifyMessage.findWebElement().getText();
-        return nameVerifyMessageText.equals(expectedMessage);
-    }
+
     public void clickBtnContinue(){
         logger.info("clickBtnContinue");
         WebDriverWait wait = new WebDriverWait(driver,60);

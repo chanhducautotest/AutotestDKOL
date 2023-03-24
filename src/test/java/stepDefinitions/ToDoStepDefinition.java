@@ -9,6 +9,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.opentestfactory.exception.ParameterException;
+import org.opentestfactory.exception.ParameterFormatException;
 import org.opentestfactory.exception.ParameterNotFoundException;
 import org.opentestfactory.util.ParameterService;
 import org.testng.Assert;
@@ -16,6 +17,7 @@ import page_objects.FPTPlayPage.ActionFPTPlayPage;
 import page_objects.LandingPage.ActionLandingPage;
 import page_objects.LandingPageInternet.ActionLandingPageInternet;
 import page_objects.Menu.ActionsMenu;
+import page_objects.Register.ActionsRegister;
 import runners.RunCucumberByCompositionTest;
 
 import java.io.IOException;
@@ -28,6 +30,7 @@ public class ToDoStepDefinition extends RunCucumberByCompositionTest {
     public ActionsMenu menuPage;
     public ActionFPTPlayPage fptPlayPage;
     public ActionLandingPageInternet landingPageInternet;
+    public ActionsRegister registerPage;
 
     public static void sleepTo(int milliseconds) {
         try {
@@ -170,21 +173,21 @@ public class ToDoStepDefinition extends RunCucumberByCompositionTest {
         landingPage.clickLinkFPTInternetHeader();
     }
 
-    @Then("Nhập Họ và tên lớn hơn {} ký tự {string}")
+    @Then("Nhập Họ và tên lớn hơn một trăm ký tự {string}")
     public void inputNameGreaterThan100(String param) {
         landingPageInternet = new ActionLandingPageInternet();
         param = ParameterService.INSTANCE.getString("DS_ho_ten_lon_hon_100",param);
         landingPageInternet.sendTextToInputNameTxt(param);
     }
 
-    @Then("Kiểm tra chỉ cho phép lấy tối đa {} ký tự")
+    @Then("Kiểm tra chỉ cho phép lấy tối đa một trăm ký tự {string}")
     public void verifyAcceptHundredCharacters(String param) {
         landingPageInternet = new ActionLandingPageInternet();
         param = ParameterService.INSTANCE.getString("DS_ho_ten_be_hon_bang_100",param);
-        Assert.assertTrue(landingPageInternet.verify100TextToInputNameTxt(param), "Full name allows to enter more than 100 characters");
+        Assert.assertTrue(landingPageInternet.verify100TextToInputNameTxt(param), "The system allows Full name to enter more than 100 characters");
     }
 
-    @Then("Nhập họ và tên bé hơn hoặc bằng {} ký tự {string} và các thông tin còn lại")
+    @Then("Nhập họ và tên bé hơn hoặc bằng một trăm ký tự {string} và các thông tin còn lại")
     public void inputNameIsLessThanOrEqualTo100Characters(String param) {
         landingPageInternet = new ActionLandingPageInternet();
         param = ParameterService.INSTANCE.getString("DS_ho_ten_be_hon_bang_100",param);
@@ -193,10 +196,12 @@ public class ToDoStepDefinition extends RunCucumberByCompositionTest {
         sleepTo(3000);
     }
 
-    @And("Nhấn tiếp tục")
+    @And("Nhấn tiếp tục") @And("Để trống trường Số điện thoại và nhấn tiếp tục")
     public void clickContinueBtn() {
+        sleepTo(2000);
         landingPageInternet = new ActionLandingPageInternet();
         landingPageInternet.chooseContinueBtn();
+        sleepTo(2000);
     }
 
     @Then("Kiểm tra chuyển sang màn hình Chọn dịch vụ thành công")
@@ -267,10 +272,137 @@ public class ToDoStepDefinition extends RunCucumberByCompositionTest {
     }
 
     @Then("Hiện thông báo sai format email {string}")
-    public void hiệnThôngBáoSaiFormatEmail(String expectedMsg) {
+    public void verifyMessageWhenInputtedWrongFormatEmail(String expectedMsg) {
         landingPageInternet = new ActionLandingPageInternet();
-        expectedMsg = "Email không đúng định dạng.";
-        Assert.assertTrue(landingPage.verifyEmailMessageDisplayed(expectedMsg), "Thông báo khi chưa nhập họ và tên chưa hợp lệ");
+        Assert.assertTrue(landingPageInternet.verifyEmailMessageDisplayed(expectedMsg), "The message notify wrong email format does not appear");
+    }
 
+    @Then("Hiện thông báo khi để trống trường Số điện thoại {string}")
+    public void verifyMessageWhenLeftPhoneFieldBlank(String expMessage) {
+        landingPageInternet = new ActionLandingPageInternet();
+        Assert.assertTrue(landingPageInternet.verifyBlankPhoneMessageDisplayed(expMessage),"The message leaving the Phone number field blank does not appear");
+    }
+
+    @And("Nhập số điện thoại có chứa chữ, ký tự đặc biệt {string}")
+    public void inputPhoneNumberContainLetterAndSpecialCharacter(String param) {
+        landingPageInternet = new ActionLandingPageInternet();
+        param = ParameterService.INSTANCE.getString("DS_sdt_dac_biet",param);
+        landingPageInternet.sendSpecialTextToInputPhoneTxt(param);
+    }
+
+    @Then("Kiểm tra hệ thống không cho phép nhập chữ, ký tự đặc biệt vào trường Số điện thoại")
+    public void verifyInputSpecialTextInPhoneField() {
+        landingPageInternet = new ActionLandingPageInternet();
+        Assert.assertTrue(landingPageInternet.verifyInputSpecialTextPhoneField(),"The system allows entering letters and special characters in the Phone number field");
+    }
+
+    @And("Nhập số điện thoại bé hơn mười số {}")
+    public void inputPhoneNumberLessThan10Number(String param) {
+        landingPageInternet = new ActionLandingPageInternet();
+        param = ParameterService.INSTANCE.getString("DS_sdt_be_hon_10",param);
+        landingPageInternet.sendLessThan10NumberToInputPhoneTxt(param);
+    }
+
+    @Then("Hiện thông báo khi nhập vào số điện thoại bé hơn mười số {string}")
+    public void verifyMessageWhenInputPhoneNumberLessThan10(String expMessage) {
+        landingPageInternet = new ActionLandingPageInternet();
+        Assert.assertTrue(landingPageInternet.verifyLessThan10PNumberMessageDisplayed(expMessage),"The message when input less than 10 numbers into phone field does not appear");
+    }
+
+    @And("Nhập số điện thoại có số đầu khác không {}")
+    public void inputPhoneNumberWithPrefixOtherThan0(String param) {
+        landingPageInternet = new ActionLandingPageInternet();
+        param = ParameterService.INSTANCE.getString("DS_sdt_khac_0",param);
+        landingPageInternet.sendPNumberDiverse0ToInputPhoneTxt(param);
+    }
+
+    @Then("Hiện thông báo khi nhập vào số điện thoại có đầu số khác không {string}")
+    public void verifyMessageWhenInputPhoneNumberWithPrefixDiverse0(String expMessage) {
+        landingPageInternet = new ActionLandingPageInternet();
+        Assert.assertTrue(landingPageInternet.verifyPrefixDiverse0PNumberMessageDisplayed(expMessage),"The message when input less than 10 numbers into phone field does not appear");
+    }
+
+    @And("Nhập số điện thoại hợp lệ {} và các thông tin còn lại")
+    public void inputValidPhoneNumberAndOthersInfo(String param) {
+        landingPageInternet = new ActionLandingPageInternet();
+        param = ParameterService.INSTANCE.getString("DS_sdt_hop_le",param);
+        landingPageInternet.sendTextToInputPhoneTxt(param);
+        landingPageInternet.sendTextToOthersFieldsExceptPhoneField();
+        sleepTo(3000);
+    }
+
+    @Then("Kiểm tra hiển thị: Logo FPT Telecom, Thông tin đăng ký, Chọn dịch vụ, Thông tin thanh toán, Hoàn tất đăng ký")
+    public void verifyDisplayElementsOnRegisterPage() {
+        landingPageInternet = new ActionLandingPageInternet();
+        Assert.assertTrue(landingPageInternet.verifyElementsOnNavbarRegisterPage(),"Logo FPT Telecom, Thông tin đăng ký, Chọn dịch vụ, Thông tin thanh toán, Hoàn tất đăng ký are not displayed");
+    }
+
+    @Then("Kiểm tra hiển thị các label: Họ và tên *, Số điện thoại *, Số CMND,CCCD *, Ngày sinh *, Giới tính, Địa chỉ email ở mục thông tin khách hàng")
+    public void verifyDisplayElementsOnCustomerInformationSection() {
+        registerPage = new ActionsRegister();
+        Assert.assertTrue(registerPage.verifyElementsDisplayOnInfoSectionRegisterPage(),"Họ và tên *, Số điện thoại *, Số CMND,CCCD *, Ngày sinh *, Giới tính, Địa chỉ email are not displayed");
+        Assert.assertTrue(registerPage.compareElementListsOnInfoSectionRegisterPage(),"The text of these label Họ và tên *, Số điện thoại *, Số CMND,CCCD *, Ngày sinh *, Giới tính, Địa chỉ email are not matched the expected value");
+    }
+
+    @Then("Kiểm tra hiển thị các mục Tỉnh, Thành phố, Quận, huyện, Phường, xã, Đường, Radio button: NHÀ RIÊNG, CHUNG CƯ, Địa chỉ, số nhà , Ghi chú, Btn Tiếp tục")
+    public void verifyDisplayElementsOnMountingAddressSection() {
+        registerPage = new ActionsRegister();
+        Assert.assertTrue(registerPage.verifyElementsDisplayOnAmountingAddressSectionRegisterPage(),"Tỉnh, Thành phố, Quận, huyện, Phường, xã, Đường, Radio button: NHÀ RIÊNG, CHUNG CƯ, Địa chỉ, số nhà , Ghi chú, Btn Tiếp tục are not displayed");
+        Assert.assertTrue(registerPage.compareElementListsOnAmountingAddressSectionRegisterPage(),"The value of these label Tỉnh, Thành phố, Quận, huyện, Phường, xã, Đường, Radio button: NHÀ RIÊNG, CHUNG CƯ, Địa chỉ, số nhà , Ghi chú, Btn Tiếp tục are not matched the expected value");
+    }
+
+    @Then("Hiện thông báo chưa nhập CMND, CCCD {string}")
+    public void verifyMessageWhenLeftCMNDBlanked(String expectedMsg) {
+        registerPage = new ActionsRegister();
+        Assert.assertTrue(registerPage.verifyBlankedCMNDMessageDisplayed(expectedMsg),"The message of CMND Fields when its blanked not match the expected message");
+    }
+
+    @And("Nhập Số CMND, CCCD bé hơn chín số {}")
+    public void inputCMNDLessThan9Numbers(String param) {
+        registerPage = new ActionsRegister();
+        param = ParameterService.INSTANCE.getString("DS_cmnd_be_hon_9",param);
+        registerPage.sendCMNDLessThan9Num(param);
+    }
+
+    @Then("Hiện thông báo nhập sai format CMND, CCCD {string}")
+    public void verifyMessageWhenInputWrongCMNDFormat(String expectedMsg) {
+        registerPage = new ActionsRegister();
+        Assert.assertTrue(registerPage.verifyWrongFormatCMNDMessageDisplayed(expectedMsg),"The message of CMND Fields when its blanked not match the expected message");
+    }
+
+    @And("Nhập Số CMND, CCCD có chứa chữ, ký tự đặc biệt {string}")
+    public void inputCMNDContainLetterAndSpecialCharacter(String param) {
+        registerPage = new ActionsRegister();
+        param = ParameterService.INSTANCE.getString("DS_cmnd_ky_tu_dac_biet",param);
+        registerPage.sendSpecialTextCMNDField(param);
+    }
+
+    @Then("Kiểm tra hệ thống không cho phép nhập chữ và ký tự đặc biệt vào trường CMND, CCCD")
+    public void verifyInputSpecialTextInCMNDField() {
+        registerPage = new ActionsRegister();
+        Assert.assertTrue(registerPage.verifySpecialTextCMNDMessageDisplayed(),"The system allows entering letters and special characters in the CMND field");
+    }
+
+    @And("Nhập Số CMND, CCCD lớn hơn mười hai số {}")
+    public void inputCMNDMoreThan12Numbers(String param) {
+        registerPage = new ActionsRegister();
+        param = ParameterService.INSTANCE.getString("DS_cmnd_lon_hon_12",param);
+        registerPage.sendCMNDMoreThan12Num(param);
+    }
+
+    @Then("Kiểm tra hệ thống chỉ cho phép nhập vào CMND, CCCD mười hai số {}")
+    public void verifyCMNDFieldAcceptInputMax12Numbers(String param) {
+        registerPage = new ActionsRegister();
+        param = ParameterService.INSTANCE.getString("DS_cmnd_12_so",param);
+        Assert.assertTrue(registerPage.verifyMax12NumToInputCMNDField(param),"The system allows CMND to enter more than 12 numbers");
+    }
+
+    @And("Nhập Số CMND, CCCD hợp lệ {} và các thông tin còn lại")
+    public void inputValidCMNDAndOthersInfo(String param) {
+        registerPage = new ActionsRegister();
+        param = ParameterService.INSTANCE.getString("DS_cmnd_hop_le",param);
+        registerPage.sendValidCMND(param);
+        registerPage.sendTextToOthersFieldsExceptPhoneField();
+        sleepTo(2000);
     }
 }

@@ -1,15 +1,16 @@
 package page_objects.Register;
 
 import com.lazerycode.selenium.util.Query;
+import constants.CommonInternet;
+import constants.CommonRegister;
 import net.fpt.utils.TimeUtil;
-import org.apache.tools.ant.taskdefs.Sleep;
-import org.bouncycastle.eac.EACIOException;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
@@ -22,6 +23,9 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static constants.Common.urlHome;
+import static constants.CommonInternet.*;
+import static constants.CommonInternet.inputStreetMenu;
 import static net.fpt.utils.WebElementActionUtil.*;
 import static net.fpt.utils.VNCharacterUtils.*;
 import static net.fpt.utils.DateUtil.*;
@@ -1630,10 +1634,152 @@ public class ActionsRegister extends ElementsRegister {
         //wait.until(ExpectedConditions.visibilityOfElementLocated(label_namePaymentMethods.by()));
         sleepTo(1000);
     }
-
-
+    public boolean areElementsDisplayed(List<WebElement> elementsList) {
+        for (WebElement element : elementsList) {
+            if (!element.isDisplayed()) {
+                return false;
+            }
+        }
+        return true;
+    }
+    public boolean verifyElementsDisplayOnInfoSectionRegisterPage(){
+        List<WebElement> elementsList = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(listRegisterInformationLabel.by()));
+        return areElementsDisplayed(elementsList);
+    }
+    public boolean compareElementListsOnInfoSectionRegisterPage() {
+        List<WebElement> elementsList = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(listRegisterInformationLabel.by()));
+        List listExpected = CommonRegister.listPrivateInfo;
+        if (elementsList.size() != listExpected.size()) {
+            return false;
+        }
+        for (int i = 0; i < elementsList.size(); i++) {
+            if (!elementsList.get(i).getText().equals(listExpected.get(i).toString())) {
+                return false;
+            }
+        }
+        return true;
+    }
+    List<WebElement> elementsList = new ArrayList<WebElement>(){
+    };
+    public boolean compareElementListsOnAmountingAddressSectionRegisterPage() {
+        elementsList.add(dropdown_province.findWebElement());
+        elementsList.add(dropdown_district.findWebElement());
+        elementsList.add(dropdown_ward.findWebElement());
+        elementsList.add(dropdown_street.findWebElement());
+        elementsList.add(label_home.findWebElement());
+        elementsList.add(label_tower.findWebElement());
+        elementsList.add(label_adress.findWebElement());
+        elementsList.add(label_note.findWebElement());
+        elementsList.add(button_continue.findWebElement());
+        List listExpected = CommonRegister.getListSetUpInfo;
+        if (elementsList.size() != listExpected.size()) {
+            return false;
+        }
+        for (int i = 0; i < elementsList.size(); i++) {
+            if (!elementsList.get(i).getText().equals(listExpected.get(i).toString())) {
+                return false;
+            }
+        }
+        return true;
+    }
+    public boolean verifyElementsDisplayOnAmountingAddressSectionRegisterPage(){
+        return areElementsDisplayed(elementsList);
+    }
+    public boolean verifyBlankedCMNDMessageDisplayed(String expectedMsg) {
+        WebDriverWait wait = new WebDriverWait(driver,60);
+        WebElement cmndBlankVerifyMessageText = wait.until(ExpectedConditions.visibilityOfElementLocated(label_messageErrorBlankCMND.by()));
+        return cmndBlankVerifyMessageText.getText().equalsIgnoreCase(expectedMsg);
+    }
+    public void sendCMNDLessThan9Num(String param){
+        WebElement inputCMND = wait.until(ExpectedConditions.visibilityOfElementLocated(text_idNumber.by()));
+        inputCMND.clear();
+        wait.until(ExpectedConditions.textToBePresentInElementValue(inputCMND, ""));
+        text_idNumber.findWebElement().sendKeys(param);
+        sleepTo(2000);
+    }
+    public boolean verifyWrongFormatCMNDMessageDisplayed(String expectedMsg) {
+        WebDriverWait wait = new WebDriverWait(driver,60);
+        WebElement cmndWrongFormatVerifyMessageText = wait.until(ExpectedConditions.visibilityOfElementLocated(label_messageErrorFormatCMND.by()));
+        return cmndWrongFormatVerifyMessageText.getText().equalsIgnoreCase(expectedMsg);
+    }
+    public void sendSpecialTextCMNDField(String param){
+        WebElement inputCMND = wait.until(ExpectedConditions.visibilityOfElementLocated(text_idNumber.by()));
+        inputCMND.clear();
+        wait.until(ExpectedConditions.textToBePresentInElementValue(inputCMND, ""));
+        text_idNumber.findWebElement().sendKeys(param);
+        sleepTo(2000);
+    }
+    public boolean verifySpecialTextCMNDMessageDisplayed() {
+        String specialTextPhoneField = text_idNumber.findWebElement().getText();
+        return specialTextPhoneField.equalsIgnoreCase("");
+    }
+    public void sendCMNDMoreThan12Num(String param){
+        WebElement inputCMND = wait.until(ExpectedConditions.visibilityOfElementLocated(text_idNumber.by()));
+        inputCMND.clear();
+        wait.until(ExpectedConditions.textToBePresentInElementValue(inputCMND, ""));
+        text_idNumber.findWebElement().sendKeys(param);
+        sleepTo(2000);
+        text_idNumber.findWebElement().sendKeys(Keys.ENTER);
+    }
+    public boolean verifyMax12NumToInputCMNDField(String param) {
+        String cmndMax12NumVerifyText = text_idNumber.findWebElement().getAttribute("value");
+        return cmndMax12NumVerifyText.equalsIgnoreCase(param);
+    }
+    public void sendValidCMND(String param){
+        WebElement inputCMND = wait.until(ExpectedConditions.visibilityOfElementLocated(text_idNumber.by()));
+        inputCMND.clear();
+        wait.until(ExpectedConditions.textToBePresentInElementValue(inputCMND, ""));
+        text_idNumber.findWebElement().sendKeys(param);
+    }
+    public void sendTextToInputCitySearchBox(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(searchBox_province.by()));
+        searchBox_province.findWebElement().sendKeys(inputProvinceMenu);
+        List<WebElement> listProvince = Collections.singletonList(wait.until(ExpectedConditions.visibilityOfElementLocated(listItem_province.by())));
+        listProvince.get(0).click();
+    }
+    public void sendTextToInputDistrictSearchBox(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(searchBox_district.by()));
+        searchBox_district.findWebElement().sendKeys(inputDistrictMenu);
+        List<WebElement> listProvince = Collections.singletonList(wait.until(ExpectedConditions.visibilityOfElementLocated(listItem_district.by())));
+        listProvince.get(0).click();
+    }
+    public void sendTextToInputWardSearchBox(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(searchBox_ward.by()));
+        searchBox_ward.findWebElement().sendKeys(inputWardMenu);
+        List<WebElement> listProvince = Collections.singletonList(wait.until(ExpectedConditions.visibilityOfElementLocated(listItem_ward.by())));
+        listProvince.get(0).click();
+    }
+    public void sendTextToInputStreetSearchBox(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(searchBox_street.by()));
+        searchBox_street.findWebElement().sendKeys(inputStreetMenu);
+        List<WebElement> listProvince = Collections.singletonList(wait.until(ExpectedConditions.visibilityOfElementLocated(listItem_street.by())));
+        listProvince.get(0).click();
+    }
+    public void sendTextToOthersFieldsExceptPhoneField(){
+        text_name.findWebElement().sendKeys(inputFullNameTxt);
+        text_birthday.findWebElement().sendKeys(CommonInternet.inputBirthdayTxt);
+        text_phone.findWebElement().sendKeys(CommonInternet.inputPhoneTxt);
+        text_email.findWebElement().sendKeys(CommonInternet.inputEmailTxt);
+        sleepTo(2000);
+        JavascriptExecutor jsExecutor = driver;
+        jsExecutor.executeScript("arguments[0].scrollIntoView(true);", addressField.findWebElement());
+        sleepTo(1000);
+        clickEl(wait,dropdown_province);
+        sendTextToInputCitySearchBox();
+        sleepTo(500);
+        clickEl(wait,dropdown_district);
+        sendTextToInputDistrictSearchBox();
+        sleepTo(500);
+        clickEl(wait,dropdown_ward);
+        sendTextToInputWardSearchBox();
+        sleepTo(500);
+        clickEl(wait,dropdown_street);
+        sendTextToInputStreetSearchBox();
+        text_address.findWebElement().sendKeys(inputHouseNumberMenu);
+    }
     public void waitForRefreshURL()  {
         wait.until(ExpectedConditions.refreshed(ExpectedConditions.not(ExpectedConditions.urlContains(urlHome))));
     }
+
 }
 

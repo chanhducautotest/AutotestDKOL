@@ -64,10 +64,15 @@
   "REGEX_GOODS_CODE": "(Đơn hàng: )(.*)",
   "REGEX_STATUS_PAYMENT": "Đã thanh toán.*",
   "LIST_TITLE_SETUP_INFO": [
-    "Địa chỉ lắp đặt",
+    "Hồ Chí Minh",
+    "Q1",
+    "Phường Bến Nghé",
+    "Chọn Đường/phố",
     "NHÀ RIÊNG",
     "CHUNG CƯ",
-    "ĐỊA CHỈ/SỐ NHÀ"
+    "ĐỊA CHỈ/SỐ NHÀ",
+    "GHI CHÚ",
+    "Tiếp tục"
   ],
   "LIST_TITLE_INFO_PAYMENT": [
     "Hoàn tất đăng ký",

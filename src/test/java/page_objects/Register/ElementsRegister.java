@@ -20,6 +20,8 @@ public class ElementsRegister extends PageBase {
     public Query label_service = new Query().defaultLocator(By.xpath("(//li[@class='nav-item d-flex align-items-center'])[1]//a")).usingDriver(driver);
     public Query label_paymentInformation = new Query().defaultLocator(By.xpath("(//li[@class='nav-item d-flex align-items-center'])[2]//a")).usingDriver(driver);
     public Query label_completeRegister = new Query().defaultLocator(By.xpath("(//li[@class='nav-item d-flex align-items-center'])[3]//a")).usingDriver(driver);
+    public Query listRegisterInformationLabel = new Query().defaultLocator(By.xpath("//div[@class='container w-736 sec-plb-inside rd-t rd-b box-sdow']//div[@class='pdx09 py-4']//label")).usingDriver(driver);
+    public Query listAmountingAddressLabel = new Query().defaultLocator(By.xpath("//div[@class='container w-736 sec-plb-inside rd-t mt-4 rd-b box-sdow']//div[@class='pdx09 py-4']//label")).usingDriver(driver);
     public Query label_userName = new Query().defaultLocator(By.xpath("//label[@for='name']")).usingDriver(driver);
     public Query label_phone = new Query().defaultLocator(By.xpath("(//label[@for='phone'])[1]")).usingDriver(driver);
     public Query label_birthday = new Query().defaultLocator(By.xpath("//label[@for='birthday']")).usingDriver(driver);
@@ -29,16 +31,16 @@ public class ElementsRegister extends PageBase {
     public Query label_home = new Query().defaultLocator(By.xpath("(//span[@class='text-bold text-16 clo-black'])[1]")).usingDriver(driver);
     public Query label_tower = new Query().defaultLocator(By.xpath("(//span[@class='text-bold text-16 clo-black'])[2]")).usingDriver(driver);
     public Query label_adress = new Query().defaultLocator(By.xpath("//label[@for='address']")).usingDriver(driver);
-
     public Query text_name = new Query().defaultLocator(By.xpath("//input[@id='name']")).usingDriver(driver);
     public Query text_phone = new Query().defaultLocator(By.xpath("//input[@id='phone']")).usingDriver(driver);
     public Query text_birthday = new Query().defaultLocator(By.xpath("//input[@id='birthday']")).usingDriver(driver);
     public Query text_idNumber = new Query().defaultLocator(By.xpath("//input[@id='cmnd']")).usingDriver(driver);
     public Query text_email = new Query().defaultLocator(By.xpath("//input[@id='email']")).usingDriver(driver);
     public Query text_address = new Query().defaultLocator(By.xpath("//input[@id='address']")).usingDriver(driver);
-
+    public Query label_note = new Query().defaultLocator(By.xpath("//label[@for='note']")).usingDriver(driver);
     public Query radioButton_home = new Query().defaultLocator(By.xpath("(//input[@type='radio'])[1]")).usingDriver(driver);
     public Query radioButton_tower = new Query().defaultLocator(By.xpath("(//input[@type='radio'])[2]")).usingDriver(driver);
+    public Query addressField = new Query().defaultLocator(By.xpath("//div[@class='container w-736 sec-plb-inside rd-t mt-4 rd-b box-sdow']//div[@class='col-12']")).usingDriver(driver);
 
     public Query dropdown_gender = new Query().defaultLocator(By.xpath("/html[1]/body[1]/div[1]/div[2]/main[1]/div[1]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/form[1]/div[3]/div[2]/div[1]/span[1]/span[1]/span[1]/span[1]")).usingDriver(driver);
     public Query listItem_gender = new Query().defaultLocator(By.xpath("//ul[@role='listbox']//li")).usingDriver(driver);
@@ -57,14 +59,15 @@ public class ElementsRegister extends PageBase {
     public Query dropdown_ward = new Query().defaultLocator(By.xpath("(//span[@id='select2--container'])[4]")).usingDriver(driver);
     public Query searchBox_ward = new Query().defaultLocator(By.xpath("//input[@role='searchbox']")).usingDriver(driver);
     public Query listItem_ward = new Query().defaultLocator(By.xpath("//ul[@role='listbox']//li")).usingDriver(driver);
-    public Query label_ward = new Query().defaultLocator(By.xpath("(//span[@id=\"select2--container\"])[4]")).usingDriver(driver);
+    public Query label_ward = new Query().defaultLocator(By.xpath("(//span[@id='select2--container'])[4]")).usingDriver(driver);
 
     public Query dropdown_street = new Query().defaultLocator(By.xpath("(//span[@id='select2--container'])[5]")).usingDriver(driver);
     public Query searchBox_street = new Query().defaultLocator(By.xpath("//input[@role='searchbox']")).usingDriver(driver);
     public Query listItem_street = new Query().defaultLocator(By.xpath("//ul[@role='listbox']//li")).usingDriver(driver);
 
     public Query label_messageError = new Query().defaultLocator(By.xpath("//small[@class='form-text text-12 clo-red']")).usingDriver(driver);
-
+    public Query label_messageErrorBlankCMND = new Query().defaultLocator(By.xpath("//small[contains(text(),'Vui lòng nhập CMND/CCCD.')]")).usingDriver(driver);
+    public Query label_messageErrorFormatCMND = new Query().defaultLocator(By.xpath("//small[contains(text(),'CMND/CCCD phải từ 9 đến 12 chữ số.')]")).usingDriver(driver);
     public Query element_imgLogo = new Query().defaultLocator(By.xpath("//img[@alt='FPT Telecom']")).usingDriver(driver);
 
     public Query button_agree = new Query().defaultLocator(By.xpath("(//button[@class='w-100 btn btn-custom orange'])[2]")).usingDriver(driver);

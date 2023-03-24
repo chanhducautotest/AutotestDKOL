@@ -40,9 +40,7 @@ public class ElementsLadingPageInternet extends PageBase {
 
     /** Locator của trang tin tức nổi bật **/
     public Query label_firstComboData = new Query().defaultLocator(By.xpath("(//h3[@class='internet-seo name text-bold text-16 mt-2 pointer '])[1]")).usingDriver(driver);
-
     public Query label_rules02 = new Query().defaultLocator(By.xpath("(//p[@class='text-12 mb-0']//span)[2]")).usingDriver(driver);
-
     public Query inputNameTxt = new Query().defaultLocator(By.xpath("//input[@id='name']")).usingDriver(driver);
     public Query inputPhoneTxt = new Query().defaultLocator(By.xpath("//input[@id='phone']")).usingDriver(driver);
     public Query inputBirthdayTxt = new Query().defaultLocator(By.xpath("//input[@id='birthday']")).usingDriver(driver);
@@ -61,5 +59,10 @@ public class ElementsLadingPageInternet extends PageBase {
     public Query continueBtn = new Query().defaultLocator(By.xpath("//button[contains(text(),'Tiếp tục')]")).usingDriver(driver);
     public Query fptLogo = new Query().defaultLocator(By.xpath("//img[@class='kd-fptplay-img']")).usingDriver(driver);
     public Query btnClear = new Query().defaultLocator(By.xpath("//i[@class='btn-clear']")).usingDriver(driver);
+    public Query emailVerifyMessage = new Query().defaultLocator(By.xpath("//small[contains(text(),'Email không đúng định dạng.')]")).usingDriver(driver);
+    public Query phoneBlankVerifyMessage = new Query().defaultLocator(By.xpath("//small[contains(text(),'Vui lòng nhập số điện thoại.')]")).usingDriver(driver);
+    public Query phoneFormatVerifyMessage = new Query().defaultLocator(By.xpath("//small[contains(text(),'Số điện thoại của bạn không đúng định dạng!')]")).usingDriver(driver);
+    public Query registerInfoStepNavbar = new Query().defaultLocator(By.xpath("(//li[@class='nav-item d-flex align-items-center active'])[1]")).usingDriver(driver);
+    public Query navbarElementsList = new Query().defaultLocator(By.xpath("(//li[@class='nav-item d-flex align-items-center active'])[1]")).usingDriver(driver);
 
 }

@@ -28,6 +28,8 @@ public final class CommonRegister {
 
     public static List listPopupPayment =
             jsonUtil.docFileJSON(DATA_TEST_FILE_PATH_REGISTER,"LIST_TEXT_METHOD_PAYMENT");
+    public static List listPrivateInfo =
+            jsonUtil.docFileJSON(DATA_TEST_FILE_PATH_REGISTER,"LIST_TEXT_PRIVATE_INFO");
 
     public static String statusPayment =
             jsonUtil.getStringUTF8(DATA_TEST_FILE_PATH_REGISTER,"REGEX_STATUS_PAYMENT");

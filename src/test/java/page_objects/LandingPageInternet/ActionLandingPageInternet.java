@@ -15,9 +15,7 @@ import page_objects.Menu.ActionsMenu;
 import page_objects.Register.ActionsRegister;
 
 import java.net.MalformedURLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 import static constants.Common.*;
 import static constants.CommonFPTPlay.priceRegularExpression;
@@ -216,10 +214,37 @@ public class ActionLandingPageInternet extends ElementsLadingPageInternet {
         inputNameTxt.findWebElement().sendKeys(param);
         inputNameTxt.findWebElement().sendKeys(Keys.ENTER);
     }
+    public void sendTextToInputPhoneTxt(String param){
+        WebElement inputPhone = wait.until(ExpectedConditions.visibilityOfElementLocated(inputPhoneTxt.by()));
+        inputPhone.clear();
+        wait.until(ExpectedConditions.textToBePresentInElementValue(inputPhone, ""));
+        inputPhoneTxt.findWebElement().sendKeys(param);
+    }
     public void sendTextToInputEmailTxt(String param){
         wait.until(ExpectedConditions.visibilityOfElementLocated(inputEmailTxt.by()));
         inputEmailTxt.findWebElement().sendKeys(param);
         inputEmailTxt.findWebElement().sendKeys(Keys.ENTER);
+    }
+    public void sendSpecialTextToInputPhoneTxt(String param){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(inputPhoneTxt.by()));
+        inputPhoneTxt.findWebElement().sendKeys(param);
+    }
+    public void sendLessThan10NumberToInputPhoneTxt(String param){
+        WebElement inputPhone = wait.until(ExpectedConditions.visibilityOfElementLocated(inputPhoneTxt.by()));
+        inputPhone.clear();
+        wait.until(ExpectedConditions.textToBePresentInElementValue(inputPhone, ""));
+        inputPhoneTxt.findWebElement().sendKeys(param);
+    }
+    public void sendPNumberDiverse0ToInputPhoneTxt(String param){
+        WebElement inputPhone = wait.until(ExpectedConditions.visibilityOfElementLocated(inputPhoneTxt.by()));
+        inputPhone.clear();
+        wait.until(ExpectedConditions.textToBePresentInElementValue(inputPhone, ""));
+        inputPhoneTxt.findWebElement().sendKeys(param);
+        sleepTo(2000);
+    }
+    public boolean verifyInputSpecialTextPhoneField(){
+        String specialTextPhoneField = inputPhoneTxt.findWebElement().getText();
+        return specialTextPhoneField.equalsIgnoreCase("");
     }
     public boolean verify100TextToInputNameTxt(String param) {
         inputNameTxt.findWebElement().sendKeys(Keys.ENTER);
@@ -284,6 +309,52 @@ public class ActionLandingPageInternet extends ElementsLadingPageInternet {
         sendTextToInputStreetSearchBox();
         houseNumberInputTxt.findWebElement().sendKeys(inputHouseNumberMenu);
     }
+    public void sendTextToOthersFieldsExceptPhoneField(){
+        inputNameTxt.findWebElement().sendKeys(inputFullNameTxt);
+        inputBirthdayTxt.findWebElement().sendKeys(CommonInternet.inputBirthdayTxt);
+        inputCMNDTxt.findWebElement().sendKeys(CommonInternet.inputCMNDTxt);
+        inputEmailTxt.findWebElement().sendKeys(CommonInternet.inputEmailTxt);
+        sleepTo(2000);
+        JavascriptExecutor jsExecutor = driver;
+        jsExecutor.executeScript("arguments[0].scrollIntoView(true);", addressField.findWebElement());
+        sleepTo(1000);
+        clickEl(wait,dropdownCityArrow);
+        sendTextToInputCitySearchBox();
+        sleepTo(500);
+        clickEl(wait,dropdownDistrictArrow);
+        sendTextToInputDistrictSearchBox();
+        sleepTo(500);
+        clickEl(wait,dropdownWardArrow);
+        sendTextToInputWardSearchBox();
+        sleepTo(500);
+        clickEl(wait,dropdownStreetArrow);
+        sendTextToInputStreetSearchBox();
+        houseNumberInputTxt.findWebElement().sendKeys(inputHouseNumberMenu);
+    }
+    public boolean verifyEmailMessageDisplayed(String expectedMessage) {
+        WebDriverWait wait = new WebDriverWait(driver,60);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(emailVerifyMessage.by()));
+        String nameVerifyMessageText = emailVerifyMessage.findWebElement().getText();
+        return nameVerifyMessageText.equals(expectedMessage);
+    }
+    public boolean verifyBlankPhoneMessageDisplayed(String message) {
+        WebDriverWait wait = new WebDriverWait(driver,60);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(phoneBlankVerifyMessage.by()));
+        String phoneBlankVerifyMessageText = phoneBlankVerifyMessage.findWebElement().getText();
+        return phoneBlankVerifyMessageText.equals(message);
+    }
+    public boolean verifyLessThan10PNumberMessageDisplayed(String message) {
+        WebDriverWait wait = new WebDriverWait(driver,60);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(phoneFormatVerifyMessage.by()));
+        String phoneBlankVerifyMessageText = phoneFormatVerifyMessage.findWebElement().getText();
+        return phoneBlankVerifyMessageText.equals(message);
+    }
+    public boolean verifyPrefixDiverse0PNumberMessageDisplayed(String message) {
+        WebDriverWait wait = new WebDriverWait(driver,60);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(phoneFormatVerifyMessage.by()));
+        String phoneBlankVerifyMessageText = phoneFormatVerifyMessage.findWebElement().getText();
+        return phoneBlankVerifyMessageText.equals(message);
+    }
     public void chooseContinueBtn(){
         JavascriptExecutor jsExecutor = driver;
         jsExecutor.executeScript("arguments[0].scrollIntoView(true);", continueBtn.findWebElement());
@@ -332,7 +403,18 @@ public class ActionLandingPageInternet extends ElementsLadingPageInternet {
     }
     public boolean verifyDefaultEmailPlaceHolder(String param){
         String expectedValue = inputEmailTxt.findWebElement().getAttribute("placeholder");
-        System.out.println(expectedValue);
         return expectedValue.equalsIgnoreCase(param);
+    }
+    public boolean areElementsDisplayed(List<WebElement> elementsList) {
+        for (WebElement element : elementsList) {
+            if (!element.isDisplayed()) {
+                return false;
+            }
+        }
+        return true;
+    }
+    public boolean verifyElementsOnNavbarRegisterPage(){
+        List<WebElement> elementsList = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(navbarElementsList.by()));
+        return areElementsDisplayed(elementsList);
     }
 }
