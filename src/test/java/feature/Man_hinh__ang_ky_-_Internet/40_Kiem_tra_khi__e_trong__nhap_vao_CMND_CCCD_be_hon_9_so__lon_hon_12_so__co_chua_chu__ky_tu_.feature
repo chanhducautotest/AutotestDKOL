@@ -8,15 +8,15 @@ Feature: Kiểm tra khi để trống, nhập vào CMND/CCCD bé hơn 9 số, l�
 		When Vào mục internet
 		And Chọn gói cước: <ten_goi_cuoc>
 		And Nhấn tiếp tục
-		Then Hiện thông báo chưa nhập CMND/CCCD "Vui lòng nhập CMND/CCCD."
-		And Nhập Số CMND/CCCD bé hơn chín số <cmnd_be_hon_9>
+		Then Hiện thông báo chưa nhập CMND, CCCD "Vui lòng nhập CMND/CCCD."
+		And Nhập Số CMND, CCCD bé hơn chín số <cmnd_be_hon_9>
 		And Nhấn tiếp tục
-		Then Hiện thông báo nhập sai format CMND/CCCD "CMND/CCCD phải từ 9 đến 12 chữ số."
-		And Nhập Số CMND/CCCD có chứa chữ, ký tự đặc biệt <cmnd_ky_tu_dac_biet>
+		Then Hiện thông báo nhập sai format CMND, CCCD "CMND/CCCD phải từ 9 đến 12 chữ số."
+		And Nhập Số CMND, CCCD có chứa chữ, ký tự đặc biệt <cmnd_ky_tu_dac_biet>
 		Then Kiểm tra hệ thống không cho phép nhập chữ và ký tự đặc biệt vào trường CMND/CCCD
-		And Nhập Số CMND/CCCD lớn hơn mười hai số <cmnd_lon_hon_12>
-		Then Kiểm tra hệ thống chỉ cho phép nhập vào CMND/CCCD mười hai số <cmnd_12_so>
-		And Nhập Số CMND/CCCD hợp lệ <cmnd_hop_le> và các thông tin còn lại
+		And Nhập Số CMND, CCCD lớn hơn mười hai số <cmnd_lon_hon_12>
+		Then Kiểm tra hệ thống chỉ cho phép nhập vào CMND, CCCD mười hai số <cmnd_12_so>
+		And Nhập Số CMND, CCCD hợp lệ <cmnd_hop_le> và các thông tin còn lại
 		And Nhấn tiếp tục
 		Then Kiểm tra chuyển sang màn hình Chọn dịch vụ thành công
 
