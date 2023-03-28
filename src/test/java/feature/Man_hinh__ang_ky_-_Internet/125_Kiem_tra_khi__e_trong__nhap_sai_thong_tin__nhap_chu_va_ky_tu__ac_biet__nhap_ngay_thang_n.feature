@@ -12,7 +12,7 @@ Feature: Kiểm tra khi để trống, nhập sai thông tin, nhập chữ và k
 		And Nhập sai thông tin vào trường ngày sinh <ngay_sinh_sai>
 		And Nhấn tiếp tục
 		Then Hiện thông báo khi nhập sai thông tin trong trường ngày sinh "Năm sinh không hợp lệ"
-		And Nhập số điện thoại có chứa chữ, ký tự đặc biệt <ngay_sinh_dac_biet>
+		And Nhập ngày sinh có chứa chữ, ký tự đặc biệt <ngay_sinh_dac_biet>
 		Then Kiểm tra hệ thống không cho phép nhập chữ, ký tự đặc biệt vào trường Ngày sinh
 		And Nhập ngày tháng năm sinh nhỏ hơn mười lăm tuổi <ngay_sinh_nho_hon_15t>
 		And Nhấn tiếp tục
