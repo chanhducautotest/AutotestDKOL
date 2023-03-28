@@ -196,7 +196,7 @@ public class ToDoStepDefinition extends RunCucumberByCompositionTest {
         sleepTo(3000);
     }
 
-    @And("Nhấn tiếp tục") @And("Để trống trường Số điện thoại và nhấn tiếp tục")
+    @And("Nhấn tiếp tục") @And("Để trống trường Số điện thoại và nhấn tiếp tục") @And("Để trống trường Ngày sinh và nhấn tiếp tục") @And("Để trống trường Địa chỉ, Số nhà và Nhấn tiếp tục")
     public void clickContinueBtn() {
         sleepTo(2000);
         landingPageInternet = new ActionLandingPageInternet();
@@ -404,5 +404,201 @@ public class ToDoStepDefinition extends RunCucumberByCompositionTest {
         registerPage.sendValidCMND(param);
         registerPage.sendTextToOthersFieldsExceptPhoneField();
         sleepTo(2000);
+    }
+
+    @Then("Hiện thông báo khi để trống trường Ngày sinh {string}")
+    public void verifyMessageWhenLeavingBirthdayFieldBlank(String expectedMsg) {
+        registerPage = new ActionsRegister();
+        Assert.assertTrue(registerPage.verifyBlankedBirthdayMessageDisplayed(expectedMsg),"The message of Birthday Field when its blanked not match the expected message");
+    }
+
+    @And("Nhập sai thông tin vào trường ngày sinh {string}")
+    public void inputWrongInfoIntoBirthdayField(String param) {
+        registerPage = new ActionsRegister();
+        param = ParameterService.INSTANCE.getString("DS_ngay_sinh_sai",param);
+        registerPage.sendBirthdayValue(param);
+    }
+
+    @Then("Hiện thông báo khi nhập sai thông tin trong trường ngày sinh {string}")
+    public void verifyMessageWhenInputWrongBirthday(String expectedMsg) {
+        registerPage = new ActionsRegister();
+        Assert.assertTrue(registerPage.verifyWrongBirthdayMessageDisplayed(expectedMsg),"The message of Birthday Field when its wrong not match the expected message");
+    }
+    @And("Nhập ngày sinh có chứa chữ, ký tự đặc biệt {string}")
+    public void inputSpecialTxtIntoBirthdayField(String param) {
+        registerPage = new ActionsRegister();
+        param = ParameterService.INSTANCE.getString("DS_ngay_sinh_dac_biet",param);
+        registerPage.sendBirthdayValue(param);
+    }
+    @Then("Kiểm tra hệ thống không cho phép nhập chữ, ký tự đặc biệt vào trường Ngày sinh")
+    public void verifyNotAllowInputSpecialTxtToBDField() {
+        registerPage = new ActionsRegister();
+        Assert.assertTrue(registerPage.verifySpecialTextBirthdayMessageDisplayed(),"The system allows entering letters and special characters in the Birthday field");
+    }
+
+    @And("Nhập ngày tháng năm sinh nhỏ hơn mười lăm tuổi {}")
+    public void inputBirthdayLessThan15YearsOld(String param) {
+        registerPage = new ActionsRegister();
+        param = ParameterService.INSTANCE.getString("DS_ngay_sinh_nho_hon_15t",param);
+        registerPage.sendBirthdayValue(param);
+    }
+
+    @Then("Hiển thị thông báo khi nhập vào ngày sinh nhỏ hơn mười lăm tuổi {string}")
+    public void verifyMessageWhenInputLessThan15YearsOld(String expectedMsg) {
+        registerPage = new ActionsRegister();
+        Assert.assertTrue(registerPage.verifyLess15YrsOBirthdayMessageDisplayed(expectedMsg),"The message of Birthday Field when input less than 15 years old birthdate not match the expected message");
+    }
+
+    @And("Nhập ngày tháng năm sinh bằng mười lăm tuổi {} và các thông tin còn lại")
+    public void nhậpNgàyThángNămSinhBằngMườiLămTuổiNgay_sinh_TVàCácThôngTinCònLại(String param) {
+        registerPage = new ActionsRegister();
+        param = ParameterService.INSTANCE.getString("DS_ngay_sinh_15t",param);
+        registerPage.sendBirthdayValue(param);
+        registerPage.sendTextToOthersFieldsExceptBirthdayField();
+    }
+
+    @Then("Kiểm tra giá trị default của trường Tỉnh, Thành phố {string} và Combobox cho phép chọn giá trị")
+    public void verifyDefaultValueOfCityAndChooseComboboxValue(String param) {
+        registerPage = new ActionsRegister();
+        param = ParameterService.INSTANCE.getString("DS_default_tinh_thanh",param);
+        Assert.assertTrue(registerPage.verifyCityHolderPlace(param),"Default value on city dropdown box not matched");
+        registerPage.chooseComboBoxCity();
+    }
+
+    @Then("Kiểm tra giá trị default của trường Quận, huyện {string} và Combobox cho phép chọn giá trị")
+    public void verifyDefaultValueOfDistrictAndChooseComboboxValue(String param) {
+        registerPage = new ActionsRegister();
+        param = ParameterService.INSTANCE.getString("DS_default_quan_huyen",param);
+        Assert.assertTrue(registerPage.verifyDistrictHolderPlace(param),"Default value on district dropdown box not matched");
+        registerPage.chooseComboBoxDistrict();
+    }
+
+    @Then("Kiểm tra giá trị default của trường Phường, xã {string} và Combobox cho phép chọn giá trị")
+    public void verifyDefaultValueOfWardAndChooseComboboxValue(String param) {
+        registerPage = new ActionsRegister();
+        param = ParameterService.INSTANCE.getString("DS_default_phuong_xa",param);
+        Assert.assertTrue(registerPage.verifyWardHolderPlace(param),"Default value on ward dropdown box not matched");
+        registerPage.chooseComboBoxWard();
+    }
+
+    @Then("Kiểm tra giá trị default của trường Đường, Phố {string} và Combobox cho phép chọn giá trị")
+    public void verifyDefaultValueOfStreetAndChooseComboboxValue(String param) {
+        registerPage = new ActionsRegister();
+        param = ParameterService.INSTANCE.getString("DS_default_duong_pho",param);
+        Assert.assertTrue(registerPage.verifyStreetHolderPlace(param),"Default value on street dropdown box not matched");
+        registerPage.chooseComboBoxStreet();
+    }
+
+    @Then("Nhập giá trị có dấu vào trường Tỉnh, Thành phố {string} và kiểm tra hiển thị đúng giá trị có dấu tương ứng trong dropdown list Tỉnh, Thành phố")
+    public void inputSignedValueIntoCityFieldAndVerifyDisplayedValueInDropdownList(String param) {
+        registerPage = new ActionsRegister();
+        param = ParameterService.INSTANCE.getString("DS_tinh_thanh_co_dau",param);
+        Assert.assertTrue(registerPage.enteredValueWithSpecifiedSignIntoCitySearch(param),"Do not display the corresponding signed value in City dropdown list When inputted signed value");
+    }
+
+    @Then("Nhập giá trị không dấu vào trường Tỉnh, thành {string} và kiểm tra hiển thị đúng giá trị có dấu {string} tương ứng trong dropdown list Tỉnh, Thành phố")
+    public void inputUnsignedValueIntoCityFieldAndVerifyDisplayedSignedValueInDropdownList(String param1, String param2) {
+        registerPage = new ActionsRegister();
+        param1 = ParameterService.INSTANCE.getString("DS_tinh_thanh_khong_dau",param1);
+        param2 = ParameterService.INSTANCE.getString("DS_tinh_thanh_co_dau",param2);
+        Assert.assertTrue(registerPage.enteredValueWithUnspecifiedSignIntoCitySearch(param1, param2),"Do not display the corresponding signed value in City dropdown list When inputted unsigned value");
+    }
+
+    @Then("Nhập giá trị có dấu vào trường Quận, huyện {string} và kiểm tra hiển thị đúng giá trị có dấu tương ứng trong dropdown list Quận, Huyện")
+    public void inputSignedValueIntoDistrictFieldAndVerifyDisplayedValueInDropdownList(String param) {
+        registerPage = new ActionsRegister();
+        param = ParameterService.INSTANCE.getString("DS_quan_huyen_co_dau",param);
+        Assert.assertTrue(registerPage.enteredValueWithSpecifiedSignIntoDistrictSearch(param),"Do not display the corresponding signed value in District dropdown list When inputted signed value");
+    }
+
+    @Then("Nhập giá trị không dấu vào trường Quận, huyện {string} và kiểm tra hiển thị đúng giá trị có dấu {string} tương ứng trong dropdown list Quận, Huyện")
+    public void inputUnsignedValueIntoDistrictFieldAndVerifyDisplayedValueInDropdownList(String param1, String param2) {
+        registerPage = new ActionsRegister();
+        param1 = ParameterService.INSTANCE.getString("DS_quan_huyen_khong_dau",param1);
+        param2 = ParameterService.INSTANCE.getString("DS_quan_huyen_co_dau",param2);
+        Assert.assertTrue(registerPage.enteredValueWithUnspecifiedSignIntoDistrictSearch(param1, param2),"Do not display the corresponding signed value in District dropdown list When inputted unsigned value");
+    }
+
+    @Then("Nhập giá trị có dấu vào trường Phường, xã {string} và kiểm tra hiển thị đúng giá trị có dấu tương ứng trong dropdown list Phường, xã")
+    public void inputSignedValueIntoWardFieldAndVerifyDisplayedValueInDropdownList(String param) {
+        registerPage = new ActionsRegister();
+        param = ParameterService.INSTANCE.getString("DS_phuong_xa_co_dau",param);
+        Assert.assertTrue(registerPage.enteredValueWithSpecifiedSignIntoWardSearch(param),"Do not display the corresponding signed value in Ward dropdown list When inputted signed value");
+    }
+
+    @Then("Nhập giá trị không dấu vào trường Phường, xã {string} và kiểm tra hiển thị đúng giá trị có dấu {string} tương ứng trong dropdown list Phường, xã")
+    public void inputUnsignedValueIntoWardFieldAndVerifyDisplayedValueInDropdownList(String param1, String param2) {
+        registerPage = new ActionsRegister();
+        param1 = ParameterService.INSTANCE.getString("DS_phuong_xa_khong_dau",param1);
+        param2 = ParameterService.INSTANCE.getString("DS_phuong_xa_co_dau",param2);
+        Assert.assertTrue(registerPage.enteredValueWithUnspecifiedSignIntoWardSearch(param1, param2),"Do not display the corresponding signed value in Ward dropdown list When inputted unsigned value");
+    }
+
+    @Then("Nhập giá trị có dấu vào trường Đường, Phố {string} và kiểm tra hiển thị đúng giá trị có dấu tương ứng trong dropdown list Đường, Phố")
+    public void inputSignedValueIntoStreetFieldAndVerifyDisplayedValueInDropdownList(String param) {
+        registerPage = new ActionsRegister();
+        param = ParameterService.INSTANCE.getString("DS_duong_pho_co_dau",param);
+        Assert.assertTrue(registerPage.enteredValueWithSpecifiedSignIntoWardSearch(param),"Do not display the corresponding signed value in Street dropdown list When inputted signed value");
+    }
+
+    @Then("Nhập giá trị không dấu vào trường Đường, Phố {string} và kiểm tra hiển thị đúng giá trị có dấu {string} tương ứng trong dropdown list Đường, Phố")
+    public void inputUnsignedValueIntoStreetFieldAndVerifyDisplayedValueInDropdownList(String param1, String param2) {
+        registerPage = new ActionsRegister();
+        param1 = ParameterService.INSTANCE.getString("DS_duong_pho_khong_dau",param1);
+        param2 = ParameterService.INSTANCE.getString("DS_duong_pho_co_dau",param2);
+        Assert.assertTrue(registerPage.enteredValueWithUnspecifiedSignIntoStreetSearch(param1, param2),"Do not display the corresponding signed value in Street dropdown list When inputted unsigned value");
+    }
+
+    @Then("Kiểm tra hiển thị trường txtbox Địa chỉ, Số nhà, txtbox Ghi chú khi trường Loại nhà là default: Nhà riêng")
+    public void verifyDisplayedFieldsWhenDefaultIsSelectedHome() {
+        registerPage = new ActionsRegister();
+        Assert.assertTrue(registerPage.verifyDisplayedLabelWhenRdBtnIsSelectedHomeOrAppartment(),"Labels are not appeared when default value is Home");
+        Assert.assertTrue(registerPage.verifyDisplayedTxtWhenRdBtnIsSelectedHomeOrAppartment(),"Txt inputs are not appeared when default value is Home");
+    }
+
+    @Then("Kiểm tra placeholder text của trường Địa chỉ, Số nhà {string}")
+    public void verifyDisplayedPlaceholderValueOfHouseNumberField(String param) {
+        registerPage = new ActionsRegister();
+        param = ParameterService.INSTANCE.getString("DS_placeholder_diachi",param);
+        Assert.assertTrue(registerPage.verifyPlaceholderOfHouseNumberField(param),"The placeholder value of house number is not matched ");
+    }
+
+    @Then("Hiện thông báo khi để trống trường Địa chỉ, số nhà {string}")
+    public void verifyMessageWhenLeavingAddressBlanked(String expectedMsg) {
+        registerPage = new ActionsRegister();
+        Assert.assertTrue(registerPage.verifyBlankedAddressMessageDisplayed(expectedMsg),"The message when leaving the address/house number field blanked not matched expected message");
+    }
+
+    @And("Nhập vào trường Địa chỉ, Số nhà lớn hơn ba mươi ký tự {}")
+    public void inputIntoAddressValueGreaterThan30Characters(String param) {
+        registerPage = new ActionsRegister();
+        param = ParameterService.INSTANCE.getString("DS_dia_chi_lon_hon_30",param);
+        registerPage.sendTextToAddressField(param);
+    }
+
+    @Then("Kiểm tra hệ thống chỉ cho phép nhập tối đa ba mươi ký tự {}")
+    public void verifyAddressFieldAcceptedMax30Characters(String param) {
+        registerPage = new ActionsRegister();
+        param = ParameterService.INSTANCE.getString("DS_dia_chi_30",param);
+        Assert.assertTrue(registerPage.verifyMax30NumToInputAddressField(param),"The system allows to input more than 30 characters into address field");
+    }
+
+    @And("Click radio button Loại nhà: CHUNG CƯ")
+    public void clickRadioButtonTypeAppartment() {
+        registerPage = new ActionsRegister();
+        registerPage.chooseAppartmentRdBtn();
+    }
+
+    @Then("Kiểm tra hiển thị Combobox: CHỌN CHUNG CƯ, Textbox TÒA NHÀ, LÔ,BLOCK, Textbox : SỐ TẦNG*, Textbox : SỐ PHÒNG*, Textbox : GHI CHÚ")
+    public void verifyDisplayedFieldsWhenDefaultIsSelectedAppartment() {
+        registerPage = new ActionsRegister();
+        Assert.assertTrue(registerPage.verifyDisplayedLabelWhenRdBtnIsSelectedHomeOrAppartment(),"Labels are not appeared when default value is Appartment");
+        Assert.assertTrue(registerPage.verifyDisplayedTxtWhenRdBtnIsSelectedHomeOrAppartment(),"Txt inputs are not appeared when default value is Appartment");
+    }
+
+    @Then("Kiểm tra hiển thị các placeholder của các textbox TÒA NHÀ,LÔ,BLOCK, SỐ TẦNG*, SỐ PHÒNG*, GHI CHÚ")
+    public void verifyDisplayedPlaceholderOfTxtInpuntWhenAppartmentIsSelected() {
+        registerPage = new ActionsRegister();
+        Assert.assertTrue(registerPage.comparePlaceholderElementsOnAddressAppartmentSelected(),"Placeholder of textbox TÒA NHÀ,LÔ,BLOCK, SỐ TẦNG*, SỐ PHÒNG*, GHI CHÚ is not matched");
     }
 }

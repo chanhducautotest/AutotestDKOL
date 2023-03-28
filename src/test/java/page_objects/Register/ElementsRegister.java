@@ -22,6 +22,8 @@ public class ElementsRegister extends PageBase {
     public Query label_completeRegister = new Query().defaultLocator(By.xpath("(//li[@class='nav-item d-flex align-items-center'])[3]//a")).usingDriver(driver);
     public Query listRegisterInformationLabel = new Query().defaultLocator(By.xpath("//div[@class='container w-736 sec-plb-inside rd-t rd-b box-sdow']//div[@class='pdx09 py-4']//label")).usingDriver(driver);
     public Query listAmountingAddressLabel = new Query().defaultLocator(By.xpath("//div[@class='container w-736 sec-plb-inside rd-t mt-4 rd-b box-sdow']//div[@class='pdx09 py-4']//label")).usingDriver(driver);
+    public Query listAddressLabelHomeOrAppartmentIsSelected = new Query().defaultLocator(By.xpath("//div[@class='container w-736 sec-plb-inside rd-t mt-4 rd-b box-sdow']//div[@class='form-infomation']/div/label")).usingDriver(driver);
+    public Query listAddressTxtHomeOrAppartmentIsSelected = new Query().defaultLocator(By.xpath("//div[@class='container w-736 sec-plb-inside rd-t mt-4 rd-b box-sdow']//div[@class='form-infomation']/div/div/input")).usingDriver(driver);
     public Query label_userName = new Query().defaultLocator(By.xpath("//label[@for='name']")).usingDriver(driver);
     public Query label_phone = new Query().defaultLocator(By.xpath("(//label[@for='phone'])[1]")).usingDriver(driver);
     public Query label_birthday = new Query().defaultLocator(By.xpath("//label[@for='birthday']")).usingDriver(driver);
@@ -37,6 +39,7 @@ public class ElementsRegister extends PageBase {
     public Query text_idNumber = new Query().defaultLocator(By.xpath("//input[@id='cmnd']")).usingDriver(driver);
     public Query text_email = new Query().defaultLocator(By.xpath("//input[@id='email']")).usingDriver(driver);
     public Query text_address = new Query().defaultLocator(By.xpath("//input[@id='address']")).usingDriver(driver);
+    public Query text_note = new Query().defaultLocator(By.xpath("//input[@id='note']")).usingDriver(driver);
     public Query label_note = new Query().defaultLocator(By.xpath("//label[@for='note']")).usingDriver(driver);
     public Query radioButton_home = new Query().defaultLocator(By.xpath("(//input[@type='radio'])[1]")).usingDriver(driver);
     public Query radioButton_tower = new Query().defaultLocator(By.xpath("(//input[@type='radio'])[2]")).usingDriver(driver);
@@ -67,6 +70,11 @@ public class ElementsRegister extends PageBase {
 
     public Query label_messageError = new Query().defaultLocator(By.xpath("//small[@class='form-text text-12 clo-red']")).usingDriver(driver);
     public Query label_messageErrorBlankCMND = new Query().defaultLocator(By.xpath("//small[contains(text(),'Vui lòng nhập CMND/CCCD.')]")).usingDriver(driver);
+    public Query label_messageErrorBlankBirthdate = new Query().defaultLocator(By.xpath("//small[contains(text(),'Vui lòng nhập ngày sinh')]")).usingDriver(driver);
+    public Query label_messageErrorWrongBirthdate = new Query().defaultLocator(By.xpath("//small[contains(text(),'Năm sinh không hợp lệ')]")).usingDriver(driver);
+    public Query label_messageErrorLessThan15YrsOBirthdate = new Query().defaultLocator(By.xpath("//small[contains(text(),'Khách hàng phải lớn hơn 15 tuổi')]")).usingDriver(driver);
+    public Query label_messageErrorBlankAddress = new Query().defaultLocator(By.xpath("//small[contains(text(),'Vui lòng nhập địa chỉ/số nhà.')]")).usingDriver(driver);
+
     public Query label_messageErrorFormatCMND = new Query().defaultLocator(By.xpath("//small[contains(text(),'CMND/CCCD phải từ 9 đến 12 chữ số.')]")).usingDriver(driver);
     public Query element_imgLogo = new Query().defaultLocator(By.xpath("//img[@alt='FPT Telecom']")).usingDriver(driver);
 

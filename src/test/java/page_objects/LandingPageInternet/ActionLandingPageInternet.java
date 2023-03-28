@@ -3,32 +3,20 @@ package page_objects.LandingPageInternet;
 import com.lazerycode.selenium.util.Query;
 import constants.CommonInternet;
 import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Keyboard;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
-import org.testng.util.Strings;
-import page_objects.Menu.ActionsMenu;
-import page_objects.Register.ActionsRegister;
 
-import java.net.MalformedURLException;
 import java.util.*;
 
-import static constants.Common.*;
-import static constants.CommonFPTPlay.priceRegularExpression;
 import static constants.CommonInternet.*;
-import static constants.CommonInternet.urlHome;
-import static constants.CommonRegister.urlAboutFPTRule;
-import static net.fpt.driver_setting.DriverBase.getDriver;
-import static net.fpt.utils.BrowserUtils.loadPage;
-import static net.fpt.utils.BrowserUtils.waitForURL;
 import static net.fpt.utils.WebElementActionUtil.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ActionLandingPageInternet extends ElementsLadingPageInternet {
+public class ActionLandingPageInternet extends ElementsLandingPageInternet {
     static final Logger logger = LoggerFactory.getLogger(ActionLandingPageInternet.class);
 
     /**

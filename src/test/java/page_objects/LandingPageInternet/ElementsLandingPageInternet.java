@@ -5,7 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import page_objects.PageBase;
 
-public class ElementsLadingPageInternet extends PageBase {
+public class ElementsLandingPageInternet extends PageBase {
     WebDriverWait wait = new WebDriverWait(driver, 15, 1000);
 
     public Query link_internet = new Query().defaultLocator(By.cssSelector("a[href='/internet']")).usingDriver(driver);

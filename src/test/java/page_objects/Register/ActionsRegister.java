@@ -1659,6 +1659,19 @@ public class ActionsRegister extends ElementsRegister {
         }
         return true;
     }
+    public boolean comparePlaceholderElementsOnAddressAppartmentSelected() {
+        List<WebElement> elementsList = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(listAddressTxtHomeOrAppartmentIsSelected.by()));
+        List listExpected = CommonRegister.ListPlaceholderAppartment;
+        if (elementsList.size() != listExpected.size()) {
+            return false;
+        }
+        for (int i = 0; i < elementsList.size(); i++) {
+            if (!elementsList.get(i).getAttribute("placeholder").equals(listExpected.get(i).toString())) {
+                return false;
+            }
+        }
+        return true;
+    }
     List<WebElement> elementsList = new ArrayList<WebElement>(){
     };
     public boolean compareElementListsOnAmountingAddressSectionRegisterPage() {
@@ -1690,11 +1703,33 @@ public class ActionsRegister extends ElementsRegister {
         WebElement cmndBlankVerifyMessageText = wait.until(ExpectedConditions.visibilityOfElementLocated(label_messageErrorBlankCMND.by()));
         return cmndBlankVerifyMessageText.getText().equalsIgnoreCase(expectedMsg);
     }
+    public boolean verifyBlankedBirthdayMessageDisplayed(String expectedMsg) {
+        WebDriverWait wait = new WebDriverWait(driver,60);
+        WebElement birthdayBlankVerifyMessageText = wait.until(ExpectedConditions.visibilityOfElementLocated(label_messageErrorBlankBirthdate.by()));
+        return birthdayBlankVerifyMessageText.getText().equalsIgnoreCase(expectedMsg);
+    }
+    public boolean verifyWrongBirthdayMessageDisplayed(String expectedMsg) {
+        WebDriverWait wait = new WebDriverWait(driver,60);
+        WebElement birthdayBlankVerifyMessageText = wait.until(ExpectedConditions.visibilityOfElementLocated(label_messageErrorWrongBirthdate.by()));
+        return birthdayBlankVerifyMessageText.getText().equalsIgnoreCase(expectedMsg);
+    }
+    public boolean verifyLess15YrsOBirthdayMessageDisplayed(String expectedMsg) {
+        WebDriverWait wait = new WebDriverWait(driver,60);
+        WebElement birthdayBlankVerifyMessageText = wait.until(ExpectedConditions.visibilityOfElementLocated(label_messageErrorLessThan15YrsOBirthdate.by()));
+        return birthdayBlankVerifyMessageText.getText().equalsIgnoreCase(expectedMsg);
+    }
     public void sendCMNDLessThan9Num(String param){
         WebElement inputCMND = wait.until(ExpectedConditions.visibilityOfElementLocated(text_idNumber.by()));
         inputCMND.clear();
         wait.until(ExpectedConditions.textToBePresentInElementValue(inputCMND, ""));
         text_idNumber.findWebElement().sendKeys(param);
+        sleepTo(2000);
+    }
+    public void sendBirthdayValue(String param){
+        WebElement inputBirthdayValue = wait.until(ExpectedConditions.visibilityOfElementLocated(text_birthday.by()));
+        inputBirthdayValue.clear();
+        wait.until(ExpectedConditions.textToBePresentInElementValue(inputBirthdayValue, ""));
+        text_birthday.findWebElement().sendKeys(param);
         sleepTo(2000);
     }
     public boolean verifyWrongFormatCMNDMessageDisplayed(String expectedMsg) {
@@ -1710,8 +1745,12 @@ public class ActionsRegister extends ElementsRegister {
         sleepTo(2000);
     }
     public boolean verifySpecialTextCMNDMessageDisplayed() {
-        String specialTextPhoneField = text_idNumber.findWebElement().getText();
-        return specialTextPhoneField.equalsIgnoreCase("");
+        String specialTextCMNDField = text_idNumber.findWebElement().getText();
+        return specialTextCMNDField.equalsIgnoreCase("");
+    }
+    public boolean verifySpecialTextBirthdayMessageDisplayed() {
+        String specialTextBirthdayField = text_birthday.findWebElement().getText();
+        return specialTextBirthdayField.equalsIgnoreCase("");
     }
     public void sendCMNDMoreThan12Num(String param){
         WebElement inputCMND = wait.until(ExpectedConditions.visibilityOfElementLocated(text_idNumber.by()));
@@ -1730,6 +1769,18 @@ public class ActionsRegister extends ElementsRegister {
         inputCMND.clear();
         wait.until(ExpectedConditions.textToBePresentInElementValue(inputCMND, ""));
         text_idNumber.findWebElement().sendKeys(param);
+    }
+    public void sendTextToAddressField(String param){
+        WebElement inputAddress = wait.until(ExpectedConditions.visibilityOfElementLocated(text_address.by()));
+        inputAddress.clear();
+        wait.until(ExpectedConditions.textToBePresentInElementValue(inputAddress, ""));
+        inputAddress.sendKeys(param);
+        sleepTo(2000);
+        inputAddress.sendKeys(Keys.ENTER);
+    }
+    public boolean verifyMax30NumToInputAddressField(String param) {
+        String cmndMax12NumVerifyText = text_idNumber.findWebElement().getAttribute("value");
+        return cmndMax12NumVerifyText.equalsIgnoreCase(param);
     }
     public void sendTextToInputCitySearchBox(){
         wait.until(ExpectedConditions.visibilityOfElementLocated(searchBox_province.by()));
@@ -1777,9 +1828,172 @@ public class ActionsRegister extends ElementsRegister {
         sendTextToInputStreetSearchBox();
         text_address.findWebElement().sendKeys(inputHouseNumberMenu);
     }
+    public void sendTextToOthersFieldsExceptBirthdayField(){
+        text_name.findWebElement().sendKeys(inputFullNameTxt);
+        text_idNumber.findWebElement().sendKeys(inputCMNDTxt);
+        text_phone.findWebElement().sendKeys(CommonInternet.inputPhoneTxt);
+        text_email.findWebElement().sendKeys(CommonInternet.inputEmailTxt);
+        sleepTo(2000);
+        JavascriptExecutor jsExecutor = driver;
+        jsExecutor.executeScript("arguments[0].scrollIntoView(true);", addressField.findWebElement());
+        sleepTo(1000);
+        clickEl(wait,dropdown_province);
+        sendTextToInputCitySearchBox();
+        sleepTo(500);
+        clickEl(wait,dropdown_district);
+        sendTextToInputDistrictSearchBox();
+        sleepTo(500);
+        clickEl(wait,dropdown_ward);
+        sendTextToInputWardSearchBox();
+        sleepTo(500);
+        clickEl(wait,dropdown_street);
+        sendTextToInputStreetSearchBox();
+        text_address.findWebElement().sendKeys(inputHouseNumberMenu);
+    }
+    public boolean verifyCityHolderPlace(String param) {
+        JavascriptExecutor jsExecutor = driver;
+        jsExecutor.executeScript("arguments[0].scrollIntoView(true);", addressField.findWebElement());
+        sleepTo(1000);
+        String cityDropdownList = dropdown_province.findWebElement().getText();
+        return cityDropdownList.equalsIgnoreCase(param);
+    }
+    public void chooseComboBoxCity(){
+        WebElement dropdownCity = wait.until(ExpectedConditions.visibilityOfElementLocated(dropdown_province.by()));
+        dropdownCity.click();
+        List<WebElement> listProvince = Collections.singletonList(wait.until(ExpectedConditions.visibilityOfElementLocated(listItem_province.by())));
+        listProvince.get(0).click();
+    }
+    public boolean verifyDistrictHolderPlace(String param) {
+        String districtDropdownList = dropdown_district.findWebElement().getText();
+        return districtDropdownList.equalsIgnoreCase(param);
+    }
+    public void chooseComboBoxDistrict(){
+        WebElement dropdownDistrict = wait.until(ExpectedConditions.visibilityOfElementLocated(dropdown_district.by()));
+        dropdownDistrict.click();
+        List<WebElement> listDistrict = Collections.singletonList(wait.until(ExpectedConditions.visibilityOfElementLocated(listItem_district.by())));
+        listDistrict.get(0).click();
+    }
+    public boolean verifyWardHolderPlace(String param) {
+        String wardDropdownList = dropdown_ward.findWebElement().getText();
+        return wardDropdownList.equalsIgnoreCase(param);
+    }
+    public void chooseComboBoxWard(){
+        WebElement dropdownWard = wait.until(ExpectedConditions.visibilityOfElementLocated(dropdown_ward.by()));
+        dropdownWard.click();
+        List<WebElement> listWard = Collections.singletonList(wait.until(ExpectedConditions.visibilityOfElementLocated(listItem_ward.by())));
+        listWard.get(0).click();
+    }
+    public boolean verifyStreetHolderPlace(String param) {
+        String cityDropdownList = dropdown_street.findWebElement().getText();
+        return cityDropdownList.equalsIgnoreCase(param);
+    }
+    public void chooseComboBoxStreet(){
+        WebElement dropdownStreet = wait.until(ExpectedConditions.visibilityOfElementLocated(dropdown_street.by()));
+        dropdownStreet.click();
+        List<WebElement> listStreet = Collections.singletonList(wait.until(ExpectedConditions.visibilityOfElementLocated(listItem_street.by())));
+        listStreet.get(0).click();
+    }
+    public boolean enteredValueWithSpecifiedSignIntoCitySearch(String param){
+        WebElement dropdownCity = wait.until(ExpectedConditions.visibilityOfElementLocated(dropdown_province.by()));
+        dropdownCity.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(searchBox_province.by()));
+        searchBox_province.findWebElement().sendKeys(param);
+        sleepTo(2000);
+        List<WebElement> listCity = Collections.singletonList(wait.until(ExpectedConditions.visibilityOfElementLocated(listItem_province.by())));
+        return listCity.get(0).getText().equalsIgnoreCase(param);
+    }
+    public boolean enteredValueWithSpecifiedSignIntoDistrictSearch(String param){
+        WebElement dropdownDistrict = wait.until(ExpectedConditions.visibilityOfElementLocated(dropdown_district.by()));
+        dropdownDistrict.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(searchBox_district.by()));
+        searchBox_district.findWebElement().sendKeys(param);
+        sleepTo(2000);
+        List<WebElement> listDistrict = Collections.singletonList(wait.until(ExpectedConditions.visibilityOfElementLocated(listItem_district.by())));
+        return listDistrict.get(0).getText().equalsIgnoreCase(param);
+    }
+    public boolean enteredValueWithSpecifiedSignIntoWardSearch(String param){
+        WebElement dropdownWard = wait.until(ExpectedConditions.visibilityOfElementLocated(dropdown_ward.by()));
+        dropdownWard.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(searchBox_ward.by()));
+        searchBox_ward.findWebElement().sendKeys(param);
+        sleepTo(2000);
+        List<WebElement> listWard = Collections.singletonList(wait.until(ExpectedConditions.visibilityOfElementLocated(listItem_ward.by())));
+        return listWard.get(0).getText().equalsIgnoreCase(param);
+    }
+    public boolean enteredValueWithSpecifiedSignIntoStreetSearch(String param){
+        WebElement dropdownStreet = wait.until(ExpectedConditions.visibilityOfElementLocated(dropdown_street.by()));
+        dropdownStreet.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(searchBox_street.by()));
+        searchBox_street.findWebElement().sendKeys(param);
+        sleepTo(2000);
+        List<WebElement> listStreet = Collections.singletonList(wait.until(ExpectedConditions.visibilityOfElementLocated(listItem_street.by())));
+        return listStreet.get(0).getText().equalsIgnoreCase(param);
+    }
+    public boolean enteredValueWithUnspecifiedSignIntoCitySearch(String param1, String param2){
+        WebElement dropdownCity = wait.until(ExpectedConditions.visibilityOfElementLocated(dropdown_province.by()));
+        dropdownCity.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(searchBox_province.by()));
+        searchBox_province.findWebElement().sendKeys(param1);
+        sleepTo(2000);
+        List<WebElement> listCity = Collections.singletonList(wait.until(ExpectedConditions.visibilityOfElementLocated(listItem_province.by())));
+        return listCity.get(0).getText().equalsIgnoreCase(param2);
+    }
+    public boolean enteredValueWithUnspecifiedSignIntoDistrictSearch(String param1, String param2){
+        WebElement dropdownDistrict = wait.until(ExpectedConditions.visibilityOfElementLocated(dropdown_district.by()));
+        dropdownDistrict.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(searchBox_district.by()));
+        searchBox_district.findWebElement().sendKeys(param1);
+        sleepTo(2000);
+        List<WebElement> listDistrict = Collections.singletonList(wait.until(ExpectedConditions.visibilityOfElementLocated(listItem_district.by())));
+        return listDistrict.get(0).getText().equalsIgnoreCase(param2);
+    }
+    public boolean enteredValueWithUnspecifiedSignIntoWardSearch(String param1, String param2){
+        WebElement dropdownWard = wait.until(ExpectedConditions.visibilityOfElementLocated(dropdown_ward.by()));
+        dropdownWard.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(searchBox_ward.by()));
+        searchBox_ward.findWebElement().sendKeys(param1);
+        sleepTo(2000);
+        List<WebElement> listWard = Collections.singletonList(wait.until(ExpectedConditions.visibilityOfElementLocated(listItem_ward.by())));
+        return listWard.get(0).getText().equalsIgnoreCase(param2);
+    }
+    public boolean enteredValueWithUnspecifiedSignIntoStreetSearch(String param1, String param2){
+        WebElement dropdownStreet = wait.until(ExpectedConditions.visibilityOfElementLocated(dropdown_street.by()));
+        dropdownStreet.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(searchBox_street.by()));
+        searchBox_street.findWebElement().sendKeys(param1);
+        sleepTo(2000);
+        List<WebElement> listStreet = Collections.singletonList(wait.until(ExpectedConditions.visibilityOfElementLocated(listItem_street.by())));
+        return listStreet.get(0).getText().equalsIgnoreCase(param2);
+    }
+    public boolean verifyDisplayedLabelWhenRdBtnIsSelectedHomeOrAppartment(){
+        JavascriptExecutor jsExecutor = driver;
+        jsExecutor.executeScript("arguments[0].scrollIntoView(true);", addressField.findWebElement());
+        sleepTo(3000);
+        List<WebElement> elementsList = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(listAddressLabelHomeOrAppartmentIsSelected.by()));
+        return areElementsDisplayed(elementsList);
+    }
+    public boolean verifyDisplayedTxtWhenRdBtnIsSelectedHomeOrAppartment(){
+        List<WebElement> elementsList = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(listAddressTxtHomeOrAppartmentIsSelected.by()));
+        return areElementsDisplayed(elementsList);
+    }
+    public boolean verifyPlaceholderOfHouseNumberField(String param){
+        WebElement element =  wait.until(ExpectedConditions.visibilityOfElementLocated(text_address.by()));
+        return element.getText().equalsIgnoreCase(param);
+    }
+    public boolean verifyBlankedAddressMessageDisplayed(String expectedMsg) {
+        WebDriverWait wait = new WebDriverWait(driver,60);
+        WebElement addressBlankVerifyMessageText = wait.until(ExpectedConditions.visibilityOfElementLocated(label_messageErrorBlankAddress.by()));
+        return addressBlankVerifyMessageText.getText().equalsIgnoreCase(expectedMsg);
+    }
+    public void chooseAppartmentRdBtn(){
+        JavascriptExecutor jsExecutor = driver;
+        jsExecutor.executeScript("arguments[0].scrollIntoView(true);", addressField.findWebElement());
+        sleepTo(3000);
+        WebElement element =  wait.until(ExpectedConditions.visibilityOfElementLocated(radioButton_tower.by()));
+        element.click();
+    }
     public void waitForRefreshURL()  {
         wait.until(ExpectedConditions.refreshed(ExpectedConditions.not(ExpectedConditions.urlContains(urlHome))));
     }
-
 }
 

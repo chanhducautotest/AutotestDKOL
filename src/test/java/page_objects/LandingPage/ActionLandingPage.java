@@ -8,7 +8,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.testng.Assert;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +17,7 @@ import static net.fpt.utils.WebElementActionUtil.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static constants.Common.*;
 
-public class ActionLandingPage extends ElementsLadingPage {
+public class ActionLandingPage extends ElementsLandingPage {
     static final Logger logger = LoggerFactory.getLogger(ActionLandingPage.class);
     //Maximize window
     public void maximizeWindow(){

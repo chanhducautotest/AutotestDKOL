@@ -19,6 +19,8 @@ public final class CommonRegister {
 
     public static List getListSetUpInfo =
             jsonUtil.docFileJSON(DATA_TEST_FILE_PATH_REGISTER,"LIST_TITLE_SETUP_INFO");
+    public static List ListPlaceholderAppartment =
+            jsonUtil.docFileJSON(DATA_TEST_FILE_PATH_REGISTER,"LIST_PLACEHOLDER_APPARTMENT");
 
     public static List listInfoPayment =
             jsonUtil.docFileJSON(DATA_TEST_FILE_PATH_REGISTER,"LIST_TITLE_INFO_PAYMENT");

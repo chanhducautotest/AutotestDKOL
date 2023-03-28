@@ -5,7 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import page_objects.PageBase;
 
-public class ElementsLadingPage extends PageBase {
+public class ElementsLandingPage extends PageBase {
         WebDriverWait wait = new WebDriverWait(driver, 30, 1000);
 
         public Query topServices = new Query().defaultLocator(By.xpath("//div[@class='owl-stage']/div/div/span[1]")).usingDriver(driver);

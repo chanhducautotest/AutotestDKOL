@@ -152,5 +152,12 @@
   "INPUT_DROPDOWN_TIME01": "08:00 - 10:00",
   "INPUT_DROPDOWN_TIME02": "10:00 - 12:00",
   "INPUT_DROPDOWN_TIME03": "13:30 - 15:30",
-  "INPUT_DROPDOWN_TIME04": "15:30 - 17:30"
+  "INPUT_DROPDOWN_TIME04": "15:30 - 17:30",
+  "LIST_PLACEHOLDER_APPARTMENT": [
+    "Ví dụ: Toà CT3B / Lô CT3B/ Block CT3B",
+    "Ví dụ: 10",
+    "Ví dụ: 1001",
+    "Vui lòng nhập số CMND/CCCD.",
+    "Ví dụ: qua cầu abc sẽ thấy chung cư"
+  ]
 }
