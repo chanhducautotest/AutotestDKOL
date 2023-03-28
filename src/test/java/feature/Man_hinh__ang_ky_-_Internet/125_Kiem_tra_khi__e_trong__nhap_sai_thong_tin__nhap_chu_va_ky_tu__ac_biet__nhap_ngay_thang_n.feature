@@ -8,8 +8,8 @@ Feature: Kiểm tra khi để trống, nhập sai thông tin, nhập chữ và k
 		When Vào mục internet
 		And Chọn gói cước: <ten_goi_cuoc>
 		And Để trống trường Ngày sinh và nhấn tiếp tục
-		Then Hiện thông báo khi để trống trường Số điện thoại "Vui lòng nhập ngày sinh"
-		And Nhập sai thông tin trong trường ngày sinh <ngay_sinh_sai>
+		Then Hiện thông báo khi để trống trường Ngày sinh "Vui lòng nhập ngày sinh"
+		And Nhập sai thông tin vào trường ngày sinh <ngay_sinh_sai>
 		And Nhấn tiếp tục
 		Then Hiện thông báo khi nhập sai thông tin trong trường ngày sinh "Năm sinh không hợp lệ"
 		And Nhập số điện thoại có chứa chữ, ký tự đặc biệt <ngay_sinh_dac_biet>
