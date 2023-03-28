@@ -8,13 +8,13 @@ Feature: Kiểm tra hiển thị đúng giá trị có dấu tương ứng khi n
 		When Vào mục internet
 		And Chọn gói cước: <ten_goi_cuoc>
 		Then Nhập giá trị có dấu vào trường Tỉnh, Thành phố <tinh_thanh_co_dau> và kiểm tra hiển thị đúng giá trị có dấu tương ứng trong dropdown list Tỉnh, Thành phố
-		Then Nhập giá trị không dấu vào trường Tỉnh, thành <tinh_thanh_khong_dau> và kiểm tra hiển thị đúng giá trị có dấu tương ứng trong dropdown list Tỉnh, Thành phố
+		Then Nhập giá trị không dấu vào trường Tỉnh, thành <tinh_thanh_khong_dau> và kiểm tra hiển thị đúng giá trị có dấu <tinh_thanh_co_dau> tương ứng trong dropdown list Tỉnh, Thành phố
 		Then Nhập giá trị có dấu vào trường Quận, huyện <quan_huyen_co_dau> và kiểm tra hiển thị đúng giá trị có dấu tương ứng trong dropdown list Quận, Huyện
-		Then Nhập giá trị không dấu vào trường Quận, huyện <quan_huyen_khong_dau> và kiểm tra hiển thị đúng giá trị có dấu tương ứng trong dropdown list Quận, Huyện
+		Then Nhập giá trị không dấu vào trường Quận, huyện <quan_huyen_khong_dau> và kiểm tra hiển thị đúng giá trị có dấu <quan_huyen_co_dau> tương ứng trong dropdown list Quận, Huyện
 		Then Nhập giá trị có dấu vào trường Phường, xã <phuong_xa_co_dau> và kiểm tra hiển thị đúng giá trị có dấu tương ứng trong dropdown list Phường, xã
-		Then Nhập giá trị không dấu vào trường Phường, xã <phuong_xa_khong_dau> và kiểm tra hiển thị đúng giá trị có dấu tương ứng trong dropdown list Phường, xã
+		Then Nhập giá trị không dấu vào trường Phường, xã <phuong_xa_khong_dau> và kiểm tra hiển thị đúng giá trị có dấu <phuong_xa_co_dau> tương ứng trong dropdown list Phường, xã
 		Then Nhập giá trị có dấu vào trường Đường, Phố <duong__pho_co_dau> và kiểm tra hiển thị đúng giá trị có dấu tương ứng trong dropdown list Đường, Phố
-		Then Nhập giá trị không dấu vào trường Đường, Phố <duong__pho_khong_dau> và kiểm tra hiển thị đúng giá trị có dấu tương ứng trong dropdown list Đường, Phố
+		Then Nhập giá trị không dấu vào trường Đường, Phố <duong__pho_khong_dau> và kiểm tra hiển thị đúng giá trị có dấu <duong__pho_co_dau> tương ứng trong dropdown list Đường, Phố
 
 		@1
 		Examples:
