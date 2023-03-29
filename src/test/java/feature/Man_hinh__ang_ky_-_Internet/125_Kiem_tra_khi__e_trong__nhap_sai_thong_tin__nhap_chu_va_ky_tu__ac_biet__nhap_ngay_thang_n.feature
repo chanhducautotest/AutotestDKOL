@@ -4,10 +4,9 @@
 Feature: Kiểm tra khi để trống, nhập sai thông tin, nhập chữ và ký tự đặc biệt, nhập ngày tháng năm sinh nhỏ hơn 15 tuổi, nhập bằng 15 tuổi vào trường ngày sinh.
 
 	Scenario Outline: Kiểm tra khi để trống, nhập sai thông tin, nhập chữ và ký tự đặc biệt, nhập ngày tháng năm sinh nhỏ hơn 15 tuổi, nhập bằng 15 tuổi vào trường ngày sinh.
-		Given Truy cập hệ thống DKOL
-		When Vào mục internet
-		And Chọn gói cước: <ten_goi_cuoc>
-		And Để trống trường Ngày sinh và nhấn tiếp tục
+		Given Truy cập trang Đăng ký của gói Internet <ten_goi_cuoc> trên web DKOL
+		And Chờ màn hình Đăng ký tải hoàn tất
+		And Nhấn tiếp tục
 		Then Hiện thông báo khi để trống trường Ngày sinh "Vui lòng nhập ngày sinh"
 		And Nhập sai thông tin vào trường ngày sinh <ngay_sinh_sai>
 		And Nhấn tiếp tục

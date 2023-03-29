@@ -4,9 +4,8 @@
 Feature: Kiểm tra defaut trường Tỉnh, Thành phố; Quận, Huyện; Phường, xã; Đường, Phố
 
 	Scenario Outline: Kiểm tra defaut trường Tỉnh, Thành phố; Quận, Huyện; Phường, xã; Đường, Phố
-		Given Truy cập hệ thống DKOL
-		When Vào mục internet
-		And Chọn gói cước: <ten_goi_cuoc>
+		Given Truy cập trang Đăng ký của gói Internet <ten_goi_cuoc> trên web DKOL
+		And Chờ màn hình Đăng ký tải hoàn tất
 		Then Kiểm tra giá trị default của trường Tỉnh, Thành phố <default_tinh_thanh> và Combobox cho phép chọn giá trị
 		Then Kiểm tra giá trị default của trường Quận, huyện <default_quan_huyen> và Combobox cho phép chọn giá trị
 		Then Kiểm tra giá trị default của trường Phường, xã <default_phuong_xa> và Combobox cho phép chọn giá trị
