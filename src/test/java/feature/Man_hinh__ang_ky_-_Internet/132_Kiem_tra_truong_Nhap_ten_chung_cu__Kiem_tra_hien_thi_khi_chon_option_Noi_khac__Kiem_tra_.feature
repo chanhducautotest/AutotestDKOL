@@ -6,7 +6,7 @@ Feature: Kiểm tra trường Nhập tên chung cư: Kiểm tra hiển thị khi
 	Scenario Outline: Kiểm tra trường Nhập tên chung cư: Kiểm tra hiển thị khi chọn option Nơi khác, Kiểm tra bỏ trống, Kiểm tra nhập vào nhỏ hơn hoặc bằng 50 ký tự, Kiểm tra nhập vào lớn hơn 50 ký tự
 		Given Truy cập trang Đăng ký của gói Internet <ten_goi_cuoc> trên web DKOL
 		And Chờ màn hình Đăng ký tải hoàn tất
-		And Click chọn radio button Loại nhà: CHUNG CƯ
+		And Click radio button Loại nhà: CHUNG CƯ
 		And Chọn option Nơi khác
 		Then Kiểm tra hiển thị thị text Nhập tên chung cư
 		And Nhấn tiếp tục
