@@ -1,4 +1,4 @@
-# Automation priority: null
+# Automation priority: 1
 # Test case importance: Low
 # language: en
 Feature: Kiểm tra trường Nhập tên chung cư: Kiểm tra hiển thị khi chọn option Nơi khác, Kiểm tra bỏ trống, Kiểm tra nhập vào nhỏ hơn hoặc bằng 50 ký tự, Kiểm tra nhập vào lớn hơn 50 ký tự
