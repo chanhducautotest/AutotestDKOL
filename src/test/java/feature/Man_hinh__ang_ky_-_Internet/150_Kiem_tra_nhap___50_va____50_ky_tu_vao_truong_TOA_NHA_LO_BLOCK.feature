@@ -9,11 +9,11 @@ Feature: Kiểm tra nhập > 50 và =< 50 ký tự vào trường TOÀ NHÀ/LÔ/
 		And Click radio button Loại nhà: CHUNG CƯ
 		And Nhập vào trường TOÀ NHÀ,LÔ,BLOCK lớn hơn năm chục ký tự <lon_hon_50_ky_tu>
 		Then Kiểm tra hệ thống chỉ lấy tối đa năm chục ký tự <50_ky_tu> ở trường TOÀ NHÀ,LÔ,BLOCK
-		And Nhập vào trường TOÀ NHÀ,LÔ,BLOCK nhỏ hơn hoặc bằng năm chục ký tự <50_ky_tu> và các thông tin còn lại
+		And Nhập vào trường TOÀ NHÀ,LÔ,BLOCK nhỏ hơn hoặc bằng năm chục ký tự <50_ky_tu_chinh_xac> và các thông tin còn lại
 		And Nhấn tiếp tục
 		Then Kiểm tra chuyển sang màn hình Chọn dịch vụ thành công
 
 		@1
 		Examples:
-		| 50_ky_tu | lon_hon_50_ky_tu | ten_goi_cuoc |
-		| "duZBhgycCsZxomDFslSmOiqhNPbctdhinYEGtRtqmtMDEDmgZM" | "duZBhgycCsZxomDFslSmOiqhNPbctdhinYEGtRtqmtMDEDmgZMcc" | "Sky" |
+		| 50_ky_tu | 50_ky_tu_chinh_xac | lon_hon_50_ky_tu | ten_goi_cuoc |
+		| "duZBhgycCsZxomDFslSmOiqhNPbctdhinYEGtRtqmtMDEDmgZM" | "" | "duZBhgycCsZxomDFslSmOiqhNPbctdhinYEGtRtqmtMDEDmgZMcc" | "Sky" |
