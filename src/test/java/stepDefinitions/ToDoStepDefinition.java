@@ -111,12 +111,6 @@ public class ToDoStepDefinition extends RunCucumberByCompositionTest {
         sleepTo(3000);
     }
 
-    @And("Nhấn Tiếp Tục")
-    public void chooseContinue() {
-        landingPage = new ActionLandingPage();
-        landingPage.clickBtnContinue();
-    }
-
     @Then("Hiện thông báo {string}")
     public void showNotification(String expectedMsg) {
         landingPage = new ActionLandingPage();
@@ -168,11 +162,6 @@ public class ToDoStepDefinition extends RunCucumberByCompositionTest {
         landingPage.clickBtnContinue();
     }
 
-    @When("Vào mục Internet")
-    public void goToInternetsSection() throws InterruptedException {
-        landingPage.clickLinkFPTInternetHeader();
-    }
-
     @Then("Nhập Họ và tên lớn hơn một trăm ký tự {string}")
     public void inputNameGreaterThan100(String param) {
         landingPageInternet = new ActionLandingPageInternet();
@@ -196,7 +185,7 @@ public class ToDoStepDefinition extends RunCucumberByCompositionTest {
         sleepTo(3000);
     }
 
-    @And("Nhấn tiếp tục") @And("Để trống trường Số điện thoại và nhấn tiếp tục") @And("Để trống trường Ngày sinh và nhấn tiếp tục") @And("Để trống trường Địa chỉ, Số nhà và Nhấn tiếp tục")
+    @And("Nhấn tiếp tục") @And("Để trống trường Số điện thoại và nhấn tiếp tục") @And("Để trống trường Ngày sinh và nhấn tiếp tục") @And("Để trống trường Địa chỉ, Số nhà và Nhấn tiếp tục") @And("Nhấn Tiếp Tục")
     public void clickContinueBtn() {
         sleepTo(2000);
         landingPageInternet = new ActionLandingPageInternet();
@@ -367,7 +356,7 @@ public class ToDoStepDefinition extends RunCucumberByCompositionTest {
     @Then("Hiện thông báo nhập sai format CMND, CCCD {string}")
     public void verifyMessageWhenInputWrongCMNDFormat(String expectedMsg) {
         registerPage = new ActionsRegister();
-        Assert.assertTrue(registerPage.verifyWrongFormatCMNDMessageDisplayed(expectedMsg),"The message of CMND Fields when its blanked not match the expected message");
+        Assert.assertTrue(registerPage.verifyWrongFormatCMNDMessageDisplayed(expectedMsg),"The message of CMND Fields when its wrong format not match the expected message");
     }
 
     @And("Nhập Số CMND, CCCD có chứa chữ, ký tự đặc biệt {string}")
@@ -538,7 +527,7 @@ public class ToDoStepDefinition extends RunCucumberByCompositionTest {
     public void inputSignedValueIntoStreetFieldAndVerifyDisplayedValueInDropdownList(String param) {
         registerPage = new ActionsRegister();
         param = ParameterService.INSTANCE.getString("DS_duong_pho_co_dau",param);
-        Assert.assertTrue(registerPage.enteredValueWithSpecifiedSignIntoWardSearch(param),"Do not display the corresponding signed value in Street dropdown list When inputted signed value");
+        Assert.assertTrue(registerPage.enteredValueWithSpecifiedSignIntoStreetSearch(param),"Do not display the corresponding signed value in Street dropdown list When inputted signed value");
     }
 
     @Then("Nhập giá trị không dấu vào trường Đường, Phố {string} và kiểm tra hiển thị đúng giá trị có dấu {string} tương ứng trong dropdown list Đường, Phố")
@@ -576,7 +565,7 @@ public class ToDoStepDefinition extends RunCucumberByCompositionTest {
         registerPage.sendTextToAddressField(param);
     }
 
-    @Then("Kiểm tra hệ thống chỉ cho phép nhập tối đa ba mươi ký tự {}")
+    @Then("Kiểm tra hệ thống chỉ cho phép lấy tối đa ba mươi ký tự {} vào trường địa chỉ")
     public void verifyAddressFieldAcceptedMax30Characters(String param) {
         registerPage = new ActionsRegister();
         param = ParameterService.INSTANCE.getString("DS_dia_chi_30",param);
@@ -600,5 +589,189 @@ public class ToDoStepDefinition extends RunCucumberByCompositionTest {
     public void verifyDisplayedPlaceholderOfTxtInpuntWhenAppartmentIsSelected() {
         registerPage = new ActionsRegister();
         Assert.assertTrue(registerPage.comparePlaceholderElementsOnAddressAppartmentSelected(),"Placeholder of textbox TÒA NHÀ,LÔ,BLOCK, SỐ TẦNG*, SỐ PHÒNG*, GHI CHÚ is not matched");
+    }
+
+    @Then("Nhập giá trị có dấu vào search Chung cư {string} và kiểm tra hiển thị đúng giá trị có dấu tương ứng trong dropdown list Chung cư")
+    public void inputSignedValueIntoAppartmentSearchBoxAndVerifyDisplayedValueInDropdown(String param) {
+        registerPage = new ActionsRegister();
+        param = ParameterService.INSTANCE.getString("DS_chung_cu_co_dau",param);
+        Assert.assertTrue(registerPage.enteredValueWithSpecifiedSignIntoAppartmentSearch(param),"Do not display the corresponding signed value in Appartment dropdown list When inputted signed value");
+    }
+
+    @Then("Nhập giá trị không dấu vào search Chung cư {string} và kiểm tra hiển thị đúng giá trị có dấu tương ứng {string} trong dropdown list Chung cư")
+    public void inputUnsignedValueIntoAppartmentSearchBoxAndVerifyDisplayedValueInDropdown(String param1, String param2) {
+        registerPage = new ActionsRegister();
+        param1 = ParameterService.INSTANCE.getString("DS_chung_cu_khong_dau",param1);
+        param2 = ParameterService.INSTANCE.getString("DS_chung_cu_co_dau",param2);
+        Assert.assertTrue(registerPage.enteredValueWithUnspecifiedSignIntoAppartmentSearch(param1,param2),"Do not display the corresponding signed value in Appartment dropdown list When inputted unsigned value");
+    }
+
+    @And("Chọn Phường, xã không có chung cư")
+    public void chooseWardHasNoAppartment() {
+        registerPage = new ActionsRegister();
+        registerPage.chooseAddressHasNoAppartment();
+    }
+
+    @Then("Kiểm tra dropdown list chung cư chỉ hiển thị một giá trị {string}")
+    public void verifyDropdownListAppartmentOnlyDisplayed1Value(String expectedResult) {
+        registerPage = new ActionsRegister();
+        Assert.assertTrue(registerPage.verifyListAppartMentOnlyHas1ValueExpected(expectedResult),"The Appartment dropdown list displayed the value not match the expected value");
+    }
+
+    @Given("Truy cập trang Đăng ký của gói Internet {string} trên web DKOL")
+    public void getAccessToRegisterPageDKOL(String param) throws InterruptedException {
+        registerPage = new ActionsRegister();
+        accessDKOLSystem();
+        goToInternetSection();
+        param = ParameterService.INSTANCE.getString("DS_ten_goi_cuoc",param);
+        chooseInternetPackage(param);
+    }
+
+    @And("Chờ màn hình Đăng ký tải hoàn tất")
+    public void waitForRegisterPageToBeLoaded() {
+        registerPage = new ActionsRegister();
+        registerPage.waitForRegisterSkyPageLoaded();
+    }
+
+    @And("Nhập vào trường ghi chú nhiều hơn một trăm ký tự {string}")
+    public void inputIntoNoteFieldMoreThanHundredCharacters(String param) {
+        registerPage = new ActionsRegister();
+        param = ParameterService.INSTANCE.getString("DS_ghi_chu_hon_100_ky_tu",param);
+        registerPage.sendMoreThan100CharactersToNoteField(param);
+    }
+
+    @Then("Kiểm tra hệ thống chỉ lấy tối đa một trăm ký tự vào trường GHI CHÚ {string}")
+    public void verifySystemOnlyGetMax100Characters(String param) {
+        registerPage = new ActionsRegister();
+        param = ParameterService.INSTANCE.getString("DS_ghi_chu_100_ky_tu",param);
+        Assert.assertTrue(registerPage.verifyInputMoreThan100CharactersToNoteField(param),"The system allows input more than 100 Characters into Note Field");
+    }
+
+    @And("Chọn option Nơi khác")
+    public void chooseOptionAnotherPlace() {
+        registerPage = new ActionsRegister();
+        registerPage.chooseAnotherPlace();
+    }
+
+    @Then("Kiểm tra hiển thị trường Nhập tên chung cư")
+    public void verifyDisplayPlaceholderOfInputAppertment() {
+        registerPage = new ActionsRegister();
+        Assert.assertTrue(registerPage.verifyPlaceholderInputTxt(),"Placeholder of input Appartment name is not displayed");
+    }
+
+    @Then("Kiểm tra hiển thị thông báo khi bỏ trống trường Nhập tên chung cư {string}")
+    public void verifyDisplayedMessageWhenLeavingInputAppartmentNameBlanked(String expectedMsg) {
+        registerPage = new ActionsRegister();
+        Assert.assertTrue(registerPage.verifyBlankedAppartmentNameInputMessageDisplayed(expectedMsg),"The Message when leaving Appartment name blanked is not matching expected ");
+    }
+
+    @And("Nhập tên chung cư lớn hơn năm mươi ký tự {string}")
+    public void inputNameOfAppartmentMoreThan50Characters(String param) {
+        registerPage = new ActionsRegister();
+        param = ParameterService.INSTANCE.getString("DS_ten_lon_hon_50",param);
+        registerPage.sendMoreThan50CharactersToAppartmentNameField(param);
+    }
+
+    @Then("Kiểm tra hệ thống chỉ cho phép lấy được tối đa năm mươi ký tự {string}")
+    public void verifyInputNameOfAppartmentAllowsToGetMax50Characters(String param) {
+        registerPage = new ActionsRegister();
+        param = ParameterService.INSTANCE.getString("DS_ten_50",param);
+        Assert.assertTrue(registerPage.verifyInputMax50CharactersToAppartmentNameField(param),"The system allows to input more than 50 characters into Appartment Name Field");
+    }
+
+    @And("Nhập tên chung cư bé hơn hoặc bằng năm mươi ký tự {string} và các thông tin còn lại")
+    public void inputNameOfAppartmentEqualsOrLessThan10CharactersAndOthersInfo(String param) {
+        registerPage = new ActionsRegister();
+        param = ParameterService.INSTANCE.getString("DS_ten_50",param);
+        registerPage.sendTextToOthersFieldsExceptAppartmentNameField();
+        registerPage.sendEqualsOrLessThan10CharactersToAppartmentNameField(param);
+    }
+    @Then("Kiểm tra hiển thị popups thông báo {string} và nhấn nút Đồng ý")
+    public void verifyOpenPopupsAndClickAcceptBtn(String expectedMsg) {
+        registerPage = new ActionsRegister();
+        registerPage.verifyOpenPopups(expectedMsg);
+        registerPage.chooseAcceptedBtn();
+    }
+
+    @And("^Bỏ trống trường TOÀ NHÀ/LÔ/BLOCK và nhập đầy đủ các thông tin vào trường còn lại$")
+    public void letBlockFieldBlankedAndInputOthersInfo() {
+        registerPage = new ActionsRegister();
+        registerPage.setBlockFieldBlankedAndSendTextToOthersFields();
+    }
+
+    @And("Nhập vào trường TOÀ NHÀ,LÔ,BLOCK lớn hơn năm chục ký tự {string}")
+    public void inputIntoBlockFieldMoreThan50Characters(String param) {
+        registerPage = new ActionsRegister();
+        param = ParameterService.INSTANCE.getString("DS_lon_hon_50_ky_tu",param);
+        registerPage.sendMoreThan50CharactersToBlockField(param);
+    }
+
+    @Then("Kiểm tra hệ thống chỉ lấy tối đa năm chục ký tự {string} ở trường TOÀ NHÀ,LÔ,BLOCK")
+    public void verifySystemOnlyGetMax50Characters(String param) {
+        registerPage = new ActionsRegister();
+        param = ParameterService.INSTANCE.getString("DS_50_ky_tu",param);
+        Assert.assertTrue(registerPage.verifySystemOnlyGet50CharactersOnBlockField(param),"The system allows to input more than 50 characters into Appartment Block Field");
+    }
+
+    @And("Nhập vào trường TOÀ NHÀ,LÔ,BLOCK nhỏ hơn hoặc bằng năm chục ký tự {string} và các thông tin còn lại")
+    public void inputIntoBlockFieldEqualOrLessThan50CharactersAndOthersInfo(String param) {
+        registerPage = new ActionsRegister();
+        param = ParameterService.INSTANCE.getString("DS_50_ky_tu",param);
+        registerPage.sendLessOrEqual50CharactersToBlockFieldAndSendTextToOrtherField(param);
+    }
+
+    @Then("Kiểm tra hiển thị thông báo khi bỏ trống trường SỐ TẦNG * {string}")
+    public void verifyMessageWhenLeavingFloorFieldBlanked(String expectedMsg) {
+        registerPage = new ActionsRegister();
+        Assert.assertTrue(registerPage.verifyMessageWhenLeavingFloorBlanked(expectedMsg),"The message when leaving Floor field blanked is not matching expected message");
+    }
+
+    @And("Nhập vào trường SỐ TẦNG * lớn hơn mười ký tự {}")
+    public void inputIntoFloorFieldMoreThan10Characters(String param) {
+        registerPage = new ActionsRegister();
+        param = ParameterService.INSTANCE.getString("DS_lon_hon_10_ky_tu",param);
+        registerPage.sendMoreThan10CharactersToFloorField(param);
+    }
+
+    @Then("Kiểm tra hệ thống chỉ lấy tối đa mười ký tự {} ở trường SỐ TẦNG *")
+    public void verifySystemAcceptedMax10CharactersOnFloorField(String param) {
+        registerPage = new ActionsRegister();
+        param = ParameterService.INSTANCE.getString("DS_10_ky_tu",param);
+        Assert.assertTrue(registerPage.verifySytemOnlyGetMax10CharactersOnFloorField(param),"The system allows to input more than 10 characters into Appartment Floor Field");
+    }
+
+    @And("Nhập vào trường SỐ TẦNG * nhỏ hơn hoặc bằng mười ký tự {} và các thông tin còn lại")
+    public void inputIntoFloorFieldEqualOrLessThan10CharactersAndOthersInfo(String param) {
+        registerPage = new ActionsRegister();
+        param = ParameterService.INSTANCE.getString("DS_10_ky_tu",param);
+        registerPage.sendDataToOthersFieldsAndLessOrEqual10CharactersToFloorField(param);
+    }
+
+    @Then("Kiểm tra hiển thị thông báo khi bỏ trống trường SỐ PHÒNG * {string}")
+    public void verifyMessageWhenLeavingRoomFieldBlanked(String expectedMsg) {
+        registerPage = new ActionsRegister();
+        Assert.assertTrue(registerPage.verifyMessageWhenLeavingRoomBlanked(expectedMsg),"The message when leaving Room field blanked is not matching expected message");
+    }
+
+    @And("Nhập vào trường SỐ PHÒNG * lớn hơn mười ký tự {}")
+    public void inputIntoRoomFieldMoreThan10Characters(String param) {
+        registerPage = new ActionsRegister();
+        param = ParameterService.INSTANCE.getString("DS_lon_hon_10_ky_tu",param);
+        registerPage.sendMoreThan10CharactersToRoomField(param);
+
+    }
+
+    @Then("Kiểm tra hệ thống chỉ lấy tối đa mười ký tự {} ở trường SỐ PHÒNG *")
+    public void verifySystemAcceptedMax10CharactersOnRoomField(String param) {
+        registerPage = new ActionsRegister();
+        param = ParameterService.INSTANCE.getString("DS_10_ky_tu",param);
+        Assert.assertTrue(registerPage.verifySytemOnlyGetMax10CharactersOnRoomField(param),"The system allows to input more than 10 characters into Appartment Room Field");
+    }
+
+    @And("Nhập vào trường SỐ PHÒNG * nhỏ hơn hoặc bằng mười ký tự {} và các thông tin còn lại")
+    public void inputIntoRoomFieldEqualOrLessThan10CharactersAndOthersInfo(String param) {
+        registerPage = new ActionsRegister();
+        param = ParameterService.INSTANCE.getString("DS_10_ky_tu",param);
+        registerPage.sendDataToOthersFieldsAndLessOrEqual10CharactersToRoomField(param);
     }
 }

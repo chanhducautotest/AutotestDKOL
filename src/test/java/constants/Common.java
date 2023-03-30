@@ -14,6 +14,7 @@ public final class Common {
 
     /* Common */
     public static String url = jsonUtil.getStringUTF8(DATA_TEST_FILE_PATH_COMMON,"URL_TEST");
+    public static String urlSkyRegister = jsonUtil.getStringUTF8(DATA_TEST_FILE_PATH_COMMON,"URL_TEST_INTERNET_SKY_REGISTER");
     public static String urlGTBB = jsonUtil.findValueJsonObjectByKeyPathJsonString(DATA_TEST_FILE_PATH_COMMON,"/URL_TEST_MA_GIOI_THIEU_BAN_BE");
     public static String maGTBBVoucher =
             jsonUtil.findValueJsonObjectByKeyPathJsonString(DATA_TEST_FILE_PATH_COMMON,"/MA_GTBB");

@@ -159,5 +159,8 @@
     "Ví dụ: 1001",
     "Vui lòng nhập số CMND/CCCD.",
     "Ví dụ: qua cầu abc sẽ thấy chung cư"
-  ]
+  ],
+  "INPUT_DISTRICT_NON_APPARTMENT": "Q8",
+  "INPUT_WARD_NON_APPARTMENT": "Phường 14",
+  "INPUT_STREET_NON_APPARTMENT": "Bến Bình Đông"
 }

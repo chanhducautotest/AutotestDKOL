@@ -1611,7 +1611,10 @@ public class ActionsRegister extends ElementsRegister {
         wait.until(ExpectedConditions.urlContains(url));
         return this;
     }
-
+    public ActionsRegister waitForRegisterSkyPageLoaded() {
+        wait.until(ExpectedConditions.urlContains(urlSkyRegister));
+        return this;
+    }
     /**
      * Click vào button thay đổi địa chỉ lắp đặt
      * author: DienLT2
@@ -1782,29 +1785,41 @@ public class ActionsRegister extends ElementsRegister {
         String cmndMax12NumVerifyText = text_idNumber.findWebElement().getAttribute("value");
         return cmndMax12NumVerifyText.equalsIgnoreCase(param);
     }
-    public void sendTextToInputCitySearchBox(){
+    public void sendTextToInputCitySearchBox(String city){
         wait.until(ExpectedConditions.visibilityOfElementLocated(searchBox_province.by()));
-        searchBox_province.findWebElement().sendKeys(inputProvinceMenu);
+        searchBox_province.findWebElement().sendKeys(city);
         List<WebElement> listProvince = Collections.singletonList(wait.until(ExpectedConditions.visibilityOfElementLocated(listItem_province.by())));
         listProvince.get(0).click();
     }
-    public void sendTextToInputDistrictSearchBox(){
+    public void sendTextToInputDistrictSearchBox(String district){
         wait.until(ExpectedConditions.visibilityOfElementLocated(searchBox_district.by()));
-        searchBox_district.findWebElement().sendKeys(inputDistrictMenu);
+        searchBox_district.findWebElement().sendKeys(district);
         List<WebElement> listProvince = Collections.singletonList(wait.until(ExpectedConditions.visibilityOfElementLocated(listItem_district.by())));
         listProvince.get(0).click();
     }
-    public void sendTextToInputWardSearchBox(){
+    public void sendTextToInputWardSearchBox(String ward){
         wait.until(ExpectedConditions.visibilityOfElementLocated(searchBox_ward.by()));
-        searchBox_ward.findWebElement().sendKeys(inputWardMenu);
+        searchBox_ward.findWebElement().sendKeys(ward);
         List<WebElement> listProvince = Collections.singletonList(wait.until(ExpectedConditions.visibilityOfElementLocated(listItem_ward.by())));
         listProvince.get(0).click();
     }
-    public void sendTextToInputStreetSearchBox(){
+    public void sendTextToInputStreetSearchBox(String street){
         wait.until(ExpectedConditions.visibilityOfElementLocated(searchBox_street.by()));
-        searchBox_street.findWebElement().sendKeys(inputStreetMenu);
+        searchBox_street.findWebElement().sendKeys(street);
         List<WebElement> listProvince = Collections.singletonList(wait.until(ExpectedConditions.visibilityOfElementLocated(listItem_street.by())));
         listProvince.get(0).click();
+    }
+    public void sendTextToInputBlockAppartment(String block){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(text_block.by()));
+        text_block.findWebElement().sendKeys(block);
+    }
+    public void sendTextToInputFloorAppartment(String floor){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(text_floor.by()));
+        text_block.findWebElement().sendKeys(floor);
+    }
+    public void sendTextToInputRoomAppartment(String room){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(text_room.by()));
+        text_block.findWebElement().sendKeys(room);
     }
     public void sendTextToOthersFieldsExceptPhoneField(){
         text_name.findWebElement().sendKeys(inputFullNameTxt);
@@ -1816,16 +1831,16 @@ public class ActionsRegister extends ElementsRegister {
         jsExecutor.executeScript("arguments[0].scrollIntoView(true);", addressField.findWebElement());
         sleepTo(1000);
         clickEl(wait,dropdown_province);
-        sendTextToInputCitySearchBox();
+        sendTextToInputCitySearchBox(inputProvinceMenu);
         sleepTo(500);
         clickEl(wait,dropdown_district);
-        sendTextToInputDistrictSearchBox();
+        sendTextToInputDistrictSearchBox(inputDistrictMenu);
         sleepTo(500);
         clickEl(wait,dropdown_ward);
-        sendTextToInputWardSearchBox();
+        sendTextToInputWardSearchBox(inputWardMenu);
         sleepTo(500);
         clickEl(wait,dropdown_street);
-        sendTextToInputStreetSearchBox();
+        sendTextToInputStreetSearchBox(inputStreetMenu);
         text_address.findWebElement().sendKeys(inputHouseNumberMenu);
     }
     public void sendTextToOthersFieldsExceptBirthdayField(){
@@ -1838,18 +1853,19 @@ public class ActionsRegister extends ElementsRegister {
         jsExecutor.executeScript("arguments[0].scrollIntoView(true);", addressField.findWebElement());
         sleepTo(1000);
         clickEl(wait,dropdown_province);
-        sendTextToInputCitySearchBox();
+        sendTextToInputCitySearchBox(inputProvinceMenu);
         sleepTo(500);
         clickEl(wait,dropdown_district);
-        sendTextToInputDistrictSearchBox();
+        sendTextToInputDistrictSearchBox(inputDistrictMenu);
         sleepTo(500);
         clickEl(wait,dropdown_ward);
-        sendTextToInputWardSearchBox();
+        sendTextToInputWardSearchBox(inputWardMenu);
         sleepTo(500);
         clickEl(wait,dropdown_street);
-        sendTextToInputStreetSearchBox();
+        sendTextToInputStreetSearchBox(inputStreetMenu);
         text_address.findWebElement().sendKeys(inputHouseNumberMenu);
     }
+
     public boolean verifyCityHolderPlace(String param) {
         JavascriptExecutor jsExecutor = driver;
         jsExecutor.executeScript("arguments[0].scrollIntoView(true);", addressField.findWebElement());
@@ -1894,6 +1910,9 @@ public class ActionsRegister extends ElementsRegister {
         listStreet.get(0).click();
     }
     public boolean enteredValueWithSpecifiedSignIntoCitySearch(String param){
+        JavascriptExecutor jsExecutor = driver;
+        jsExecutor.executeScript("arguments[0].scrollIntoView(true);", addressField.findWebElement());
+        sleepTo(1000);
         WebElement dropdownCity = wait.until(ExpectedConditions.visibilityOfElementLocated(dropdown_province.by()));
         dropdownCity.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(searchBox_province.by()));
@@ -1981,6 +2000,9 @@ public class ActionsRegister extends ElementsRegister {
         return element.getText().equalsIgnoreCase(param);
     }
     public boolean verifyBlankedAddressMessageDisplayed(String expectedMsg) {
+        JavascriptExecutor jsExecutor = driver;
+        jsExecutor.executeScript("arguments[0].scrollIntoView(true);", addressField.findWebElement());
+        sleepTo(1000);
         WebDriverWait wait = new WebDriverWait(driver,60);
         WebElement addressBlankVerifyMessageText = wait.until(ExpectedConditions.visibilityOfElementLocated(label_messageErrorBlankAddress.by()));
         return addressBlankVerifyMessageText.getText().equalsIgnoreCase(expectedMsg);
@@ -1991,6 +2013,278 @@ public class ActionsRegister extends ElementsRegister {
         sleepTo(3000);
         WebElement element =  wait.until(ExpectedConditions.visibilityOfElementLocated(radioButton_tower.by()));
         element.click();
+    }
+    public boolean enteredValueWithSpecifiedSignIntoAppartmentSearch(String param){
+        WebElement dropdownAppartment = wait.until(ExpectedConditions.visibilityOfElementLocated(dropdown_appartment.by()));
+        dropdownAppartment.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(searchBox_appartment.by()));
+        searchBox_appartment.findWebElement().sendKeys(param);
+        sleepTo(2000);
+        List<WebElement> listAppartment = Collections.singletonList(wait.until(ExpectedConditions.visibilityOfElementLocated(listItem_appartment.by())));
+        return listAppartment.get(0).getText().equalsIgnoreCase(param);
+    }
+    public boolean enteredValueWithUnspecifiedSignIntoAppartmentSearch(String param1, String param2){
+        WebElement dropdownAppartment = wait.until(ExpectedConditions.visibilityOfElementLocated(dropdown_appartment.by()));
+        dropdownAppartment.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(searchBox_appartment.by()));
+        searchBox_appartment.findWebElement().sendKeys(param1);
+        sleepTo(2000);
+        List<WebElement> listStreet = Collections.singletonList(wait.until(ExpectedConditions.visibilityOfElementLocated(listItem_appartment.by())));
+        return listStreet.get(0).getText().equalsIgnoreCase(param2);
+    }
+    public void chooseAddressHasNoAppartment(){
+        clickEl(wait,dropdown_district);
+        sendTextToInputDistrictSearchBox(inputDistrictNonAppartment);
+        sleepTo(500);
+        clickEl(wait,dropdown_ward);
+        sendTextToInputWardSearchBox(inputWardNonAppartment);
+        sleepTo(500);
+        clickEl(wait,dropdown_street);
+        sendTextToInputStreetSearchBox(inputStreetNonAppartment);
+    }
+    public boolean verifyListAppartMentOnlyHas1ValueExpected(String expectedValue){
+        List<WebElement> listAppartment = Collections.singletonList(wait.until(ExpectedConditions.visibilityOfElementLocated(listItem_appartment.by())));
+        if(listAppartment.size() == 1){
+            return listAppartment.get(0).getText().equalsIgnoreCase(expectedValue);
+        }else{
+            return false;
+        }
+    }
+    public void sendMoreThan100CharactersToNoteField(String param){
+        WebElement inputNote = wait.until(ExpectedConditions.visibilityOfElementLocated(text_note.by()));
+        inputNote.sendKeys(param);
+        sleepTo(2000);
+        inputNote.sendKeys(Keys.ENTER);
+    }
+    public boolean verifyInputMoreThan100CharactersToNoteField(String param){
+        WebElement inputNote = wait.until(ExpectedConditions.visibilityOfElementLocated(text_note.by()));
+        return inputNote.getAttribute("value").equalsIgnoreCase(param);
+    }
+    public void chooseAnotherPlace(){
+        List<WebElement> listAppartment = Collections.singletonList(wait.until(ExpectedConditions.visibilityOfElementLocated(listItem_appartment.by())));
+        listAppartment.get(listAppartment.size()-1).click();
+    }
+    public boolean verifyPlaceholderInputTxt(){
+        WebElement inputBuilding = wait.until(ExpectedConditions.visibilityOfElementLocated(text_building.by()));
+        return inputBuilding.isDisplayed();
+    }
+    public boolean verifyBlankedAppartmentNameInputMessageDisplayed(String expectedMsg) {
+        JavascriptExecutor jsExecutor = driver;
+        jsExecutor.executeScript("arguments[0].scrollIntoView(true);", addressField.findWebElement());
+        sleepTo(1000);
+        WebDriverWait wait = new WebDriverWait(driver,60);
+        WebElement addressBlankVerifyMessageText = wait.until(ExpectedConditions.visibilityOfElementLocated(label_messageErrorAppartmentInput.by()));
+        return addressBlankVerifyMessageText.getText().equalsIgnoreCase(expectedMsg);
+    }
+    public void sendMoreThan50CharactersToAppartmentNameField(String param){
+        WebElement inputAppartmentName = wait.until(ExpectedConditions.visibilityOfElementLocated(text_building.by()));
+        inputAppartmentName.sendKeys(param);
+        sleepTo(2000);
+        inputAppartmentName.sendKeys(Keys.ENTER);
+    }
+    public boolean verifyInputMax50CharactersToAppartmentNameField(String param){
+        WebElement inputAppartmentName = wait.until(ExpectedConditions.visibilityOfElementLocated(text_building.by()));
+        return inputAppartmentName.getAttribute("value").equalsIgnoreCase(param);
+    }
+    public void sendEqualsOrLessThan10CharactersToAppartmentNameField(String param){
+        WebElement inputAppartmentName = wait.until(ExpectedConditions.visibilityOfElementLocated(text_building.by()));
+        inputAppartmentName.clear();
+        wait.until(ExpectedConditions.textToBePresentInElementValue(inputAppartmentName, ""));
+        inputAppartmentName.sendKeys(param);
+    }
+    public boolean verifyOpenPopups(String expectedMsg){
+        WebElement elementPopups = wait.until(ExpectedConditions.visibilityOfElementLocated(element_popups.by()));
+        WebElement message  =  wait.until(ExpectedConditions.visibilityOfElementLocated(text_popups.by()));
+        if(elementPopups.isDisplayed()){
+            return message.getText().equalsIgnoreCase(expectedMsg);
+        }
+        else return false;
+    }
+    public void chooseAcceptedBtn(){
+        WebElement btnAccepted  =  wait.until(ExpectedConditions.visibilityOfElementLocated(button_agree.by()));
+        btnAccepted.click();
+        sleepTo(1500);
+    }
+    public void sendTextToOthersFieldsExceptAppartmentNameField(){
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollTo(0, 0);");
+        sleepTo(1000);
+        text_name.findWebElement().sendKeys(inputFullNameTxt);
+        text_idNumber.findWebElement().sendKeys(inputCMNDTxt);
+        text_birthday.findWebElement().sendKeys(inputBirthday);
+        text_phone.findWebElement().sendKeys(CommonInternet.inputPhoneTxt);
+        text_email.findWebElement().sendKeys(CommonInternet.inputEmailTxt);
+        sleepTo(2000);
+        JavascriptExecutor jsExecutor = driver;
+        jsExecutor.executeScript("arguments[0].scrollIntoView(true);", addressField.findWebElement());
+        sleepTo(1000);
+        clickEl(wait,dropdown_province);
+        sendTextToInputCitySearchBox(inputProvinceMenu);
+        sleepTo(500);
+        clickEl(wait,dropdown_district);
+        sendTextToInputDistrictSearchBox(inputDistrictMenu);
+        sleepTo(500);
+        clickEl(wait,dropdown_ward);
+        sendTextToInputWardSearchBox(inputWardMenu);
+        sleepTo(500);
+        clickEl(wait,dropdown_street);
+        sendTextToInputStreetSearchBox(inputStreetMenu);
+        sleepTo(500);
+        chooseAnotherPlace();
+        sleepTo(1000);
+        sendTextToInputBlockAppartment(inputBlock);
+        sendTextToInputFloorAppartment(inputFloor);
+        sendTextToInputRoomAppartment(inputRoom);
+    }
+    public void setBlockFieldBlankedAndSendTextToOthersFields(){
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollTo(0, 0);");
+        sleepTo(1000);
+        text_name.findWebElement().sendKeys(inputFullNameTxt);
+        text_idNumber.findWebElement().sendKeys(inputCMNDTxt);
+        text_birthday.findWebElement().sendKeys(inputBirthday);
+        text_phone.findWebElement().sendKeys(CommonInternet.inputPhoneTxt);
+        text_email.findWebElement().sendKeys(CommonInternet.inputEmailTxt);
+        sleepTo(2000);
+        JavascriptExecutor jsExecutor = driver;
+        jsExecutor.executeScript("arguments[0].scrollIntoView(true);", addressField.findWebElement());
+        sleepTo(1000);
+        clickEl(wait,dropdown_province);
+        sendTextToInputCitySearchBox(inputProvinceMenu);
+        sleepTo(500);
+        clickEl(wait,dropdown_district);
+        sendTextToInputDistrictSearchBox(inputDistrictMenu);
+        sleepTo(500);
+        clickEl(wait,dropdown_ward);
+        sendTextToInputWardSearchBox(inputWardMenu);
+        sleepTo(500);
+        clickEl(wait,dropdown_street);
+        sendTextToInputStreetSearchBox(inputStreetMenu);
+        sleepTo(500);
+        chooseAnotherPlace();
+        sleepTo(1000);
+        sendTextToInputBlockAppartment(inputFloor);
+        sendTextToInputRoomAppartment(inputRoom);
+    }
+    public void sendDataToOthersFieldsAndLessOrEqual10CharactersToFloorField(String param){
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollTo(0, 0);");
+        sleepTo(1000);
+        text_name.findWebElement().sendKeys(inputFullNameTxt);
+        text_idNumber.findWebElement().sendKeys(inputCMNDTxt);
+        text_birthday.findWebElement().sendKeys(inputBirthday);
+        text_phone.findWebElement().sendKeys(CommonInternet.inputPhoneTxt);
+        text_email.findWebElement().sendKeys(CommonInternet.inputEmailTxt);
+        sleepTo(2000);
+        JavascriptExecutor jsExecutor = driver;
+        jsExecutor.executeScript("arguments[0].scrollIntoView(true);", addressField.findWebElement());
+        sleepTo(1000);
+        clickEl(wait,dropdown_province);
+        sendTextToInputCitySearchBox(inputProvinceMenu);
+        sleepTo(500);
+        clickEl(wait,dropdown_district);
+        sendTextToInputDistrictSearchBox(inputDistrictMenu);
+        sleepTo(500);
+        clickEl(wait,dropdown_ward);
+        sendTextToInputWardSearchBox(inputWardMenu);
+        sleepTo(500);
+        clickEl(wait,dropdown_street);
+        sendTextToInputStreetSearchBox(inputStreetMenu);
+        sleepTo(500);
+        chooseAnotherPlace();
+        sleepTo(1000);
+        sendTextToInputBlockAppartment(inputBlock);
+        sendTextToInputRoomAppartment(inputRoom);
+        WebElement inputFloor = wait.until(ExpectedConditions.visibilityOfElementLocated(text_floor.by()));
+        inputFloor.clear();
+        wait.until(ExpectedConditions.textToBePresentInElementValue(inputFloor, ""));
+        inputFloor.sendKeys(param);
+    }
+    public void sendDataToOthersFieldsAndLessOrEqual10CharactersToRoomField(String param){
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollTo(0, 0);");
+        sleepTo(1000);
+        text_name.findWebElement().sendKeys(inputFullNameTxt);
+        text_idNumber.findWebElement().sendKeys(inputCMNDTxt);
+        text_birthday.findWebElement().sendKeys(inputBirthday);
+        text_phone.findWebElement().sendKeys(CommonInternet.inputPhoneTxt);
+        text_email.findWebElement().sendKeys(CommonInternet.inputEmailTxt);
+        sleepTo(2000);
+        JavascriptExecutor jsExecutor = driver;
+        jsExecutor.executeScript("arguments[0].scrollIntoView(true);", addressField.findWebElement());
+        sleepTo(1000);
+        clickEl(wait,dropdown_province);
+        sendTextToInputCitySearchBox(inputProvinceMenu);
+        sleepTo(500);
+        clickEl(wait,dropdown_district);
+        sendTextToInputDistrictSearchBox(inputDistrictMenu);
+        sleepTo(500);
+        clickEl(wait,dropdown_ward);
+        sendTextToInputWardSearchBox(inputWardMenu);
+        sleepTo(500);
+        clickEl(wait,dropdown_street);
+        sendTextToInputStreetSearchBox(inputStreetMenu);
+        sleepTo(500);
+        chooseAnotherPlace();
+        sleepTo(1000);
+        sendTextToInputFloorAppartment(inputFloor);
+        sendTextToInputBlockAppartment(inputBlock);
+        WebElement inputRoom = wait.until(ExpectedConditions.visibilityOfElementLocated(text_room.by()));
+        inputRoom.clear();
+        wait.until(ExpectedConditions.textToBePresentInElementValue(inputRoom, ""));
+        inputRoom.sendKeys(param);
+    }
+    public void sendMoreThan50CharactersToBlockField(String param){
+        WebElement inputBlock = wait.until(ExpectedConditions.visibilityOfElementLocated(text_block.by()));
+        inputBlock.sendKeys(param);
+        sleepTo(2000);
+        inputBlock.sendKeys(Keys.ENTER);
+    }
+    public boolean verifySystemOnlyGet50CharactersOnBlockField(String param){
+        WebElement inputBlock = wait.until(ExpectedConditions.visibilityOfElementLocated(text_block.by()));
+        return inputBlock.getAttribute("value").equalsIgnoreCase(param);
+    }
+    public void sendLessOrEqual50CharactersToBlockFieldAndSendTextToOrtherField(String param){
+        setBlockFieldBlankedAndSendTextToOthersFields();
+        WebElement inputBlock = wait.until(ExpectedConditions.visibilityOfElementLocated(text_block.by()));
+        inputBlock.clear();
+        wait.until(ExpectedConditions.textToBePresentInElementValue(inputBlock, ""));
+        inputBlock.sendKeys(param);
+        sleepTo(2000);
+    }
+    public boolean verifyMessageWhenLeavingFloorBlanked(String expectedMsg){
+        JavascriptExecutor jsExecutor = driver;
+        jsExecutor.executeScript("arguments[0].scrollIntoView(true);", addressField.findWebElement());
+        sleepTo(3000);
+        WebElement labelMsgFloor = wait.until(ExpectedConditions.visibilityOfElementLocated(label_messageErrorBlankFloor.by()));
+        return labelMsgFloor.getText().equalsIgnoreCase(expectedMsg);
+    }
+    public boolean verifyMessageWhenLeavingRoomBlanked(String expectedMsg){
+        JavascriptExecutor jsExecutor = driver;
+        jsExecutor.executeScript("arguments[0].scrollIntoView(true);", addressField.findWebElement());
+        sleepTo(3000);
+        WebElement labelMsgRoom = wait.until(ExpectedConditions.visibilityOfElementLocated(label_messageErrorBlankRoom.by()));
+        return labelMsgRoom.getText().equalsIgnoreCase(expectedMsg);
+    }
+    public void sendMoreThan10CharactersToFloorField(String param){
+        WebElement inputFloor = wait.until(ExpectedConditions.visibilityOfElementLocated(text_floor.by()));
+        inputFloor.sendKeys(param);
+        sleepTo(2000);
+        inputFloor.sendKeys(Keys.ENTER);
+    }
+    public void sendMoreThan10CharactersToRoomField(String param){
+        WebElement inputRoom = wait.until(ExpectedConditions.visibilityOfElementLocated(text_room.by()));
+        inputRoom.sendKeys(param);
+        sleepTo(2000);
+        inputRoom.sendKeys(Keys.ENTER);
+    }
+    public boolean verifySytemOnlyGetMax10CharactersOnFloorField(String param){
+        WebElement inputFloor = wait.until(ExpectedConditions.visibilityOfElementLocated(text_floor.by()));
+        return inputFloor.getAttribute("value").equalsIgnoreCase(param);
+    }
+    public boolean verifySytemOnlyGetMax10CharactersOnRoomField(String param){
+        WebElement inputRoom = wait.until(ExpectedConditions.visibilityOfElementLocated(text_room.by()));
+        return inputRoom.getAttribute("value").equalsIgnoreCase(param);
     }
     public void waitForRefreshURL()  {
         wait.until(ExpectedConditions.refreshed(ExpectedConditions.not(ExpectedConditions.urlContains(urlHome))));

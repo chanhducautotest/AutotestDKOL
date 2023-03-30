@@ -161,6 +161,11 @@ public final class CommonRegister {
     public static String inputSearchStreet02 =
             jsonUtil.getStringUTF8(DATA_TEST_FILE_PATH_REGISTER,"INPUT_SEARCH_STREET_02");
 
-
+    public static String inputDistrictNonAppartment =
+            jsonUtil.getStringUTF8(DATA_TEST_FILE_PATH_REGISTER,"INPUT_DISTRICT_NON_APPARTMENT");
+    public static String inputWardNonAppartment =
+            jsonUtil.getStringUTF8(DATA_TEST_FILE_PATH_REGISTER,"INPUT_WARD_NON_APPARTMENT");
+    public static String inputStreetNonAppartment =
+            jsonUtil.getStringUTF8(DATA_TEST_FILE_PATH_REGISTER,"INPUT_STREET_NON_APPARTMENT");
 
 }
