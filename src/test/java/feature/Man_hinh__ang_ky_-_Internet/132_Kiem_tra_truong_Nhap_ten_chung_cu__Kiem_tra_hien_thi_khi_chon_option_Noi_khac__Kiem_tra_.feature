@@ -14,7 +14,7 @@ Feature: Kiểm tra trường Nhập tên chung cư: Kiểm tra hiển thị khi
 		And Nhập tên chung cư lớn hơn năm mươi ký tự <ten_lon_hon_50>
 		Then Kiểm tra hệ thống chỉ cho phép lấy được tối đa năm mươi ký tự <ten_50>
 		And Nhập tên chung cư bé hơn hoặc bằng năm mươi ký tự <ten_50> và các thông tin còn lại
-		Then Kiểm tra chuyển sang màn hình Chọn dịch vụ thành công
+		Then Kiểm tra hiển thị popups thông báo "Hệ thống chưa xác định được địa chỉ lắp đặt của Quý khách có hạ tầng hay không. Sẽ có nhân viên FPT Telecom khu vực gọi lại trong vòng 5 phút. Xin cảm ơn!" và nhấn nút Đồng ý
 
 		@1
 		Examples:
