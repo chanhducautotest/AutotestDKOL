@@ -8,10 +8,10 @@ Feature: Kiểm tra trường Nhập tên chung cư: Kiểm tra hiển thị khi
 		And Chờ màn hình Đăng ký tải hoàn tất
 		And Click radio button Loại nhà: CHUNG CƯ
 		And Chọn option Nơi khác
-		Then Kiểm tra hiển thị thị text Nhập tên chung cư
+		Then Kiểm tra hiển thị trường Nhập tên chung cư
 		And Nhấn tiếp tục
 		Then Kiểm tra hiển thị thông báo khi bỏ trống trường Nhập tên chung cư "Vui lòng nhập tên chung cư."
-		And Nhập tên chung cư lớn hơn năm mươi ký tự <ten_lon_hon_50> và các thông tin còn lại
+		And Nhập tên chung cư lớn hơn năm mươi ký tự <ten_lon_hon_50>
 		Then Kiểm tra hệ thống chỉ cho phép lấy được tối đa năm mươi ký tự <ten_50>
 		And Nhập tên chung cư bé hơn hoặc bằng năm mươi ký tự <ten_50> và các thông tin còn lại
 		Then Kiểm tra chuyển sang màn hình Chọn dịch vụ thành công
