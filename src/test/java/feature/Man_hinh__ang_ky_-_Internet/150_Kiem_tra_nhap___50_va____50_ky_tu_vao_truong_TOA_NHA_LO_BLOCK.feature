@@ -16,4 +16,4 @@ Feature: Kiểm tra nhập > 50 và =< 50 ký tự vào trường TOÀ NHÀ/LÔ/
 		@1
 		Examples:
 		| 50_ky_tu | 50_ky_tu_chinh_xac | lon_hon_50_ky_tu | ten_goi_cuoc |
-		| "duZBhgycCsZxomDFslSmOiqhNPbctdhinYEGtRtqmtMDEDmgZM" | "" | "duZBhgycCsZxomDFslSmOiqhNPbctdhinYEGtRtqmtMDEDmgZMcc" | "Sky" |
+		| "duZBhgycCsZxomDFslSmOiqhNPbctdhinYEGtRtqmtMDEDmgZM" | "BVP Liên Hoa" | "duZBhgycCsZxomDFslSmOiqhNPbctdhinYEGtRtqmtMDEDmgZMcc" | "Sky" |
