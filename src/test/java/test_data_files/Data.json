@@ -1,5 +1,6 @@
   {
 	"URL_TEST": "https://shop-stag.fpt.vn",
+    "URL_TEST_INTERNET_SKY_REGISTER": "https://shop-stag.fpt.vn/internet/register/goi-sky",
     "URL_TEST_MA_GIOI_THIEU_BAN_BE": "http://shop-stag.fpt.vn/shop?ref=",
     "MA_GTBB": "FTELX97E6",
     "MAN_HINH_TTDK":[

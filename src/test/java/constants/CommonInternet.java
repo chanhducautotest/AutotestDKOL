@@ -58,5 +58,8 @@ public final class CommonInternet {
     public static String inputEmailTxt = jsonUtil.getStringUTF8(DATA_TEST_FILE_PATH_INTERNET,"INPUT_EMAIL");
     public static String inputGenderFemale = jsonUtil.getStringUTF8(DATA_TEST_FILE_PATH_INTERNET,"INPUT_GENDER_FEMALE");
     public static String inputGenderMale = jsonUtil.getStringUTF8(DATA_TEST_FILE_PATH_INTERNET,"INPUT_GENDER_MALE");
-
+    public static String inputBlock = jsonUtil.getStringUTF8(DATA_TEST_FILE_PATH_INTERNET,"INPUT_BLOCK");
+    public static String inputFloor = jsonUtil.getStringUTF8(DATA_TEST_FILE_PATH_INTERNET,"INPUT_FLOOR");
+    public static String inputRoom = jsonUtil.getStringUTF8(DATA_TEST_FILE_PATH_INTERNET,"INPUT_ROOM");
+    public static String inputAppartmentName10Characters = jsonUtil.getStringUTF8(DATA_TEST_FILE_PATH_INTERNET,"INPUT_APPARTMENT_NAME_10_CHARACTERS");
 }

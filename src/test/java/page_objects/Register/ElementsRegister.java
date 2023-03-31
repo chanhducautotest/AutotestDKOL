@@ -40,6 +40,10 @@ public class ElementsRegister extends PageBase {
     public Query text_email = new Query().defaultLocator(By.xpath("//input[@id='email']")).usingDriver(driver);
     public Query text_address = new Query().defaultLocator(By.xpath("//input[@id='address']")).usingDriver(driver);
     public Query text_note = new Query().defaultLocator(By.xpath("//input[@id='note']")).usingDriver(driver);
+    public Query text_building = new Query().defaultLocator(By.xpath("//input[@id='building']")).usingDriver(driver);
+    public Query text_block = new Query().defaultLocator(By.xpath("//input[@id='block']")).usingDriver(driver);
+    public Query text_floor = new Query().defaultLocator(By.xpath("//input[@id='floor']")).usingDriver(driver);
+    public Query text_room = new Query().defaultLocator(By.xpath("//input[@id='room']")).usingDriver(driver);
     public Query label_note = new Query().defaultLocator(By.xpath("//label[@for='note']")).usingDriver(driver);
     public Query radioButton_home = new Query().defaultLocator(By.xpath("(//input[@type='radio'])[1]")).usingDriver(driver);
     public Query radioButton_tower = new Query().defaultLocator(By.xpath("(//input[@type='radio'])[2]")).usingDriver(driver);
@@ -68,17 +72,24 @@ public class ElementsRegister extends PageBase {
     public Query searchBox_street = new Query().defaultLocator(By.xpath("//input[@role='searchbox']")).usingDriver(driver);
     public Query listItem_street = new Query().defaultLocator(By.xpath("//ul[@role='listbox']//li")).usingDriver(driver);
 
+    public Query dropdown_appartment = new Query().defaultLocator(By.xpath("(//span[@id='select2--container'])[6]")).usingDriver(driver);
+    public Query searchBox_appartment = new Query().defaultLocator(By.xpath("//input[@role='searchbox']")).usingDriver(driver);
+    public Query listItem_appartment = new Query().defaultLocator(By.xpath("//ul[@role='listbox']//li")).usingDriver(driver);
+
     public Query label_messageError = new Query().defaultLocator(By.xpath("//small[@class='form-text text-12 clo-red']")).usingDriver(driver);
     public Query label_messageErrorBlankCMND = new Query().defaultLocator(By.xpath("//small[contains(text(),'Vui lòng nhập CMND/CCCD.')]")).usingDriver(driver);
     public Query label_messageErrorBlankBirthdate = new Query().defaultLocator(By.xpath("//small[contains(text(),'Vui lòng nhập ngày sinh')]")).usingDriver(driver);
     public Query label_messageErrorWrongBirthdate = new Query().defaultLocator(By.xpath("//small[contains(text(),'Năm sinh không hợp lệ')]")).usingDriver(driver);
     public Query label_messageErrorLessThan15YrsOBirthdate = new Query().defaultLocator(By.xpath("//small[contains(text(),'Khách hàng phải lớn hơn 15 tuổi')]")).usingDriver(driver);
     public Query label_messageErrorBlankAddress = new Query().defaultLocator(By.xpath("//small[contains(text(),'Vui lòng nhập địa chỉ/số nhà.')]")).usingDriver(driver);
-
+    public Query label_messageErrorAppartmentInput = new Query().defaultLocator(By.xpath("//small[contains(text(),'Vui lòng nhập tên chung cư.')]")).usingDriver(driver);
+    public Query label_messageErrorBlankFloor = new Query().defaultLocator(By.xpath("//small[contains(text(),'Vui lòng nhập số tầng.')]")).usingDriver(driver);
+    public Query label_messageErrorBlankRoom = new Query().defaultLocator(By.xpath("//small[contains(text(),'Vui lòng nhập số phòng.')]")).usingDriver(driver);
     public Query label_messageErrorFormatCMND = new Query().defaultLocator(By.xpath("//small[contains(text(),'CMND/CCCD phải từ 9 đến 12 chữ số.')]")).usingDriver(driver);
     public Query element_imgLogo = new Query().defaultLocator(By.xpath("//img[@alt='FPT Telecom']")).usingDriver(driver);
-
-    public Query button_agree = new Query().defaultLocator(By.xpath("(//button[@class='w-100 btn btn-custom orange'])[2]")).usingDriver(driver);
+    public Query element_popups = new Query().defaultLocator(By.xpath("//div[@id='__BVID__409___BV_modal_content_']")).usingDriver(driver);
+    public Query text_popups = new Query().defaultLocator(By.xpath("//p[contains(text(),'Hệ thống chưa xác định được địa chỉ lắp đặt của Qu')]")).usingDriver(driver);
+    public Query button_agree = new Query().defaultLocator(By.xpath("//button[@class='w-100 btn btn-custom orange']")).usingDriver(driver);
     public Query button_iconX = new Query().defaultLocator(By.xpath("//i[@class='btn-clear']")).usingDriver(driver);
 
     public Query popup_notiErrorFormatID = new Query().defaultLocator(By.xpath("(//p[@class='clo-black76'])[3]")).usingDriver(driver);
