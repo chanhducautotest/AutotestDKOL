@@ -16,4 +16,4 @@ Feature: Kiểm tra hiển thị trường txtbox Địa chỉ, Số nhà, txtbo
 		@1
 		Examples:
 		| dia_chi_30 | dia_chi_lon_hon_30 | placeholder_diachi | ten_goi_cuoc |
-		| "140dIYhJdUhIDFSpKVDJaKPBIFWGVd" | "140dIYhJdUhIDFSpKVDJaKPBIFWGVd333" | "Ví dụ: 16, Hẻm 32, Ngách 65, Ngõ 165" | "Sky" |
+		| "DFCdIYhJdUhIDFSpKVDJaKPBIFWGVd" | "DFCdIYhJdUhIDFSpKVDJaKPBIFWGVd333" | "Ví dụ: 16, Hẻm 32, Ngách 65, Ngõ 165" | "Sky" |
