@@ -56,6 +56,7 @@ public class ElementsRegister extends PageBase {
 
 
     public Query dropdown_province = new Query().defaultLocator(By.xpath("(//span[@id='select2--container'])[2]")).usingDriver(driver);
+    public Query dropdown_province_arrow = new Query().defaultLocator(By.xpath("(//span[@role='presentation'])[2]")).usingDriver(driver);
     public Query searchBox_province = new Query().defaultLocator(By.xpath("//input[@role='searchbox']")).usingDriver(driver);
     public Query listItem_province = new Query().defaultLocator(By.xpath("//ul[@role='listbox']//li")).usingDriver(driver);
 

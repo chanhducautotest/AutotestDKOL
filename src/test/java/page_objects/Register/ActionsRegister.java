@@ -1776,14 +1776,15 @@ public class ActionsRegister extends ElementsRegister {
     public void sendTextToAddressField(String param){
         WebElement inputAddress = wait.until(ExpectedConditions.visibilityOfElementLocated(text_address.by()));
         inputAddress.clear();
-        wait.until(ExpectedConditions.textToBePresentInElementValue(inputAddress, ""));
+        sleepTo(2000);
+//        wait.until(ExpectedConditions.textToBePresentInElementValue(inputAddress, ""));
         inputAddress.sendKeys(param);
         sleepTo(2000);
         inputAddress.sendKeys(Keys.ENTER);
     }
     public boolean verifyMax30NumToInputAddressField(String param) {
-        String cmndMax12NumVerifyText = text_idNumber.findWebElement().getAttribute("value");
-        return cmndMax12NumVerifyText.equalsIgnoreCase(param);
+        String addressMax30VerifyText = text_address.findWebElement().getAttribute("value");
+        return addressMax30VerifyText.equalsIgnoreCase(param);
     }
     public void sendTextToInputCitySearchBox(String city){
         wait.until(ExpectedConditions.visibilityOfElementLocated(searchBox_province.by()));
@@ -1874,18 +1875,18 @@ public class ActionsRegister extends ElementsRegister {
         return cityDropdownList.equalsIgnoreCase(param);
     }
     public void chooseComboBoxCity(){
-        WebElement dropdownCity = wait.until(ExpectedConditions.visibilityOfElementLocated(dropdown_province.by()));
-        dropdownCity.click();
+        clickEl(wait,dropdown_province);
+        sleepTo(3000);
         List<WebElement> listProvince = Collections.singletonList(wait.until(ExpectedConditions.visibilityOfElementLocated(listItem_province.by())));
         listProvince.get(0).click();
     }
     public boolean verifyDistrictHolderPlace(String param) {
-        String districtDropdownList = dropdown_district.findWebElement().getText();
-        return districtDropdownList.equalsIgnoreCase(param);
+        WebElement districtDropdownList = wait.until(ExpectedConditions.visibilityOfElementLocated(dropdown_district.by()));
+        return districtDropdownList.getText().equalsIgnoreCase(param);
     }
     public void chooseComboBoxDistrict(){
-        WebElement dropdownDistrict = wait.until(ExpectedConditions.visibilityOfElementLocated(dropdown_district.by()));
-        dropdownDistrict.click();
+        clickEl(wait,dropdown_district);
+        sleepTo(3000);
         List<WebElement> listDistrict = Collections.singletonList(wait.until(ExpectedConditions.visibilityOfElementLocated(listItem_district.by())));
         listDistrict.get(0).click();
     }
@@ -1894,8 +1895,8 @@ public class ActionsRegister extends ElementsRegister {
         return wardDropdownList.equalsIgnoreCase(param);
     }
     public void chooseComboBoxWard(){
-        WebElement dropdownWard = wait.until(ExpectedConditions.visibilityOfElementLocated(dropdown_ward.by()));
-        dropdownWard.click();
+        clickEl(wait,dropdown_ward);
+        sleepTo(3000);
         List<WebElement> listWard = Collections.singletonList(wait.until(ExpectedConditions.visibilityOfElementLocated(listItem_ward.by())));
         listWard.get(0).click();
     }
@@ -1904,17 +1905,17 @@ public class ActionsRegister extends ElementsRegister {
         return cityDropdownList.equalsIgnoreCase(param);
     }
     public void chooseComboBoxStreet(){
-        WebElement dropdownStreet = wait.until(ExpectedConditions.visibilityOfElementLocated(dropdown_street.by()));
-        dropdownStreet.click();
+        clickEl(wait,dropdown_street);
+        sleepTo(3000);
         List<WebElement> listStreet = Collections.singletonList(wait.until(ExpectedConditions.visibilityOfElementLocated(listItem_street.by())));
         listStreet.get(0).click();
     }
     public boolean enteredValueWithSpecifiedSignIntoCitySearch(String param){
         JavascriptExecutor jsExecutor = driver;
         jsExecutor.executeScript("arguments[0].scrollIntoView(true);", addressField.findWebElement());
-        sleepTo(1000);
-        WebElement dropdownCity = wait.until(ExpectedConditions.visibilityOfElementLocated(dropdown_province.by()));
-        dropdownCity.click();
+        sleepTo(2000);
+        clickEl(wait,dropdown_province);
+        sleepTo(2000);
         wait.until(ExpectedConditions.visibilityOfElementLocated(searchBox_province.by()));
         searchBox_province.findWebElement().sendKeys(param);
         sleepTo(2000);
@@ -1922,8 +1923,9 @@ public class ActionsRegister extends ElementsRegister {
         return listCity.get(0).getText().equalsIgnoreCase(param);
     }
     public boolean enteredValueWithSpecifiedSignIntoDistrictSearch(String param){
-        WebElement dropdownDistrict = wait.until(ExpectedConditions.visibilityOfElementLocated(dropdown_district.by()));
-        dropdownDistrict.click();
+        searchBox_province.findWebElement().sendKeys(Keys.ESCAPE);
+        sleepTo(3000);
+        clickEl(wait,dropdown_district);
         wait.until(ExpectedConditions.visibilityOfElementLocated(searchBox_district.by()));
         searchBox_district.findWebElement().sendKeys(param);
         sleepTo(2000);
@@ -1931,8 +1933,9 @@ public class ActionsRegister extends ElementsRegister {
         return listDistrict.get(0).getText().equalsIgnoreCase(param);
     }
     public boolean enteredValueWithSpecifiedSignIntoWardSearch(String param){
-        WebElement dropdownWard = wait.until(ExpectedConditions.visibilityOfElementLocated(dropdown_ward.by()));
-        dropdownWard.click();
+        searchBox_district.findWebElement().sendKeys(Keys.ESCAPE);
+        sleepTo(3000);
+        clickEl(wait,dropdown_ward);
         wait.until(ExpectedConditions.visibilityOfElementLocated(searchBox_ward.by()));
         searchBox_ward.findWebElement().sendKeys(param);
         sleepTo(2000);
@@ -1940,8 +1943,9 @@ public class ActionsRegister extends ElementsRegister {
         return listWard.get(0).getText().equalsIgnoreCase(param);
     }
     public boolean enteredValueWithSpecifiedSignIntoStreetSearch(String param){
-        WebElement dropdownStreet = wait.until(ExpectedConditions.visibilityOfElementLocated(dropdown_street.by()));
-        dropdownStreet.click();
+        searchBox_ward.findWebElement().sendKeys(Keys.ESCAPE);
+        sleepTo(3000);
+        clickEl(wait,dropdown_street);
         wait.until(ExpectedConditions.visibilityOfElementLocated(searchBox_street.by()));
         searchBox_street.findWebElement().sendKeys(param);
         sleepTo(2000);
@@ -1949,36 +1953,32 @@ public class ActionsRegister extends ElementsRegister {
         return listStreet.get(0).getText().equalsIgnoreCase(param);
     }
     public boolean enteredValueWithUnspecifiedSignIntoCitySearch(String param1, String param2){
-        WebElement dropdownCity = wait.until(ExpectedConditions.visibilityOfElementLocated(dropdown_province.by()));
-        dropdownCity.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(searchBox_province.by()));
+        searchBox_province.findWebElement().clear();
+        wait.until(ExpectedConditions.textToBePresentInElementValue(searchBox_province.by(),""));
         searchBox_province.findWebElement().sendKeys(param1);
         sleepTo(2000);
         List<WebElement> listCity = Collections.singletonList(wait.until(ExpectedConditions.visibilityOfElementLocated(listItem_province.by())));
         return listCity.get(0).getText().equalsIgnoreCase(param2);
     }
     public boolean enteredValueWithUnspecifiedSignIntoDistrictSearch(String param1, String param2){
-        WebElement dropdownDistrict = wait.until(ExpectedConditions.visibilityOfElementLocated(dropdown_district.by()));
-        dropdownDistrict.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(searchBox_district.by()));
+        searchBox_district.findWebElement().clear();
+        wait.until(ExpectedConditions.textToBePresentInElementValue(searchBox_district.by(),""));
         searchBox_district.findWebElement().sendKeys(param1);
         sleepTo(2000);
         List<WebElement> listDistrict = Collections.singletonList(wait.until(ExpectedConditions.visibilityOfElementLocated(listItem_district.by())));
         return listDistrict.get(0).getText().equalsIgnoreCase(param2);
     }
     public boolean enteredValueWithUnspecifiedSignIntoWardSearch(String param1, String param2){
-        WebElement dropdownWard = wait.until(ExpectedConditions.visibilityOfElementLocated(dropdown_ward.by()));
-        dropdownWard.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(searchBox_ward.by()));
+        searchBox_ward.findWebElement().clear();
+        wait.until(ExpectedConditions.textToBePresentInElementValue(searchBox_ward.by(),""));
         searchBox_ward.findWebElement().sendKeys(param1);
         sleepTo(2000);
         List<WebElement> listWard = Collections.singletonList(wait.until(ExpectedConditions.visibilityOfElementLocated(listItem_ward.by())));
         return listWard.get(0).getText().equalsIgnoreCase(param2);
     }
     public boolean enteredValueWithUnspecifiedSignIntoStreetSearch(String param1, String param2){
-        WebElement dropdownStreet = wait.until(ExpectedConditions.visibilityOfElementLocated(dropdown_street.by()));
-        dropdownStreet.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(searchBox_street.by()));
+        searchBox_street.findWebElement().clear();
+        wait.until(ExpectedConditions.textToBePresentInElementValue(searchBox_street.by(),""));
         searchBox_street.findWebElement().sendKeys(param1);
         sleepTo(2000);
         List<WebElement> listStreet = Collections.singletonList(wait.until(ExpectedConditions.visibilityOfElementLocated(listItem_street.by())));
@@ -1997,13 +1997,14 @@ public class ActionsRegister extends ElementsRegister {
     }
     public boolean verifyPlaceholderOfHouseNumberField(String param){
         WebElement element =  wait.until(ExpectedConditions.visibilityOfElementLocated(text_address.by()));
-        return element.getText().equalsIgnoreCase(param);
+        return element.getAttribute("placeholder").equalsIgnoreCase(param);
     }
     public boolean verifyBlankedAddressMessageDisplayed(String expectedMsg) {
         JavascriptExecutor jsExecutor = driver;
         jsExecutor.executeScript("arguments[0].scrollIntoView(true);", addressField.findWebElement());
-        sleepTo(1000);
+        sleepTo(3000);
         WebDriverWait wait = new WebDriverWait(driver,60);
+        sleepTo(3000);
         WebElement addressBlankVerifyMessageText = wait.until(ExpectedConditions.visibilityOfElementLocated(label_messageErrorBlankAddress.by()));
         return addressBlankVerifyMessageText.getText().equalsIgnoreCase(expectedMsg);
     }

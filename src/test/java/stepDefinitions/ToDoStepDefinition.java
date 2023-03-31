@@ -558,14 +558,14 @@ public class ToDoStepDefinition extends RunCucumberByCompositionTest {
         Assert.assertTrue(registerPage.verifyBlankedAddressMessageDisplayed(expectedMsg),"The message when leaving the address/house number field blanked not matched expected message");
     }
 
-    @And("Nhập vào trường Địa chỉ, Số nhà lớn hơn ba mươi ký tự {}")
+    @And("Nhập vào trường Địa chỉ, Số nhà lớn hơn ba mươi ký tự {string}")
     public void inputIntoAddressValueGreaterThan30Characters(String param) {
         registerPage = new ActionsRegister();
         param = ParameterService.INSTANCE.getString("DS_dia_chi_lon_hon_30",param);
         registerPage.sendTextToAddressField(param);
     }
 
-    @Then("Kiểm tra hệ thống chỉ cho phép lấy tối đa ba mươi ký tự {} vào trường địa chỉ")
+    @Then("Kiểm tra hệ thống chỉ cho phép lấy tối đa ba mươi ký tự {string} vào trường địa chỉ")
     public void verifyAddressFieldAcceptedMax30Characters(String param) {
         registerPage = new ActionsRegister();
         param = ParameterService.INSTANCE.getString("DS_dia_chi_30",param);
