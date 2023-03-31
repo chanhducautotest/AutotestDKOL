@@ -14,4 +14,4 @@ Feature: Kiểm tra defaut trường Tỉnh, Thành phố; Quận, Huyện; Phư
 		@1
 		Examples:
 		| default_duong_pho | default_phuong_xa | default_quan_huyen | default_tinh_thanh | ten_goi_cuoc |
-		| "Chọn Đường/phố" | "Phường Bến Nghé" | "Q1" | "Hồ Chí Minh" | "Sky" |
+		| "Chọn Đường/phố" | "Chọn Phường/xã" | "Chọn Quận/Huyện" | "Hồ Chí Minh" | "Sky" |
