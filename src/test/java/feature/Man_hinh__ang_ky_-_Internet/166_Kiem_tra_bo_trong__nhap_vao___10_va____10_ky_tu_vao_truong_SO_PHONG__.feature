@@ -18,4 +18,4 @@ Feature: Kiểm tra bỏ trống, nhập vào > 10 và =< 10 ký tự vào trư�
 		@1
 		Examples:
 		| 10_ky_tu | lon_hon_10_ky_tu | ten_goi_cuoc |
-		| 11111111111 | 1111111111 | "Sky" |
+		| 1111111111 | 11111111111 | "Sky" |
