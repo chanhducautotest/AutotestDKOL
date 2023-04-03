@@ -15,4 +15,4 @@ Feature: Kiểm tra hiển thị kết quả tương ứng khi nhập có dấu,
 		@1
 		Examples:
 		| chung_cu_co_dau | chung_cu_khong_dau | ten_goi_cuoc |
-		| "BVP Liên Hoa" | "BVP Lien Hoa" | "Sky" |
+		| "CC Lý Tự Trọng" | "CC Ly Tu Trong" | "Sky" |
