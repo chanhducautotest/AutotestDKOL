@@ -1810,17 +1810,21 @@ public class ActionsRegister extends ElementsRegister {
         List<WebElement> listProvince = Collections.singletonList(wait.until(ExpectedConditions.visibilityOfElementLocated(listItem_street.by())));
         listProvince.get(0).click();
     }
+    public void sendTextToInputAppartmentName(String appartmentName){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(text_block.by()));
+        text_block.findWebElement().sendKeys(appartmentName);
+    }
     public void sendTextToInputBlockAppartment(String block){
         wait.until(ExpectedConditions.visibilityOfElementLocated(text_block.by()));
         text_block.findWebElement().sendKeys(block);
     }
     public void sendTextToInputFloorAppartment(String floor){
         wait.until(ExpectedConditions.visibilityOfElementLocated(text_floor.by()));
-        text_block.findWebElement().sendKeys(floor);
+        text_floor.findWebElement().sendKeys(floor);
     }
     public void sendTextToInputRoomAppartment(String room){
         wait.until(ExpectedConditions.visibilityOfElementLocated(text_room.by()));
-        text_block.findWebElement().sendKeys(room);
+        text_room.findWebElement().sendKeys(room);
     }
     public void sendTextToOthersFieldsExceptPhoneField(){
         text_name.findWebElement().sendKeys(inputFullNameTxt);
@@ -2016,8 +2020,8 @@ public class ActionsRegister extends ElementsRegister {
         element.click();
     }
     public boolean enteredValueWithSpecifiedSignIntoAppartmentSearch(String param){
-        WebElement dropdownAppartment = wait.until(ExpectedConditions.visibilityOfElementLocated(dropdown_appartment.by()));
-        dropdownAppartment.click();
+        sleepTo(3000);
+        clickEl(wait,dropdown_appartment);
         wait.until(ExpectedConditions.visibilityOfElementLocated(searchBox_appartment.by()));
         searchBox_appartment.findWebElement().sendKeys(param);
         sleepTo(2000);
@@ -2025,13 +2029,13 @@ public class ActionsRegister extends ElementsRegister {
         return listAppartment.get(0).getText().equalsIgnoreCase(param);
     }
     public boolean enteredValueWithUnspecifiedSignIntoAppartmentSearch(String param1, String param2){
-        WebElement dropdownAppartment = wait.until(ExpectedConditions.visibilityOfElementLocated(dropdown_appartment.by()));
-        dropdownAppartment.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(searchBox_appartment.by()));
-        searchBox_appartment.findWebElement().sendKeys(param1);
+        WebElement inputAppartmentName = wait.until(ExpectedConditions.visibilityOfElementLocated(searchBox_appartment.by()));
+        inputAppartmentName.clear();
+        wait.until(ExpectedConditions.textToBePresentInElementValue(inputAppartmentName, ""));
+        inputAppartmentName.sendKeys(param1);
         sleepTo(2000);
-        List<WebElement> listStreet = Collections.singletonList(wait.until(ExpectedConditions.visibilityOfElementLocated(listItem_appartment.by())));
-        return listStreet.get(0).getText().equalsIgnoreCase(param2);
+        List<WebElement> listAppartment = Collections.singletonList(wait.until(ExpectedConditions.visibilityOfElementLocated(listItem_appartment.by())));
+        return listAppartment.get(0).getText().equalsIgnoreCase(param2);
     }
     public void chooseAddressHasNoAppartment(){
         clickEl(wait,dropdown_district);
@@ -2044,6 +2048,7 @@ public class ActionsRegister extends ElementsRegister {
         sendTextToInputStreetSearchBox(inputStreetNonAppartment);
     }
     public boolean verifyListAppartMentOnlyHas1ValueExpected(String expectedValue){
+        clickEl(wait,dropdown_appartment);
         List<WebElement> listAppartment = Collections.singletonList(wait.until(ExpectedConditions.visibilityOfElementLocated(listItem_appartment.by())));
         if(listAppartment.size() == 1){
             return listAppartment.get(0).getText().equalsIgnoreCase(expectedValue);
@@ -2062,8 +2067,18 @@ public class ActionsRegister extends ElementsRegister {
         return inputNote.getAttribute("value").equalsIgnoreCase(param);
     }
     public void chooseAnotherPlace(){
-        List<WebElement> listAppartment = Collections.singletonList(wait.until(ExpectedConditions.visibilityOfElementLocated(listItem_appartment.by())));
+        sleepTo(3000);
+        clickEl(wait,dropdown_appartment);
+        sleepTo(3000);
+        List<WebElement> listAppartment = driver.findElements(listItem_appartment.by());
         listAppartment.get(listAppartment.size()-1).click();
+    }
+    public void chooseFirstPlace(){
+        sleepTo(3000);
+        clickEl(wait,dropdown_appartment);
+        sleepTo(3000);
+        List<WebElement> listAppartment = driver.findElements(listItem_appartment.by());
+        listAppartment.get(0).click();
     }
     public boolean verifyPlaceholderInputTxt(){
         WebElement inputBuilding = wait.until(ExpectedConditions.visibilityOfElementLocated(text_building.by()));
@@ -2162,9 +2177,9 @@ public class ActionsRegister extends ElementsRegister {
         clickEl(wait,dropdown_street);
         sendTextToInputStreetSearchBox(inputStreetMenu);
         sleepTo(500);
-        chooseAnotherPlace();
+        chooseFirstPlace();
         sleepTo(1000);
-        sendTextToInputBlockAppartment(inputFloor);
+        sendTextToInputFloorAppartment(inputFloor);
         sendTextToInputRoomAppartment(inputRoom);
     }
     public void sendDataToOthersFieldsAndLessOrEqual10CharactersToFloorField(String param){
@@ -2192,8 +2207,9 @@ public class ActionsRegister extends ElementsRegister {
         clickEl(wait,dropdown_street);
         sendTextToInputStreetSearchBox(inputStreetMenu);
         sleepTo(500);
-        chooseAnotherPlace();
+        chooseFirstPlace();
         sleepTo(1000);
+
         sendTextToInputBlockAppartment(inputBlock);
         sendTextToInputRoomAppartment(inputRoom);
         WebElement inputFloor = wait.until(ExpectedConditions.visibilityOfElementLocated(text_floor.by()));
@@ -2226,7 +2242,7 @@ public class ActionsRegister extends ElementsRegister {
         clickEl(wait,dropdown_street);
         sendTextToInputStreetSearchBox(inputStreetMenu);
         sleepTo(500);
-        chooseAnotherPlace();
+        chooseFirstPlace();
         sleepTo(1000);
         sendTextToInputFloorAppartment(inputFloor);
         sendTextToInputBlockAppartment(inputBlock);

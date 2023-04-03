@@ -88,7 +88,7 @@ public class ElementsRegister extends PageBase {
     public Query label_messageErrorBlankRoom = new Query().defaultLocator(By.xpath("//small[contains(text(),'Vui lòng nhập số phòng.')]")).usingDriver(driver);
     public Query label_messageErrorFormatCMND = new Query().defaultLocator(By.xpath("//small[contains(text(),'CMND/CCCD phải từ 9 đến 12 chữ số.')]")).usingDriver(driver);
     public Query element_imgLogo = new Query().defaultLocator(By.xpath("//img[@alt='FPT Telecom']")).usingDriver(driver);
-    public Query element_popups = new Query().defaultLocator(By.xpath("//div[@id='__BVID__409___BV_modal_content_']")).usingDriver(driver);
+    public Query element_popups = new Query().defaultLocator(By.xpath("//div[@id='__BVID__152___BV_modal_content_']")).usingDriver(driver);
     public Query text_popups = new Query().defaultLocator(By.xpath("//p[contains(text(),'Hệ thống chưa xác định được địa chỉ lắp đặt của Qu')]")).usingDriver(driver);
     public Query button_agree = new Query().defaultLocator(By.xpath("//button[@class='w-100 btn btn-custom orange']")).usingDriver(driver);
     public Query button_iconX = new Query().defaultLocator(By.xpath("//i[@class='btn-clear']")).usingDriver(driver);

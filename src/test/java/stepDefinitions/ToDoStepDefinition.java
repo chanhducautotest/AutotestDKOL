@@ -685,9 +685,11 @@ public class ToDoStepDefinition extends RunCucumberByCompositionTest {
         param = ParameterService.INSTANCE.getString("DS_ten_50",param);
         registerPage.sendTextToOthersFieldsExceptAppartmentNameField();
         registerPage.sendEqualsOrLessThan10CharactersToAppartmentNameField(param);
+
     }
     @Then("Kiểm tra hiển thị popups thông báo {string} và nhấn nút Đồng ý")
     public void verifyOpenPopupsAndClickAcceptBtn(String expectedMsg) {
+        clickContinueBtn();
         registerPage = new ActionsRegister();
         registerPage.verifyOpenPopups(expectedMsg);
         registerPage.chooseAcceptedBtn();
