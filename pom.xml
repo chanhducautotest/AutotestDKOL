@@ -255,17 +255,17 @@
             </dependencies>
         </profile>
     </profiles>
-<!--    <repositories>
-        <repository>
-            <id>org.maven.repo1</id>
-            <name>maven2</name>
-            <url>https://repo1.maven.org/maven2/</url>
-        </repository>
+    <repositories>
+<!--        <repository>-->
+<!--            <id>org.maven.repo1</id>-->
+<!--            <name>maven2</name>-->
+<!--            <url>https://repo1.maven.org/maven2/</url>-->
+<!--        </repository>-->
         <repository>
             <id>org.squashtest.repo.release</id>
             <name>Squashtest repository for releases</name>
             <url>https://nexus.squashtest.org/nexus/repository/maven-squashtest-public-releases/</url>
-&lt;!&ndash;            <url>https://nexus.squashtest.org/nexus/service/rest/repository/browse/maven-squashtest-public-releases/</url>&ndash;&gt;
+<!--            <url>https://nexus.squashtest.org/nexus/service/rest/repository/browse/maven-squashtest-public-releases/</url>-->
         </repository>
-    </repositories>-->
+    </repositories>
 </project>
