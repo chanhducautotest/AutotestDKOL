@@ -247,11 +247,11 @@
                     <version>7.5.0</version>
                     <scope>test</scope>
                 </dependency>
-                <dependency>
+ <!--               <dependency>
                     <groupId>org.opentestfactory.util</groupId>
                     <artifactId>opentestfactory-java-param-library</artifactId>
                     <version>1.1.0</version>
-                </dependency>
+                </dependency>-->
             </dependencies>
         </profile>
     </profiles>
@@ -261,11 +261,11 @@
 <!--            <name>maven2</name>-->
 <!--            <url>https://repo1.maven.org/maven2/</url>-->
 <!--        </repository>-->
-        <repository>
-            <id>org.squashtest.repo.release</id>
-            <name>Squashtest repository for releases</name>
-            <url>https://nexus.squashtest.org/nexus/repository/maven-squashtest-public-releases/</url>
+<!--        <repository>-->
+<!--            <id>org.squashtest.repo.release</id>-->
+<!--            <name>Squashtest repository for releases</name>-->
+<!--            <url>https://nexus.squashtest.org/nexus/repository/maven-squashtest-public-releases/</url>-->
 <!--            <url>https://nexus.squashtest.org/nexus/service/rest/repository/browse/maven-squashtest-public-releases/</url>-->
-        </repository>
+<!--        </repository>-->
     </repositories>
 </project>
