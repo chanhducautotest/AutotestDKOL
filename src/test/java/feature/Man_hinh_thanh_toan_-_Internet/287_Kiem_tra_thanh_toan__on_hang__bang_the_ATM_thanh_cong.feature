@@ -9,9 +9,9 @@ Feature: Kiểm tra thanh toán đơn hàng  bằng thẻ ATM thành công
 		And Click chọn button Thanh toán
 		Then Kiểm tra chuyển sang màn hình thanh toán của Foxpay
 		And Nhập thông tin the ATM hợp lệ
-		And Nhấn button tiến tục
+		And Nhấn button tiếp tục trên màn hình Foxpay
 		And Nhập thông tin OTP hợp lệ
-		And Nhấn button tiến tục
+		And Nhấn button tiếp tục trên màn hình nhập OTP
 		Then Kiểm tra chuyển sang màn hình Hoàn tất đăng ký thành công
 
 		@1
