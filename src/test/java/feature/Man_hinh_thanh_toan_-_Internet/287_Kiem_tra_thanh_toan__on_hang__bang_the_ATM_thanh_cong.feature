@@ -3,7 +3,7 @@
 # language: en
 Feature: Kiểm tra thanh toán đơn hàng  bằng thẻ ATM thành công
 
-	Scenario: Kiểm tra thanh toán đơn hàng  bằng thẻ ATM thành công
+	Scenario Outline: Kiểm tra thanh toán đơn hàng  bằng thẻ ATM thành công
 		Given Truy cập thành công trang Thanh toán của gói Internet <ten_goi_cuoc> trên web DKOL
 		And Chờ màn hình Thanh toán tải hoàn tất
 		And Click chọn button Thanh toán
@@ -13,3 +13,8 @@ Feature: Kiểm tra thanh toán đơn hàng  bằng thẻ ATM thành công
 		And Nhập thông tin OTP hợp lệ
 		And Nhấn button tiến tục
 		Then Kiểm tra chuyển sang màn hình Hoàn tất đăng ký thành công
+
+		@1
+		Examples:
+		| ten_goi_cuoc |
+		| "Sky" |
