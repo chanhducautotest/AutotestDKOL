@@ -13,6 +13,7 @@ import org.testng.Assert;
 import java.util.*;
 
 import static constants.CommonInternet.*;
+import static constants.Common.*;
 import static net.fpt.utils.WebElementActionUtil.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -356,12 +357,12 @@ public class ActionLandingPageInternet extends ElementsLandingPageInternet {
     public boolean verifyGoToServicePage(){
         waitForPageLoaded();
         sleepTo(6000);
-        String expectedUrl= "https://shop-stag.fpt.vn/internet/service";
+        String expectedUrl= urlService;
         String currentURL = driver.getCurrentUrl();
         return currentURL.matches(expectedUrl);
     }
     public boolean chooseLogoFPTAndCheckGoToHomePage(){
-        String expectedUrl="https://shop-stag.fpt.vn/";
+        String expectedUrl = url;
         clickEl(wait,fptLogo);
         waitForPageLoaded();
         String currentUrl = driver.getCurrentUrl();

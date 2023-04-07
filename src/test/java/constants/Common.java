@@ -15,6 +15,11 @@ public final class Common {
     /* Common */
     public static String url = jsonUtil.getStringUTF8(DATA_TEST_FILE_PATH_COMMON,"URL_TEST");
     public static String urlSkyRegister = jsonUtil.getStringUTF8(DATA_TEST_FILE_PATH_COMMON,"URL_TEST_INTERNET_SKY_REGISTER");
+    public static String urlRegister = jsonUtil.getStringUTF8(DATA_TEST_FILE_PATH_COMMON,"URL_TEST_INTERNET_REGISTER");
+    public static String urlFoxpay = jsonUtil.getStringUTF8(DATA_TEST_FILE_PATH_COMMON,"URL_TEST_FOX_PAY");
+    public static String urlService = jsonUtil.getStringUTF8(DATA_TEST_FILE_PATH_COMMON,"URL_TEST_INTERNET_SERVICE");
+    public static String urlPayment = jsonUtil.getStringUTF8(DATA_TEST_FILE_PATH_COMMON,"URL_TEST_INTERNET_PAYMENT");
+    public static String urlFinishRegister = jsonUtil.getStringUTF8(DATA_TEST_FILE_PATH_COMMON,"URL_TEST_FINISH_REGISTER");
     public static String urlGTBB = jsonUtil.findValueJsonObjectByKeyPathJsonString(DATA_TEST_FILE_PATH_COMMON,"/URL_TEST_MA_GIOI_THIEU_BAN_BE");
     public static String maGTBBVoucher =
             jsonUtil.findValueJsonObjectByKeyPathJsonString(DATA_TEST_FILE_PATH_COMMON,"/MA_GTBB");
@@ -81,4 +86,9 @@ public final class Common {
     public static String getTEXTCOPY = jsonUtil.getStringUTF8(DATA_TEST_FILE_PATH_HOME,"TEXT_COPY");
 
     public static String urlHome = jsonUtil.findValueJsonObjectByKeyPathJsonString(DATA_TEST_FILE_PATH_COMMON,"/URL_TEST");
+    /* Payment */
+    public static String napasCardNum = jsonUtil.findValueJsonObjectByKeyPathJsonString(DATA_TEST_FILE_PATH_COMMON,"ATM_CARD_NUMBER");
+    public static String napasCardName = jsonUtil.findValueJsonObjectByKeyPathJsonString(DATA_TEST_FILE_PATH_COMMON,"ATM_CARD_NAME");
+    public static String napasCardIssueDate = jsonUtil.findValueJsonObjectByKeyPathJsonString(DATA_TEST_FILE_PATH_COMMON,"ATM_CARD_EXP_DATE");
+    public static String napasCardOtp = jsonUtil.findValueJsonObjectByKeyPathJsonString(DATA_TEST_FILE_PATH_COMMON,"ATM_CARD_OTP");
 }

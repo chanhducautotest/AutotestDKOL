@@ -1810,9 +1810,9 @@ public class ActionsRegister extends ElementsRegister {
         List<WebElement> listProvince = Collections.singletonList(wait.until(ExpectedConditions.visibilityOfElementLocated(listItem_street.by())));
         listProvince.get(0).click();
     }
-    public void sendTextToInputAppartmentName(String appartmentName){
-        wait.until(ExpectedConditions.visibilityOfElementLocated(text_block.by()));
-        text_block.findWebElement().sendKeys(appartmentName);
+    public void sendTextToInputAddress(String txtAddress){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(text_address.by()));
+        text_address.findWebElement().sendKeys(txtAddress);
     }
     public void sendTextToInputBlockAppartment(String block){
         wait.until(ExpectedConditions.visibilityOfElementLocated(text_block.by()));
@@ -2209,7 +2209,6 @@ public class ActionsRegister extends ElementsRegister {
         sleepTo(500);
         chooseFirstPlace();
         sleepTo(1000);
-
         sendTextToInputBlockAppartment(inputBlock);
         sendTextToInputRoomAppartment(inputRoom);
         WebElement inputFloor = wait.until(ExpectedConditions.visibilityOfElementLocated(text_floor.by()));
@@ -2250,6 +2249,37 @@ public class ActionsRegister extends ElementsRegister {
         inputRoom.clear();
         wait.until(ExpectedConditions.textToBePresentInElementValue(inputRoom, ""));
         inputRoom.sendKeys(param);
+    }
+    public void sendTextToAllFieldsRegisterPageOptionAppartment(){
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollTo(0, 0);");
+        sleepTo(1000);
+        text_name.findWebElement().sendKeys(inputFullNameTxt);
+        text_idNumber.findWebElement().sendKeys(inputCMNDTxt);
+        text_birthday.findWebElement().sendKeys(inputBirthday);
+        text_phone.findWebElement().sendKeys(CommonInternet.inputPhoneTxt);
+        text_email.findWebElement().sendKeys(CommonInternet.inputEmailTxt);
+        sleepTo(2000);
+        JavascriptExecutor jsExecutor = driver;
+        jsExecutor.executeScript("arguments[0].scrollIntoView(true);", addressField.findWebElement());
+        sleepTo(1000);
+        clickEl(wait,dropdown_province);
+        sendTextToInputCitySearchBox(inputProvinceMenu);
+        sleepTo(500);
+        clickEl(wait,dropdown_district);
+        sendTextToInputDistrictSearchBox(inputDistrictMenu);
+        sleepTo(500);
+        clickEl(wait,dropdown_ward);
+        sendTextToInputWardSearchBox(inputWardMenu);
+        sleepTo(500);
+        clickEl(wait,dropdown_street);
+        sendTextToInputStreetSearchBox(inputStreetMenu);
+        sleepTo(500);
+        chooseFirstPlace();
+        sleepTo(1000);
+        sendTextToInputFloorAppartment(inputFloor);
+        sendTextToInputBlockAppartment(inputBlock);
+        sendTextToInputRoomAppartment(inputRoom);
     }
     public void sendMoreThan50CharactersToBlockField(String param){
         WebElement inputBlock = wait.until(ExpectedConditions.visibilityOfElementLocated(text_block.by()));

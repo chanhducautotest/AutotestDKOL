@@ -490,7 +490,6 @@ public class ActionLandingPage extends ElementsLandingPage {
                 as("Check Link IMG Logo FPT").
                 isEqualTo(true);
 
-
     }
 
 }

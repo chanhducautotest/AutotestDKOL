@@ -1,6 +1,11 @@
   {
 	"URL_TEST": "https://shop-stag.fpt.vn",
+    "URL_TEST_INTERNET_REGISTER": "https://shop-stag.fpt.vn/internet/register",
+    "URL_TEST_INTERNET_SERVICE": "https://shop-stag.fpt.vn/internet/service",
     "URL_TEST_INTERNET_SKY_REGISTER": "https://shop-stag.fpt.vn/internet/register/goi-sky",
+    "URL_TEST_INTERNET_PAYMENT": "https://shop-stag.fpt.vn/internet/payment",
+    "URL_TEST_FOX_PAY": "https://portal-staging.foxpay.vn/payment/checkout",
+    "URL_TEST_FINISH_REGISTER": "https://shop-stag.fpt.vn/internet/finish",
     "URL_TEST_MA_GIOI_THIEU_BAN_BE": "http://shop-stag.fpt.vn/shop?ref=",
     "MA_GTBB": "FTELX97E6",
     "MAN_HINH_TTDK":[
@@ -70,6 +75,9 @@
     "URLDVQT": "http://v5-2.shop-stag.fpt.vn/cloud?categoryType=7&localType=190",
     "NOI_DUNG_XAC_NHAN_HUY_VOUCHER": "Quý khách chắc chắn muốn hủy voucher?",
     "MESSAGE_VOUCHER_KHONG_HOP_LE_PART1": "Áp dụng mã ",
-    "MESSAGE_VOUCHER_KHONG_HOP_LE_PART2": " thất bại. Vui lòng kiểm tra lại mã voucher/mã giới thiệu của quý khách."
-
+    "MESSAGE_VOUCHER_KHONG_HOP_LE_PART2": " thất bại. Vui lòng kiểm tra lại mã voucher/mã giới thiệu của quý khách.",
+    "ATM_CARD_NUMBER": "9704 0000 0000 0018",
+    "ATM_CARD_NAME": "NGUYEN VAN A",
+    "ATM_CARD_EXP_DATE": "03 / 07",
+    "ATM_CARD_OTP": "otp"
   }

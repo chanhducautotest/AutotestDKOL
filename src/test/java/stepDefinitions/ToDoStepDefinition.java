@@ -1,18 +1,14 @@
 package stepDefinitions;
 
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
-import io.cucumber.java.Scenario;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.WebElement;
 import org.opentestfactory.exception.ParameterException;
-import org.opentestfactory.exception.ParameterFormatException;
-import org.opentestfactory.exception.ParameterNotFoundException;
 import org.opentestfactory.util.ParameterService;
 import org.testng.Assert;
+import page_objects.Payment.ActionsPayment;
 import page_objects.FPTPlayPage.ActionFPTPlayPage;
 import page_objects.LandingPage.ActionLandingPage;
 import page_objects.LandingPageInternet.ActionLandingPageInternet;
@@ -20,17 +16,13 @@ import page_objects.Menu.ActionsMenu;
 import page_objects.Register.ActionsRegister;
 import runners.RunCucumberByCompositionTest;
 
-import java.io.IOException;
-
-import static net.fpt.driver_setting.DriverBase.closeDriverObjects;
-import static net.fpt.driver_setting.DriverBase.instantiateDriverObject;
-
 public class ToDoStepDefinition extends RunCucumberByCompositionTest {
     public ActionLandingPage landingPage;
     public ActionsMenu menuPage;
     public ActionFPTPlayPage fptPlayPage;
     public ActionLandingPageInternet landingPageInternet;
     public ActionsRegister registerPage;
+    public ActionsPayment paymentPage;
 
     public static void sleepTo(int milliseconds) {
         try {
@@ -776,4 +768,106 @@ public class ToDoStepDefinition extends RunCucumberByCompositionTest {
         param = ParameterService.INSTANCE.getString("DS_10_ky_tu",param);
         registerPage.sendDataToOthersFieldsAndLessOrEqual10CharactersToRoomField(param);
     }
+
+    @Given("Truy cập thành công trang Thanh toán của gói Internet {string} trên web DKOL")
+    public void getAccessToCheckOutPageOfInternetPackage(String param) throws InterruptedException {
+        paymentPage = new ActionsPayment();
+        registerPage = new ActionsRegister();
+        param = ParameterService.INSTANCE.getString("DS_ten_goi_cuoc",param);
+        getAccessToRegisterPageDKOL(param);
+        clickRadioButtonTypeAppartment();
+        registerPage.sendTextToAllFieldsRegisterPageOptionAppartment();
+        clickContinueBtn();
+        sleepTo(6000);
+        clickContinueBtn();
+    }
+
+    @And("Chờ màn hình Thanh toán tải hoàn tất")
+    public void waitForCheckoutPageLoads() {
+        paymentPage = new ActionsPayment();
+        paymentPage.waitForPaymentPageLoaded();
+    }
+
+    @Then("Kiểm tra có hiển thị các bố cục của trang Thanh toán")
+    public void verifyDisplayedLayoutsOfCheckoutPage() {
+        paymentPage = new ActionsPayment();
+        Assert.assertTrue(paymentPage.verifyElementsDisplayOnCheckOutPage(),"Layouts Of Payment Page are not displayed");
+        Assert.assertTrue(paymentPage.compareElementListsOnInfoSectionRegisterPage(),"Text of Elements are not matched");
+    }
+
+    @And("Nhấn button Thay đổi ở địa chỉ lắp đặt")
+    public void chooseChangeBtnAtInstallationAddress() {
+        paymentPage = new ActionsPayment();
+        paymentPage.chooseBackToRegisterPage();
+    }
+
+    @Then("Kiểm tra chuyển sang màn hình Đăng ký dịch vụ thành công")
+    public void verifyRedirectToRegisterServiceScreen() {
+        paymentPage = new ActionsPayment();
+        Assert.assertTrue(paymentPage.verifyGoToRegisterPage(),"Switch to Register service screen failed!");
+    }
+
+    @And("Nhấn button Thay đổi ở thời gian lắp đặt")
+    public void chooseChangeBtnAtInstallationTime() {
+        paymentPage = new ActionsPayment();
+        paymentPage.chooseBackToServicePage();
+    }
+
+    @And("Click chọn trong khung Hình thức thanh toán")
+    public void choosePaymentBox() {
+        paymentPage = new ActionsPayment();
+        paymentPage.choosePaymentBox();
+    }
+
+    @Then("Kiểm tra hiển thị popup và các phần tử trong popup Hình thức thanh toán")
+    public void verifyDisplayPopupAndElementsOFPaymentBox() {
+        paymentPage = new ActionsPayment();
+        Assert.assertTrue(paymentPage.verifyDisplayedPaymentPopup(),"Popup payment is not displayed");
+        Assert.assertTrue(paymentPage.verifyPaymentMethodsDisplayOnPopupPayment(),"Payment Methods are not displayed");
+        Assert.assertTrue(paymentPage.verifyDisplayedBtnsInPopupPayment(),"Payment Buttons are not displayed");
+    }
+
+    @And("Click chọn button Thanh toán")
+    public void choosePaymentBtn() {
+        paymentPage = new ActionsPayment();
+        paymentPage.chooseBtnPayment();
+    }
+
+    @Then("Kiểm tra chuyển sang màn hình thanh toán của Foxpay")
+    public void verifyRedirectToFoxpayScreen() {
+        paymentPage = new ActionsPayment();
+        Assert.assertTrue(paymentPage.verifyGoToFoxpayPage(),"Switch to Foxpay screen failed!");
+    }
+
+    @And("Nhập thông tin the ATM hợp lệ")
+    public void inputValidATMCard() {
+        paymentPage = new ActionsPayment();
+        paymentPage.sendInfoToInputNapasCard();
+    }
+
+    @And("Nhấn button tiếp tục trên màn hình Foxpay")
+    public void chooseBtnContinueOnFoxpay() {
+        paymentPage = new ActionsPayment();
+        paymentPage.chooseBtnContinueFoxpay();
+    }
+
+    @And("Nhập thông tin OTP hợp lệ")
+    public void nhậpThôngTinOTPHợpLệ() {
+        paymentPage = new ActionsPayment();
+        paymentPage.inputValidNapasCardOtp();
+    }
+
+    @And("Nhấn button tiếp tục trên màn hình nhập OTP")
+    public void chooseBtnContinueOnInputOtp() {
+        paymentPage = new ActionsPayment();
+        paymentPage.chooseBtnContinueOtp();
+    }
+
+    @Then("Kiểm tra chuyển sang màn hình Hoàn tất đăng ký thành công")
+    public void verifyRedirectToFinishedRegisterPage() {
+        paymentPage = new ActionsPayment();
+        Assert.assertTrue(paymentPage.verifyGoToFinishPage(),"Switch to Finish Register screen failed!");
+    }
+
+
 }
